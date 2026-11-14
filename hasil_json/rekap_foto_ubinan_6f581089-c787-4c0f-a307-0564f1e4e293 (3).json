@@ -1,0 +1,2411 @@
+[
+  {
+    "assignmentId": "7a8eb333-a8bf-4525-b1d8-b0db918449fa",
+    "kecamatan": "CIBALONG",
+    "desa": "SAGARA",
+    "nks": "33080024",
+    "sls": "320508002",
+    "subsls": "B1",
+    "namakk": "HENDAR",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI LADANG",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.28,
+    "jmlhrumpun": 80,
+    "pcl": "ROHIMAT ",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "7a8eb333-a8bf-4525-b1d8-b0db918449fa__fotobidang__g_1792398858749.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7a8eb333-a8bf-4525-b1d8-b0db918449fa__fotobidang__g_1792398858749.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=5a6d9aef598fdc032017fa5ef251d65c6b549b494571672aceae395e799c0ed5"
+      },
+      "foto_petak": {
+        "fileName": "7a8eb333-a8bf-4525-b1d8-b0db918449fa__foto_petak__g_1792398898181.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7a8eb333-a8bf-4525-b1d8-b0db918449fa__foto_petak__g_1792398898181.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c5a1e752327003b4d055590b0da373dc810550ab5e7fc465314dc7b454b23a3b"
+      },
+      "fotoplot": {
+        "fileName": "7a8eb333-a8bf-4525-b1d8-b0db918449fa__fotoplot__g_1792398949850.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7a8eb333-a8bf-4525-b1d8-b0db918449fa__fotoplot__g_1792398949850.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=da8bb3163d2a03563f36ac21985aac700d832a59d15607005e3a3a0b3f5ea424"
+      },
+      "fotoberat": {
+        "fileName": "7a8eb333-a8bf-4525-b1d8-b0db918449fa__fotoberat__g_1792399009112.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7a8eb333-a8bf-4525-b1d8-b0db918449fa__fotoberat__g_1792399009112.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=128e713f370d728fdf4be873952207c744fa4c8f55b117081ab750ab8c3954a9"
+      }
+    }
+  },
+  {
+    "assignmentId": "16ef0b51-35cd-49dc-be12-b1e0570a1005",
+    "kecamatan": "CIKELET",
+    "desa": "LINGGAMANIK",
+    "nks": "31060228",
+    "sls": "320506022",
+    "subsls": "C2",
+    "namakk": "IRPAN NAWAWI",
+    "bulan": "NOVEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": "",
+    "jmlhrumpun": "",
+    "pcl": "ENDIN SAEPUDIN ",
+    "status_assignment": "DRAFT",
+    "photos": {}
+  },
+  {
+    "assignmentId": "1387f215-a6f3-45d5-a6d3-96214fe02906",
+    "kecamatan": "CIBALONG",
+    "desa": "MAROKO",
+    "nks": "31080397",
+    "sls": "320508039",
+    "subsls": "C1",
+    "namakk": "KOMAR ",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.32,
+    "jmlhrumpun": 80,
+    "pcl": "ROHIMAT ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "1387f215-a6f3-45d5-a6d3-96214fe02906__fotobidang__g_1794381690401.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1387f215-a6f3-45d5-a6d3-96214fe02906__fotobidang__g_1794381690401.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=fc7349366cc6bb3e05175e73be19d91c4f26c66943491aae8921b281c936bc5d"
+      },
+      "foto_petak": {
+        "fileName": "1387f215-a6f3-45d5-a6d3-96214fe02906__foto_petak__g_1794381725984.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1387f215-a6f3-45d5-a6d3-96214fe02906__foto_petak__g_1794381725984.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=5fa54e3f2f350679b10c3734af24a0e1aade906101e23ff750956b80cd23cf35"
+      },
+      "fotoplot": {
+        "fileName": "1387f215-a6f3-45d5-a6d3-96214fe02906__fotoplot__g_1794381782864.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1387f215-a6f3-45d5-a6d3-96214fe02906__fotoplot__g_1794381782864.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b0617c301396b511e7a8f41db0255dda2b3ea824de1f58b77966fc4f797e58e6"
+      },
+      "fotoberat": {
+        "fileName": "1387f215-a6f3-45d5-a6d3-96214fe02906__fotoberat__g_1794381936857.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1387f215-a6f3-45d5-a6d3-96214fe02906__fotoberat__g_1794381936857.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=8db4febd194d036948b0d95a51f89defa5fe713b3da942f3d2ff379cd49140f1"
+      }
+    }
+  },
+  {
+    "assignmentId": "05d22bf0-5771-453a-bb14-df4b46a5bc51",
+    "kecamatan": "CIBALONG",
+    "desa": "MAROKO",
+    "nks": "31080391",
+    "sls": "320508039",
+    "subsls": "A1",
+    "namakk": "SAEPUL ROSYAD",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.1,
+    "jmlhrumpun": 81,
+    "pcl": "ROHIMAT ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "05d22bf0-5771-453a-bb14-df4b46a5bc51__fotobidang__g_1794380575972.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/05d22bf0-5771-453a-bb14-df4b46a5bc51__fotobidang__g_1794380575972.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=0dd6683774fd9b215aef037c2b8db3012c49da31ffaa50182b09aa27bc57196e"
+      },
+      "foto_petak": {
+        "fileName": "05d22bf0-5771-453a-bb14-df4b46a5bc51__foto_petak__g_1794379616950.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/05d22bf0-5771-453a-bb14-df4b46a5bc51__foto_petak__g_1794379616950.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=47b6ccb16a46b21b221a066702ff013ac37ce00f4dc80ab3133a7c42e44145d6"
+      },
+      "fotoplot": {
+        "fileName": "05d22bf0-5771-453a-bb14-df4b46a5bc51__fotoplot__g_1794379360585.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/05d22bf0-5771-453a-bb14-df4b46a5bc51__fotoplot__g_1794379360585.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=052a39a1c26d1cb328825137230b2704bbde0b52008cbc0d2cf2a1cbaf02dc90"
+      },
+      "fotoberat": {
+        "fileName": "05d22bf0-5771-453a-bb14-df4b46a5bc51__fotoberat__g_1794379538131.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/05d22bf0-5771-453a-bb14-df4b46a5bc51__fotoberat__g_1794379538131.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=1b1fa6a07d74d306c9bef5278f165296896351ad8c328c79ac60ba1a31bc868d"
+      }
+    }
+  },
+  {
+    "assignmentId": "08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a",
+    "kecamatan": "SELAAWI",
+    "desa": "PELITAASIH",
+    "nks": "31300128",
+    "sls": "320530012",
+    "subsls": "C2",
+    "namakk": "ADE YUSUF",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.02,
+    "jmlhrumpun": 56,
+    "pcl": "Muhamad Ansor anugrah",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a__fotobidang__c_1793434776291.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a__fotobidang__c_1793434776291.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=25140c367d2f86f31c0212bd48ef12d2d1531bf60b2e879a6bb9b0482fc90854"
+      },
+      "foto_petak": {
+        "fileName": "08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a__foto_petak__g_1793434882893.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a__foto_petak__g_1793434882893.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a7cc98b0f2f5c3375213bbe9a7983b6f419c59c37baea58e1273ef79f0b9db80"
+      },
+      "fotoplot": {
+        "fileName": "08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a__fotoplot__g_1793435277596.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a__fotoplot__g_1793435277596.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=780ca83f30713f3324e4c703f2c998d150c1ed4a7a0e718c8b09f435f6b0cf58"
+      },
+      "fotoberat": {
+        "fileName": "08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a__fotoberat__g_1793435303955.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/08dbd1ff-f03a-468f-9581-ddb2b0c5dd7a__fotoberat__g_1793435303955.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=68061c098e228d6f2c42cc2831d766cd6f32904248a9281312f1f286ca919e2d"
+      }
+    }
+  },
+  {
+    "assignmentId": "3377717c-d4b5-43e0-8977-a8cfca3a8d4f",
+    "kecamatan": "SELAAWI",
+    "desa": "PELITAASIH",
+    "nks": "31300126",
+    "sls": "320530012",
+    "subsls": "B3",
+    "namakk": "IDI RASDI",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.78,
+    "jmlhrumpun": 72,
+    "pcl": "Muhamad Ansor anugrah",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "3377717c-d4b5-43e0-8977-a8cfca3a8d4f__fotobidang__c_1793433773013.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/3377717c-d4b5-43e0-8977-a8cfca3a8d4f__fotobidang__c_1793433773013.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=28ec42649ab81d5b9c3c4d4bbcfb718916ee024314c3472285efdac1a2818ba0"
+      },
+      "foto_petak": {
+        "fileName": "3377717c-d4b5-43e0-8977-a8cfca3a8d4f__foto_petak__g_1793433479351.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/3377717c-d4b5-43e0-8977-a8cfca3a8d4f__foto_petak__g_1793433479351.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=5af999099eb04af95f723e4e426a50e228f4cd3adb0a0be29e7d57eed2df1172"
+      },
+      "fotoplot": {
+        "fileName": "3377717c-d4b5-43e0-8977-a8cfca3a8d4f__fotoplot__g_1793433535442.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/3377717c-d4b5-43e0-8977-a8cfca3a8d4f__fotoplot__g_1793433535442.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=2575e76b1f207e490c789c51554f30517856033a795174546a4cdf0f79dee1f2"
+      },
+      "fotoberat": {
+        "fileName": "3377717c-d4b5-43e0-8977-a8cfca3a8d4f__fotoberat__g_1793433561594.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/3377717c-d4b5-43e0-8977-a8cfca3a8d4f__fotoberat__g_1793433561594.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=fadbb1e9f11922675dd3a8598e3e0f44ec193db623159af75794f3dce4fcd35b"
+      }
+    }
+  },
+  {
+    "assignmentId": "aa3d4801-ff92-471e-9e19-fae55400ff25",
+    "kecamatan": "CIGEDUG",
+    "desa": "CINTANAGARA",
+    "nks": "31151083",
+    "sls": "320515108",
+    "subsls": "A3",
+    "namakk": "SOLIH",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.86,
+    "jmlhrumpun": 80,
+    "pcl": "Iman faelani",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "aa3d4801-ff92-471e-9e19-fae55400ff25__fotobidang__c_1794047240017.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/aa3d4801-ff92-471e-9e19-fae55400ff25__fotobidang__c_1794047240017.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=aebf7a402b25833c6b1327ab9dc96e41b316fb93f68e1e5dddba84455c43956c"
+      },
+      "foto_petak": {
+        "fileName": "aa3d4801-ff92-471e-9e19-fae55400ff25__foto_petak__g_1793244489457.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/aa3d4801-ff92-471e-9e19-fae55400ff25__foto_petak__g_1793244489457.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=dd1d192396757dff9cc8fe656bc23320f122304babd1acad99a318c505d2788b"
+      },
+      "fotoplot": {
+        "fileName": "aa3d4801-ff92-471e-9e19-fae55400ff25__fotoplot__g_1793244514988.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/aa3d4801-ff92-471e-9e19-fae55400ff25__fotoplot__g_1793244514988.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=20dfb0918f3f9738d992074fe8a8d74fdc75b7e45565acd0a206cbcab8cb8b62"
+      },
+      "fotoberat": {
+        "fileName": "aa3d4801-ff92-471e-9e19-fae55400ff25__fotoberat__g_1794044279633.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/aa3d4801-ff92-471e-9e19-fae55400ff25__fotoberat__g_1794044279633.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3f2dcfb497a50f98fa836791f4fc2d98d58545b7a748f03d4699577b25652927"
+      }
+    }
+  },
+  {
+    "assignmentId": "b43b58fa-8fd8-4e89-8871-4a505340bfa3",
+    "kecamatan": "CIGEDUG",
+    "desa": "TAMBAKBAYA",
+    "nks": "31151302",
+    "sls": "320515130",
+    "subsls": "A2",
+    "namakk": "ANDI",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.38,
+    "jmlhrumpun": 80,
+    "pcl": "Iman faelani",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "b43b58fa-8fd8-4e89-8871-4a505340bfa3__fotobidang__c_1794047007704.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b43b58fa-8fd8-4e89-8871-4a505340bfa3__fotobidang__c_1794047007704.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3cbbcb9eaa64c04ac82669aebb440e0ac6cd762501108a3b1dad73c2bfa1f3eb"
+      },
+      "foto_petak": {
+        "fileName": "b43b58fa-8fd8-4e89-8871-4a505340bfa3__foto_petak__g_1793244635242.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b43b58fa-8fd8-4e89-8871-4a505340bfa3__foto_petak__g_1793244635242.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=482e209786871bb7a16e485777ed1c1e7b515ec0aaccd419a6361710fc714db8"
+      },
+      "fotoplot": {
+        "fileName": "b43b58fa-8fd8-4e89-8871-4a505340bfa3__fotoplot__g_1793244652383.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b43b58fa-8fd8-4e89-8871-4a505340bfa3__fotoplot__g_1793244652383.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4827eced6d36e3d6d070b33c5d6a5b6172ad54064067e3d3c6e9062933213e70"
+      },
+      "fotoberat": {
+        "fileName": "b43b58fa-8fd8-4e89-8871-4a505340bfa3__fotoberat__g_1794045431979.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b43b58fa-8fd8-4e89-8871-4a505340bfa3__fotoberat__g_1794045431979.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=649ba9caec426e5c325f1c6712c79a55a666466091c04560bf27cd344fab8986"
+      }
+    }
+  },
+  {
+    "assignmentId": "8c849d2c-d7e3-433b-b78a-55d809a94b6b",
+    "kecamatan": "CIGEDUG",
+    "desa": "TAMBAKBAYA",
+    "nks": "31151307",
+    "sls": "320515130",
+    "subsls": "C1",
+    "namakk": "IYA",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.6,
+    "jmlhrumpun": 82,
+    "pcl": "Iman faelani",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "8c849d2c-d7e3-433b-b78a-55d809a94b6b__fotobidang__c_1794046568215.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/8c849d2c-d7e3-433b-b78a-55d809a94b6b__fotobidang__c_1794046568215.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c2f7c6b84b817d67d171e129ee8502fe91f134cfa5893ed5908784cc812ce707"
+      },
+      "foto_petak": {
+        "fileName": "8c849d2c-d7e3-433b-b78a-55d809a94b6b__foto_petak__g_1793244712389.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/8c849d2c-d7e3-433b-b78a-55d809a94b6b__foto_petak__g_1793244712389.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=63eebe3cec8c9d78dcef40711bf326771e2433c47d3eb6263d7b9f0979b13658"
+      },
+      "fotoplot": {
+        "fileName": "8c849d2c-d7e3-433b-b78a-55d809a94b6b__fotoplot__g_1793244724641.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/8c849d2c-d7e3-433b-b78a-55d809a94b6b__fotoplot__g_1793244724641.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=72a18577bff4742773f1416eef12214e2fbfecf94874f28049713d4817ba2a76"
+      },
+      "fotoberat": {
+        "fileName": "8c849d2c-d7e3-433b-b78a-55d809a94b6b__fotoberat__g_1794046119750.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/8c849d2c-d7e3-433b-b78a-55d809a94b6b__fotoberat__g_1794046119750.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=515383e9c391ea5c445e4f67ebe192d79b7e980aec0fa9dfd747044e3b3f321f"
+      }
+    }
+  },
+  {
+    "assignmentId": "ba03c60c-f100-4b8a-91dd-abc4e5f9ddff",
+    "kecamatan": "LELES",
+    "desa": "TALAGASARI",
+    "nks": "31240564",
+    "sls": "320524056",
+    "subsls": "B1",
+    "namakk": "RUSLAN",
+    "bulan": "NOVEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.16,
+    "jmlhrumpun": 80,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "ba03c60c-f100-4b8a-91dd-abc4e5f9ddff__fotobidang__c_1793759374468.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/ba03c60c-f100-4b8a-91dd-abc4e5f9ddff__fotobidang__c_1793759374468.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=5cc0d7c047e373f35fcbba622db82ca0316868239b54a52f9a734dd81a5eb588"
+      },
+      "foto_petak": {
+        "fileName": "ba03c60c-f100-4b8a-91dd-abc4e5f9ddff__foto_petak__g_1793760280286.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/ba03c60c-f100-4b8a-91dd-abc4e5f9ddff__foto_petak__g_1793760280286.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=484f8f7bb7a7923a0aad23e88d7a855b7d6dc69dc0011f290cd6b858c48e73c0"
+      },
+      "fotoplot": {
+        "fileName": "ba03c60c-f100-4b8a-91dd-abc4e5f9ddff__fotoplot__g_1793760371807.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/ba03c60c-f100-4b8a-91dd-abc4e5f9ddff__fotoplot__g_1793760371807.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=844881cdb0e11f65d3438a9cdee91268b4c5c42100b2c046c77bea1f67c8e8c0"
+      },
+      "fotoberat": {
+        "fileName": "ba03c60c-f100-4b8a-91dd-abc4e5f9ddff__fotoberat__g_1793760439721.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/ba03c60c-f100-4b8a-91dd-abc4e5f9ddff__fotoberat__g_1793760439721.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=28a0b0830b3f1c7e844ad55457c88fc47ca5afde86bbb7c31390c00f8dcbaf54"
+      }
+    }
+  },
+  {
+    "assignmentId": "7b533ba9-2678-4d6d-9042-84924dd43022",
+    "kecamatan": "LELES",
+    "desa": "TALAGASARI",
+    "nks": "31240565",
+    "sls": "320524056",
+    "subsls": "B2",
+    "namakk": "IYOD",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.37,
+    "jmlhrumpun": 79,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "7b533ba9-2678-4d6d-9042-84924dd43022__fotobidang__c_1793758931644.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7b533ba9-2678-4d6d-9042-84924dd43022__fotobidang__c_1793758931644.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=d713a799b0a458c2fbcc769a6050ff9716b16c659f6f53f2613dc34e7625dc5f"
+      },
+      "foto_petak": {
+        "fileName": "7b533ba9-2678-4d6d-9042-84924dd43022__foto_petak__g_1793756059709.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7b533ba9-2678-4d6d-9042-84924dd43022__foto_petak__g_1793756059709.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b0bdd00f184f4271c720265f2d5dda4d7ff8196594ba86a62289364b9538231f"
+      },
+      "fotoplot": {
+        "fileName": "7b533ba9-2678-4d6d-9042-84924dd43022__fotoplot__g_1793756181970.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7b533ba9-2678-4d6d-9042-84924dd43022__fotoplot__g_1793756181970.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=26f92a76668dbb08015e9293d1887e48641d419b3d6d84137feafdb66b91a393"
+      },
+      "fotoberat": {
+        "fileName": "7b533ba9-2678-4d6d-9042-84924dd43022__fotoberat__g_1793756225697.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7b533ba9-2678-4d6d-9042-84924dd43022__fotoberat__g_1793756225697.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4634f8c5762c236918aeaa2f73de35e07e7d076d7ad74a2d44d568958f0e0cf3"
+      }
+    }
+  },
+  {
+    "assignmentId": "e3d7ab6f-3c41-4d52-ac5d-23679c45f909",
+    "kecamatan": "KARANGPAWITAN",
+    "desa": "SINDANGLAYA",
+    "nks": "31200121",
+    "sls": "320520012",
+    "subsls": "A1",
+    "namakk": "APIT SUNARYA",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.5,
+    "jmlhrumpun": 80,
+    "pcl": "EDI RUHIYAT",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "e3d7ab6f-3c41-4d52-ac5d-23679c45f909__fotobidang__g_1793459774399.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e3d7ab6f-3c41-4d52-ac5d-23679c45f909__fotobidang__g_1793459774399.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=00eeb6bd7c28b62fda7cd1e1f713c230ef7b5721417741db96b7013213783133"
+      },
+      "foto_petak": {
+        "fileName": "e3d7ab6f-3c41-4d52-ac5d-23679c45f909__foto_petak__g_1793458949643.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e3d7ab6f-3c41-4d52-ac5d-23679c45f909__foto_petak__g_1793458949643.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=5829bb8e5b7bfb6b12fd0a6b53cf0c7f6788d09b445826278830760ecac558f5"
+      },
+      "fotoplot": {
+        "fileName": "e3d7ab6f-3c41-4d52-ac5d-23679c45f909__fotoplot__g_1793459101522.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e3d7ab6f-3c41-4d52-ac5d-23679c45f909__fotoplot__g_1793459101522.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a1fe581e70bba542a37f09ec8a1b0925153e52f39ad316391c2e01bae0dac426"
+      },
+      "fotoberat": {
+        "fileName": "e3d7ab6f-3c41-4d52-ac5d-23679c45f909__fotoberat__g_1793459327799.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e3d7ab6f-3c41-4d52-ac5d-23679c45f909__fotoberat__g_1793459327799.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c41824309ee1edd7c07cb3b161326183e1d4bbbd272c93bc50c019f8765a07d5"
+      }
+    }
+  },
+  {
+    "assignmentId": "ff5aa040-aa5f-4da5-b57d-74ec7c7fb66d",
+    "kecamatan": "KARANGPAWITAN",
+    "desa": "KARANGPAWITAN",
+    "nks": "31200178",
+    "sls": "320520017",
+    "subsls": "C2",
+    "namakk": "ADE HERMAWAN",
+    "bulan": "NOVEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "6 - Tidak berhasil diubin, karena alasan lainnya",
+    "beratbersih": "",
+    "jmlhrumpun": "",
+    "pcl": "EDI EUHIYAT",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {}
+  },
+  {
+    "assignmentId": "e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73",
+    "kecamatan": "KARANGPAWITAN",
+    "desa": "SITUJAYA",
+    "nks": "31200132",
+    "sls": "320520013",
+    "subsls": "A2",
+    "namakk": "ATEP SUKANDAR",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.3,
+    "jmlhrumpun": 80,
+    "pcl": "EDI RUHIYAT",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73__fotobidang__g_1793730872758.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73__fotobidang__g_1793730872758.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9cf33618d76fdd124dd068556594794d854078516a89a7e8721947827fa2893e"
+      },
+      "foto_petak": {
+        "fileName": "e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73__foto_petak__g_1793179109572.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73__foto_petak__g_1793179109572.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a63e2e60b68b27b6f3726b7d1e3b94ea8386b28fcb7ed2cd0fcc4ff68bc001de"
+      },
+      "fotoplot": {
+        "fileName": "e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73__fotoplot__g_1793179294219.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73__fotoplot__g_1793179294219.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=04e2b62dfd5a7750bc10d16ba2fdaa959b8d1c67fa30e6b8b98f8bc602281941"
+      },
+      "fotoberat": {
+        "fileName": "e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73__fotoberat__g_1793179606946.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e2c951c4-d5d1-4204-8e5c-bc81d4d7ed73__fotoberat__g_1793179606946.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a79243927e96224ab7c487f1248dabaf89e18e702de037881335491f2989a8e7"
+      }
+    }
+  },
+  {
+    "assignmentId": "1631a727-751c-4d13-b0ee-1b656913d7fe",
+    "kecamatan": "LELES",
+    "desa": "TALAGASARI",
+    "nks": "31240569",
+    "sls": "320524056",
+    "subsls": "C3",
+    "namakk": "ANDI SUHANDI",
+    "bulan": "NOVEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.78,
+    "jmlhrumpun": 81,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "1631a727-751c-4d13-b0ee-1b656913d7fe__fotobidang__c_1793676049137.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1631a727-751c-4d13-b0ee-1b656913d7fe__fotobidang__c_1793676049137.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=bbbcfb4963dc4578c4d9b252a4b9a053521e976985a5c64097b1cea65a61fdfe"
+      },
+      "foto_petak": {
+        "fileName": "1631a727-751c-4d13-b0ee-1b656913d7fe__foto_petak__g_1793676097176.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1631a727-751c-4d13-b0ee-1b656913d7fe__foto_petak__g_1793676097176.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=753d7a9bf65e1b7736c5a389bd6e77eea335419fd616032ce7d798ef4332386e"
+      },
+      "fotoplot": {
+        "fileName": "1631a727-751c-4d13-b0ee-1b656913d7fe__fotoplot__g_1793676378232.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1631a727-751c-4d13-b0ee-1b656913d7fe__fotoplot__g_1793676378232.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3db6952e33dc0f08e6471f64192751544fa0c57490246b6df81d1148acfa333e"
+      },
+      "fotoberat": {
+        "fileName": "1631a727-751c-4d13-b0ee-1b656913d7fe__fotoberat__g_1793676521865.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1631a727-751c-4d13-b0ee-1b656913d7fe__fotoberat__g_1793676521865.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=eba8bedf4ba15c173c295a91b42686611cdc6741240dd8cf919dea345f5bf309"
+      }
+    }
+  },
+  {
+    "assignmentId": "99b98397-e76b-433e-8663-4dfba97ed638",
+    "kecamatan": "KARANGPAWITAN",
+    "desa": "MEKARSARI",
+    "nks": "31200145",
+    "sls": "320520014",
+    "subsls": "B2",
+    "namakk": "CEPI PERMANA",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.51,
+    "jmlhrumpun": 80,
+    "pcl": "EDI RUHIYAT",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "99b98397-e76b-433e-8663-4dfba97ed638__fotobidang__c_1793539653133.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/99b98397-e76b-433e-8663-4dfba97ed638__fotobidang__c_1793539653133.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=64f617753bd1bc55c577d57ab25a3c75a4206051d6893c2f670ea4df9e5b4535"
+      },
+      "foto_petak": {
+        "fileName": "99b98397-e76b-433e-8663-4dfba97ed638__foto_petak__c_1793002691395.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/99b98397-e76b-433e-8663-4dfba97ed638__foto_petak__c_1793002691395.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ebc6b6308fb73076d95981f11e623bf2c24d550a5d84fb478211fdf16e13d0a8"
+      },
+      "fotoplot": {
+        "fileName": "99b98397-e76b-433e-8663-4dfba97ed638__fotoplot__g_1793529305094.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/99b98397-e76b-433e-8663-4dfba97ed638__fotoplot__g_1793529305094.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=187f586ffc4d0104d81c8b8787a3cebb60a78dcc4a09e1a19875d6a10aa80902"
+      },
+      "fotoberat": {
+        "fileName": "99b98397-e76b-433e-8663-4dfba97ed638__fotoberat__g_1793539312202.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/99b98397-e76b-433e-8663-4dfba97ed638__fotoberat__g_1793539312202.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b84d13221e92c75ca15855f05986b1a1873d48f43d90703e77f15929e488e7bb"
+      }
+    }
+  },
+  {
+    "assignmentId": "9160045a-2b7a-4219-8a92-cd3159531ea4",
+    "kecamatan": "PANGATIKAN",
+    "desa": "SUKAMULYA",
+    "nks": "31212098",
+    "sls": "320521209",
+    "subsls": "C2",
+    "namakk": "SUMARDI",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 41.4,
+    "jmlhrumpun": 64,
+    "pcl": "Diki Budiman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "9160045a-2b7a-4219-8a92-cd3159531ea4__fotobidang__g_1793325791199.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/9160045a-2b7a-4219-8a92-cd3159531ea4__fotobidang__g_1793325791199.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=d80149b040f40c215453a17039ae0c4338ea2226babbdbc24ddd91251c922425"
+      },
+      "foto_petak": {
+        "fileName": "9160045a-2b7a-4219-8a92-cd3159531ea4__foto_petak__g_1793327835614.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/9160045a-2b7a-4219-8a92-cd3159531ea4__foto_petak__g_1793327835614.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=38396ed17b117d269076b9bc83e2a27ddeb09f53ab508b0133b4519594fd87b7"
+      },
+      "fotoplot": {
+        "fileName": "9160045a-2b7a-4219-8a92-cd3159531ea4__fotoplot__g_1793327798316.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/9160045a-2b7a-4219-8a92-cd3159531ea4__fotoplot__g_1793327798316.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b45e8d45a71427a3cf695e12a5025f7180ff2f4265cbdd820c739c5b5fc19bff"
+      },
+      "fotoberat": {
+        "fileName": "9160045a-2b7a-4219-8a92-cd3159531ea4__fotoberat__g_1793327960955.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/9160045a-2b7a-4219-8a92-cd3159531ea4__fotoberat__g_1793327960955.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=01cd65f6a6d25aec67dec9b361bdea7aa4fb786f05dda86000b25379398b611d"
+      }
+    }
+  },
+  {
+    "assignmentId": "e4679714-b996-4253-a078-65d167f76910",
+    "kecamatan": "KARANGPAWITAN",
+    "desa": "SITUJAYA",
+    "nks": "31200136",
+    "sls": "320520013",
+    "subsls": "B3",
+    "namakk": "ALI NURDIN",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.02,
+    "jmlhrumpun": 81,
+    "pcl": "EDI RUHIYAT",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "e4679714-b996-4253-a078-65d167f76910__fotobidang__g_1793458039872.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e4679714-b996-4253-a078-65d167f76910__fotobidang__g_1793458039872.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=cb9b9d2689f08aba7b449714d8eb0476a9ebbbfe6d836391ddf59cd41003aeea"
+      },
+      "foto_petak": {
+        "fileName": "e4679714-b996-4253-a078-65d167f76910__foto_petak__g_1793258566319.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e4679714-b996-4253-a078-65d167f76910__foto_petak__g_1793258566319.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=6fbcb4cb59cafda624af1f918cf42b314c9a03400ced9573b3fbc9fff56666d1"
+      },
+      "fotoplot": {
+        "fileName": "e4679714-b996-4253-a078-65d167f76910__fotoplot__g_1793457933382.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e4679714-b996-4253-a078-65d167f76910__fotoplot__g_1793457933382.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=70ea72c7513fb1b8ffa2fd5026b01a78ed3fa48742922045dd9d0bfb5b192b32"
+      },
+      "fotoberat": {
+        "fileName": "e4679714-b996-4253-a078-65d167f76910__fotoberat__g_1793458135556.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e4679714-b996-4253-a078-65d167f76910__fotoberat__g_1793458135556.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=056c8c7aa4c997c2141d8eb1b9fc6e4b9aa2dd1e61f9d26e6baa8ebec36fa5b2"
+      }
+    }
+  },
+  {
+    "assignmentId": "95bd6f5a-d1ee-4e03-a47f-3149d0337e67",
+    "kecamatan": "KARANGPAWITAN",
+    "desa": "LENGKONGJAYA",
+    "nks": "31200167",
+    "sls": "320520016",
+    "subsls": "C1",
+    "namakk": "YANI",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 49.95,
+    "jmlhrumpun": 82,
+    "pcl": "EDI RUHIYAT",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "95bd6f5a-d1ee-4e03-a47f-3149d0337e67__fotobidang__c_1793456424918.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/95bd6f5a-d1ee-4e03-a47f-3149d0337e67__fotobidang__c_1793456424918.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3206b2c68ee13bed8f40959e2e417cb80a18917196d6a2c17fd68596fa6cb986"
+      },
+      "foto_petak": {
+        "fileName": "95bd6f5a-d1ee-4e03-a47f-3149d0337e67__foto_petak__g_1793182473697.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/95bd6f5a-d1ee-4e03-a47f-3149d0337e67__foto_petak__g_1793182473697.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=fa4afbf6cf52c6dcf7291caf375ff463c0c41d5bb96bde378090ab9e7e311d62"
+      },
+      "fotoplot": {
+        "fileName": "95bd6f5a-d1ee-4e03-a47f-3149d0337e67__fotoplot__g_1793183144169.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/95bd6f5a-d1ee-4e03-a47f-3149d0337e67__fotoplot__g_1793183144169.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=cd49f36dc0532e5e555fbdd697fff98cca60e3b2e32f8e83b1c0b1d8da01018c"
+      },
+      "fotoberat": {
+        "fileName": "95bd6f5a-d1ee-4e03-a47f-3149d0337e67__fotoberat__g_1793456020509.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/95bd6f5a-d1ee-4e03-a47f-3149d0337e67__fotoberat__g_1793456020509.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b1eb2f29da4cf0592d7f5856e070e3e8d524b0bc2a8b01de070af6ce76c3572b"
+      }
+    }
+  },
+  {
+    "assignmentId": "e0faeadd-ccb0-47d8-acc0-c852a4a24c23",
+    "kecamatan": "KARANGPAWITAN",
+    "desa": "KARANGPAWITAN",
+    "nks": "31200177",
+    "sls": "320520017",
+    "subsls": "C1",
+    "namakk": "UDIN",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.3,
+    "jmlhrumpun": 81,
+    "pcl": "EDI RUHIYAT",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "e0faeadd-ccb0-47d8-acc0-c852a4a24c23__fotobidang__c_1793454450088.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e0faeadd-ccb0-47d8-acc0-c852a4a24c23__fotobidang__c_1793454450088.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9fe4f53ade660d6adcd636af9c2e5f8bb0c36c414930c936e698ac542c747230"
+      },
+      "foto_petak": {
+        "fileName": "e0faeadd-ccb0-47d8-acc0-c852a4a24c23__foto_petak__c_1793339339115.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e0faeadd-ccb0-47d8-acc0-c852a4a24c23__foto_petak__c_1793339339115.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=8fbd45d71ef3833167e1c1b9eda2b4b213ac60274bf3889fe635b45d89eb53f4"
+      },
+      "fotoplot": {
+        "fileName": "e0faeadd-ccb0-47d8-acc0-c852a4a24c23__fotoplot__g_1793453608097.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e0faeadd-ccb0-47d8-acc0-c852a4a24c23__fotoplot__g_1793453608097.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=29da26a83d66bd9d4358ff18b7ec0ef2f728c1faddd66cfcbfc77b0a064e2cb0"
+      },
+      "fotoberat": {
+        "fileName": "e0faeadd-ccb0-47d8-acc0-c852a4a24c23__fotoberat__g_1793453751220.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e0faeadd-ccb0-47d8-acc0-c852a4a24c23__fotoberat__g_1793453751220.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=740c083ac08294b1467a5ad7880fb4b5560d9901d4b1fb5f97c60c8a8c38fd3e"
+      }
+    }
+  },
+  {
+    "assignmentId": "e5d92fa6-e185-43c2-8591-99fee1487ee7",
+    "kecamatan": "SAMARANG",
+    "desa": "CINTAASIH",
+    "nks": "31170022",
+    "sls": "320517002",
+    "subsls": "A2",
+    "namakk": "NINA",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.13,
+    "jmlhrumpun": 92,
+    "pcl": "Koswara hermansyah",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "e5d92fa6-e185-43c2-8591-99fee1487ee7__fotobidang__c_1793259909497.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e5d92fa6-e185-43c2-8591-99fee1487ee7__fotobidang__c_1793259909497.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4a856cd356f2f8d8ac758a924841def9e976d5ac31cdf0ecc89147f82622893d"
+      },
+      "foto_petak": {
+        "fileName": "e5d92fa6-e185-43c2-8591-99fee1487ee7__foto_petak__g_1793234316978.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e5d92fa6-e185-43c2-8591-99fee1487ee7__foto_petak__g_1793234316978.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=05e73f5603d3ed3cca547fb96ff99952d2fe34a625c9572ba3f2402deb200218"
+      },
+      "fotoplot": {
+        "fileName": "e5d92fa6-e185-43c2-8591-99fee1487ee7__fotoplot__g_1793234345640.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e5d92fa6-e185-43c2-8591-99fee1487ee7__fotoplot__g_1793234345640.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3e080f38458093b7ebcab97cc1d8ddd459153261a0c542494cc7afcdb461a7f2"
+      },
+      "fotoberat": {
+        "fileName": "e5d92fa6-e185-43c2-8591-99fee1487ee7__fotoberat__g_1793236044776.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/e5d92fa6-e185-43c2-8591-99fee1487ee7__fotoberat__g_1793236044776.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ab241b6ae590a2080ac1fbe5b061d9799af73ef91b31dc5d4b01a5cc9e45f206"
+      }
+    }
+  },
+  {
+    "assignmentId": "7f4649ea-ba5d-4e4b-ac95-ba7c92435822",
+    "kecamatan": "SAMARANG",
+    "desa": "CINTAASIH",
+    "nks": "31170029",
+    "sls": "320517002",
+    "subsls": "C3",
+    "namakk": "ADE",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.16,
+    "jmlhrumpun": 90,
+    "pcl": "Koswara hermansyah",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "7f4649ea-ba5d-4e4b-ac95-ba7c92435822__fotobidang__c_1793259272061.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7f4649ea-ba5d-4e4b-ac95-ba7c92435822__fotobidang__c_1793259272061.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=dbac2d600bc54dc9de5552c9547c9473bb2e1556b12cbcfd55d32faa8a134113"
+      },
+      "foto_petak": {
+        "fileName": "7f4649ea-ba5d-4e4b-ac95-ba7c92435822__foto_petak__g_1793234155486.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7f4649ea-ba5d-4e4b-ac95-ba7c92435822__foto_petak__g_1793234155486.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ff6e6de5e57b21e87d33b1c2d5c44335a79fa8ce878b17139d9f56ebdd7d7f3d"
+      },
+      "fotoplot": {
+        "fileName": "7f4649ea-ba5d-4e4b-ac95-ba7c92435822__fotoplot__g_1793234187844.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7f4649ea-ba5d-4e4b-ac95-ba7c92435822__fotoplot__g_1793234187844.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=801d50fc8052478fd263035b6e7cee2555c89bfdaa4ebecbe075c3dc66a1727b"
+      },
+      "fotoberat": {
+        "fileName": "7f4649ea-ba5d-4e4b-ac95-ba7c92435822__fotoberat__g_1793259447230.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/7f4649ea-ba5d-4e4b-ac95-ba7c92435822__fotoberat__g_1793259447230.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000602Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4323e606c7703165019167b50ce1b39481e22f01406096be6605335645a148e2"
+      }
+    }
+  },
+  {
+    "assignmentId": "b270d4fa-fbfa-4521-b6e7-9de7c81e3a60",
+    "kecamatan": "SAMARANG",
+    "desa": "CINTARASA",
+    "nks": "31170048",
+    "sls": "320517004",
+    "subsls": "C2",
+    "namakk": "ENTING",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.03,
+    "jmlhrumpun": 89,
+    "pcl": "Koswara hermansyah",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "b270d4fa-fbfa-4521-b6e7-9de7c81e3a60__fotobidang__c_1793258740845.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b270d4fa-fbfa-4521-b6e7-9de7c81e3a60__fotobidang__c_1793258740845.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=2f5397e55d55e7d225a38c14847223802ef4a29f0fab9cc8d8a0ca8d908e2307"
+      },
+      "foto_petak": {
+        "fileName": "b270d4fa-fbfa-4521-b6e7-9de7c81e3a60__foto_petak__g_1793233583067.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b270d4fa-fbfa-4521-b6e7-9de7c81e3a60__foto_petak__g_1793233583067.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=196484f47e960312b932647db40eab39d1c647cf7abcc6b6179af433a9731977"
+      },
+      "fotoplot": {
+        "fileName": "b270d4fa-fbfa-4521-b6e7-9de7c81e3a60__fotoplot__g_1793233609814.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b270d4fa-fbfa-4521-b6e7-9de7c81e3a60__fotoplot__g_1793233609814.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=56736b6a8c50ebd57179c0de76e4132c0303a60960259f5348421cd9780ceded"
+      },
+      "fotoberat": {
+        "fileName": "b270d4fa-fbfa-4521-b6e7-9de7c81e3a60__fotoberat__g_1793259378619.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b270d4fa-fbfa-4521-b6e7-9de7c81e3a60__fotoberat__g_1793259378619.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b97e769d63a1ac97d0d5cb9fbed21fb6db0a02882d361b928b3bf9a4be01a20b"
+      }
+    }
+  },
+  {
+    "assignmentId": "f1fe3f3c-6ff6-4654-a9b9-7b2990869be8",
+    "kecamatan": "SAMARANG",
+    "desa": "SIRNASARI",
+    "nks": "31170074",
+    "sls": "320517007",
+    "subsls": "B1",
+    "namakk": "MUSTOPA",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.54,
+    "jmlhrumpun": 95,
+    "pcl": "Koswara hermansyah",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "f1fe3f3c-6ff6-4654-a9b9-7b2990869be8__fotobidang__c_1793258049014.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f1fe3f3c-6ff6-4654-a9b9-7b2990869be8__fotobidang__c_1793258049014.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7bb3cbdfc9b820233a25b3ec0e0596c8c1351ef1445da64ed274c764559eb8fa"
+      },
+      "foto_petak": {
+        "fileName": "f1fe3f3c-6ff6-4654-a9b9-7b2990869be8__foto_petak__g_1793233345567.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f1fe3f3c-6ff6-4654-a9b9-7b2990869be8__foto_petak__g_1793233345567.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=06544df21db5d9c377584485d82af9e25d4467f2abba24f385df98829e634546"
+      },
+      "fotoplot": {
+        "fileName": "f1fe3f3c-6ff6-4654-a9b9-7b2990869be8__fotoplot__g_1793233382283.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f1fe3f3c-6ff6-4654-a9b9-7b2990869be8__fotoplot__g_1793233382283.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=1899d6f18fab1717ea5344da3cd6060e18806d7188b28e703e02488292fe920d"
+      },
+      "fotoberat": {
+        "fileName": "f1fe3f3c-6ff6-4654-a9b9-7b2990869be8__fotoberat__g_1793233401548.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f1fe3f3c-6ff6-4654-a9b9-7b2990869be8__fotoberat__g_1793233401548.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=05081b8307ea7a5987f7ac4f6be95040045c5cdad943cec9fc8578d682865eeb"
+      }
+    }
+  },
+  {
+    "assignmentId": "d985a7c2-fa3c-4064-a469-5cc4a51d66f0",
+    "kecamatan": "SAMARANG",
+    "desa": "SIRNASARI",
+    "nks": "31170079",
+    "sls": "320517007",
+    "subsls": "C3",
+    "namakk": "IRPAN",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.12,
+    "jmlhrumpun": 92,
+    "pcl": "Koswara hermansyah",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "d985a7c2-fa3c-4064-a469-5cc4a51d66f0__fotobidang__c_1793257370023.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/d985a7c2-fa3c-4064-a469-5cc4a51d66f0__fotobidang__c_1793257370023.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a34e2cb61ae664b90ed4c7efcda68440c3a44f6f9b67e2f6d358c1a6b9b65002"
+      },
+      "foto_petak": {
+        "fileName": "d985a7c2-fa3c-4064-a469-5cc4a51d66f0__foto_petak__g_1793232899276.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/d985a7c2-fa3c-4064-a469-5cc4a51d66f0__foto_petak__g_1793232899276.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f21c028d781119b206a5ae45a4bad555a2a2bb659de170d22688b74fd9ab02c0"
+      },
+      "fotoplot": {
+        "fileName": "d985a7c2-fa3c-4064-a469-5cc4a51d66f0__fotoplot__g_1793233059690.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/d985a7c2-fa3c-4064-a469-5cc4a51d66f0__fotoplot__g_1793233059690.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4e0f5f998eec5962852a3acf1899b08a40af9f314753475812d440d759bfd363"
+      },
+      "fotoberat": {
+        "fileName": "d985a7c2-fa3c-4064-a469-5cc4a51d66f0__fotoberat__g_1793233080747.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/d985a7c2-fa3c-4064-a469-5cc4a51d66f0__fotoberat__g_1793233080747.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=cfa297dfe55558bf4c0bfae6c458e07845abb3eed4706fca8671bb3e5cdc72bb"
+      }
+    }
+  },
+  {
+    "assignmentId": "4701df48-9613-4b7d-bfeb-f086fd2e405a",
+    "kecamatan": "TALEGONG",
+    "desa": "MEKARMULYA",
+    "nks": "31020168",
+    "sls": "320502016",
+    "subsls": "C2",
+    "namakk": "undefined",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": "",
+    "jmlhrumpun": "",
+    "pcl": "Aldi",
+    "status_assignment": "DRAFT",
+    "photos": {}
+  },
+  {
+    "assignmentId": "409a79e6-3ff5-4bbd-b0fe-c2701c7b095c",
+    "kecamatan": "TALEGONG",
+    "desa": "MEKARMULYA",
+    "nks": "31020162",
+    "sls": "320502016",
+    "subsls": "A2",
+    "namakk": "undefined",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": "",
+    "jmlhrumpun": "",
+    "pcl": "Aldi",
+    "status_assignment": "DRAFT",
+    "photos": {}
+  },
+  {
+    "assignmentId": "fc458c24-2a89-4661-abcf-b2e655b9ccc7",
+    "kecamatan": "CISOMPET",
+    "desa": "SINDANGSARI",
+    "nks": "31090087",
+    "sls": "320509008",
+    "subsls": "C1",
+    "namakk": "TATANG ",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.08,
+    "jmlhrumpun": 106,
+    "pcl": "Suhendan ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "fc458c24-2a89-4661-abcf-b2e655b9ccc7__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/fc458c24-2a89-4661-abcf-b2e655b9ccc7__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7ef7f1b485e1a75627fe87e2ec4358357ba7ceb47208e3cd11777961e81d52c5"
+      },
+      "foto_petak": {
+        "fileName": "fc458c24-2a89-4661-abcf-b2e655b9ccc7__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/fc458c24-2a89-4661-abcf-b2e655b9ccc7__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=2d7b77cb7513b915bcbd30ece4e8083ca8cc31c74e92112827f6906143748575"
+      },
+      "fotoplot": {
+        "fileName": "fc458c24-2a89-4661-abcf-b2e655b9ccc7__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/fc458c24-2a89-4661-abcf-b2e655b9ccc7__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f91c594f7d271ea7c998e900eabd2ce34cc030d3a8782f9cf49219fa545f73fc"
+      },
+      "fotoberat": {
+        "fileName": "fc458c24-2a89-4661-abcf-b2e655b9ccc7__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/fc458c24-2a89-4661-abcf-b2e655b9ccc7__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=191cdbbbce632528c79e3d331f7238ffa0afb03ead336e722d7536feaa646ee7"
+      }
+    }
+  },
+  {
+    "assignmentId": "56baa557-8260-4408-a537-292508531612",
+    "kecamatan": "CISOMPET",
+    "desa": "SINDANGSARI",
+    "nks": "31090081",
+    "sls": "320509008",
+    "subsls": "A1",
+    "namakk": "SAOJA",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.68,
+    "jmlhrumpun": 110,
+    "pcl": "Suhendan ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "56baa557-8260-4408-a537-292508531612__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/56baa557-8260-4408-a537-292508531612__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b5e6d3189b93ad4fe32cd1a6f80fc11ec445d5dbc6073d0ee8d736f89db4c14f"
+      },
+      "foto_petak": {
+        "fileName": "56baa557-8260-4408-a537-292508531612__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/56baa557-8260-4408-a537-292508531612__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=381d7329d391e721e5ddac13446de5b0494d842bb77332c3dc10586e6a9bc95d"
+      },
+      "fotoplot": {
+        "fileName": "56baa557-8260-4408-a537-292508531612__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/56baa557-8260-4408-a537-292508531612__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=71fb6db880158c0555dcf2d891a9201feebfba6e7be4972279d8f3cfc535302e"
+      },
+      "fotoberat": {
+        "fileName": "56baa557-8260-4408-a537-292508531612__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/56baa557-8260-4408-a537-292508531612__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7eb4e5aa8415bf7ed8698bdf1611a5bda511438390e5de77cae7fd21b7dc651a"
+      }
+    }
+  },
+  {
+    "assignmentId": "41849071-93b1-4d81-a917-b8177ad5531f",
+    "kecamatan": "CISOMPET",
+    "desa": "PANYINDANGAN",
+    "nks": "33090098",
+    "sls": "320509009",
+    "subsls": "C2",
+    "namakk": "SAEPULOH ",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI LADANG",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 2.94,
+    "jmlhrumpun": 92,
+    "pcl": "Suhendan ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "41849071-93b1-4d81-a917-b8177ad5531f__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/41849071-93b1-4d81-a917-b8177ad5531f__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=48bd1e3aaf3213b3e0bbe62ce4fc20957b742dac27caa0c69b03b979485b56ef"
+      },
+      "foto_petak": {
+        "fileName": "41849071-93b1-4d81-a917-b8177ad5531f__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/41849071-93b1-4d81-a917-b8177ad5531f__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=66aac8deac566a09504093ed57c11810be5fc49819ffe4b7fcbb9b97e6a41f61"
+      },
+      "fotoplot": {
+        "fileName": "41849071-93b1-4d81-a917-b8177ad5531f__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/41849071-93b1-4d81-a917-b8177ad5531f__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=614b8510450ad7eb2d941401c55e4011d1079d3e0eff773af5be676b2bbd2038"
+      },
+      "fotoberat": {
+        "fileName": "41849071-93b1-4d81-a917-b8177ad5531f__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/41849071-93b1-4d81-a917-b8177ad5531f__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ab22ec0d163a46cf8222a475338343df6ec4e6dd684c5dda8f1769e5d38583ee"
+      }
+    }
+  },
+  {
+    "assignmentId": "f49e1c0b-cde0-4357-aa15-6773ba36e519",
+    "kecamatan": "CISOMPET",
+    "desa": "SINDANGSARI",
+    "nks": "31090089",
+    "sls": "320509008",
+    "subsls": "C3",
+    "namakk": "UMAN",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.08,
+    "jmlhrumpun": 100,
+    "pcl": "Suhendan ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "f49e1c0b-cde0-4357-aa15-6773ba36e519__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f49e1c0b-cde0-4357-aa15-6773ba36e519__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=1725a66a3963d23be740f004fd40ccc69a6930a8badb2233e445a288c7484bba"
+      },
+      "foto_petak": {
+        "fileName": "f49e1c0b-cde0-4357-aa15-6773ba36e519__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f49e1c0b-cde0-4357-aa15-6773ba36e519__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ad73f1fd1252dc207a4c7f0076a131a3ddde0527aa63e47c4c3ca82b7e92f564"
+      },
+      "fotoplot": {
+        "fileName": "f49e1c0b-cde0-4357-aa15-6773ba36e519__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f49e1c0b-cde0-4357-aa15-6773ba36e519__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ef5498f1b116413a4d47e54051d2dc75844f61154e9d6134b5ab5f945a516d8b"
+      },
+      "fotoberat": {
+        "fileName": "f49e1c0b-cde0-4357-aa15-6773ba36e519__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f49e1c0b-cde0-4357-aa15-6773ba36e519__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9ec45e7d82ebe6d235d43c3beb2a7878da51948a7d0add90337ff21f5e95a02c"
+      }
+    }
+  },
+  {
+    "assignmentId": "5df16c36-badf-41d9-a9e9-d0ba87088e29",
+    "kecamatan": "PEUNDEUY",
+    "desa": "SUKANAGARA",
+    "nks": "",
+    "sls": "0017",
+    "subsls": "00",
+    "namakk": "SARKOSIH",
+    "bulan": "OKTOBER",
+    "komoditas": "JAGUNG",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.3,
+    "jmlhrumpun": 34,
+    "pcl": "SURAHMAN SENJAYA ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "5df16c36-badf-41d9-a9e9-d0ba87088e29__fotobidang__g_1793196068035.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5df16c36-badf-41d9-a9e9-d0ba87088e29__fotobidang__g_1793196068035.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9f46faafc3a32f527af87d713ee5cad82da5577e9243956beb44c8f253b94122"
+      },
+      "foto_petak": {
+        "fileName": "5df16c36-badf-41d9-a9e9-d0ba87088e29__foto_petak__g_1793196173525.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5df16c36-badf-41d9-a9e9-d0ba87088e29__foto_petak__g_1793196173525.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=62e07097bc176c01442d71b7b10747bcc23a415bd73102c886604f06b99d9e37"
+      },
+      "fotoplot": {
+        "fileName": "5df16c36-badf-41d9-a9e9-d0ba87088e29__fotoplot__g_1793168317513.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5df16c36-badf-41d9-a9e9-d0ba87088e29__fotoplot__g_1793168317513.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f14b51be5fc575fd6faa6b8bd20c8281c233671c4a0f422fb2940d3927f560cd"
+      },
+      "fotoberat": {
+        "fileName": "5df16c36-badf-41d9-a9e9-d0ba87088e29__fotoberat__g_1793168365459.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5df16c36-badf-41d9-a9e9-d0ba87088e29__fotoberat__g_1793168365459.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=d9682fb4e97ac0c608fabc472d4da1d0847ac67a4bd7a2ca972fe236aa5ace06"
+      }
+    }
+  },
+  {
+    "assignmentId": "6ee92fe1-fd59-49b2-a68d-b6a7968e477f",
+    "kecamatan": "SINGAJAYA",
+    "desa": "GIRIMUKTI",
+    "nks": "",
+    "sls": "0045",
+    "subsls": "00",
+    "namakk": "TATANG ALI SAMBAS",
+    "bulan": "NOVEMBER",
+    "komoditas": "UBI KAYU",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 14.68,
+    "jmlhrumpun": 7,
+    "pcl": "Ari rahman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "6ee92fe1-fd59-49b2-a68d-b6a7968e477f__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/6ee92fe1-fd59-49b2-a68d-b6a7968e477f__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=73a50ece6925ad2164383dbb34f1341cef7dbac59f2074655ff2b0f94df271af"
+      },
+      "foto_petak": {
+        "fileName": "6ee92fe1-fd59-49b2-a68d-b6a7968e477f__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/6ee92fe1-fd59-49b2-a68d-b6a7968e477f__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=2d31f0fe399e18b25bbb60c32ec5cfa05399833ac86e1dab3a43b1963ee8869c"
+      },
+      "fotoplot": {
+        "fileName": "6ee92fe1-fd59-49b2-a68d-b6a7968e477f__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/6ee92fe1-fd59-49b2-a68d-b6a7968e477f__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=41953783cfd794736922aa9b37c9ba743c406fda53cffda5c1e4907331349191"
+      },
+      "fotoberat": {
+        "fileName": "6ee92fe1-fd59-49b2-a68d-b6a7968e477f__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/6ee92fe1-fd59-49b2-a68d-b6a7968e477f__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=8b2c4fb93702b474123a628df223c1b895294b7abb64da8ab84bb67681cf9afb"
+      }
+    }
+  },
+  {
+    "assignmentId": "20e57247-4ef4-4fe1-ad57-89bf53cfbf12",
+    "kecamatan": "SINGAJAYA",
+    "desa": "GIRIMUKTI",
+    "nks": "",
+    "sls": "0045",
+    "subsls": "00",
+    "namakk": "IDAN S.",
+    "bulan": "OKTOBER",
+    "komoditas": "UBI KAYU",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 10.64,
+    "jmlhrumpun": 6,
+    "pcl": "Ari rahman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "20e57247-4ef4-4fe1-ad57-89bf53cfbf12__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/20e57247-4ef4-4fe1-ad57-89bf53cfbf12__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=0555c6c2ec9a48752cd0cf4ca9fecbe789ae48538ae3a7bfe99b8fd48c2cd4a7"
+      },
+      "foto_petak": {
+        "fileName": "20e57247-4ef4-4fe1-ad57-89bf53cfbf12__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/20e57247-4ef4-4fe1-ad57-89bf53cfbf12__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=511a8f546e06375de1ee0b7c34e681c99f409a39c21d22daf173b43af04f52b4"
+      },
+      "fotoplot": {
+        "fileName": "20e57247-4ef4-4fe1-ad57-89bf53cfbf12__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/20e57247-4ef4-4fe1-ad57-89bf53cfbf12__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e7064935128aae241b09cd893e4e0fe0f6a9b5cccbf16ba7f2ff2246e6614764"
+      },
+      "fotoberat": {
+        "fileName": "20e57247-4ef4-4fe1-ad57-89bf53cfbf12__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/20e57247-4ef4-4fe1-ad57-89bf53cfbf12__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7266ba192951bb7cffd2a6d62c6090789e8bbb8e05c6e7340c01f32f1f029e95"
+      }
+    }
+  },
+  {
+    "assignmentId": "c830792c-a367-459c-93be-f28cbb9e2876",
+    "kecamatan": "CISOMPET",
+    "desa": "SINDANGSARI",
+    "nks": "31090085",
+    "sls": "320509008",
+    "subsls": "B2",
+    "namakk": "ADE",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 2.95,
+    "jmlhrumpun": 102,
+    "pcl": "Suhendan ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "c830792c-a367-459c-93be-f28cbb9e2876__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/c830792c-a367-459c-93be-f28cbb9e2876__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=02dc7bc08df11e1ce7bd7702db88caa16836dbbfbf03f1af1d2ef07dc2047ceb"
+      },
+      "foto_petak": {
+        "fileName": "c830792c-a367-459c-93be-f28cbb9e2876__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/c830792c-a367-459c-93be-f28cbb9e2876__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=52b233bd734a0032d9aa3d947ba648caf8c91ed287db40aa0a394e62e38c4182"
+      },
+      "fotoplot": {
+        "fileName": "c830792c-a367-459c-93be-f28cbb9e2876__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/c830792c-a367-459c-93be-f28cbb9e2876__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=14d25c5adaf1a0e493594291abcb0eef41b445ad114eda5746635d73e29ab119"
+      },
+      "fotoberat": {
+        "fileName": "c830792c-a367-459c-93be-f28cbb9e2876__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/c830792c-a367-459c-93be-f28cbb9e2876__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=689dfe290e5613b30a466af8a442b0f013cf6478de13278760db235fa635e86f"
+      }
+    }
+  },
+  {
+    "assignmentId": "f1cdca31-119a-4e6c-81e6-c209ca12ba45",
+    "kecamatan": "SINGAJAYA",
+    "desa": "SUKAWANGI",
+    "nks": "31110059",
+    "sls": "320511005",
+    "subsls": "C3",
+    "namakk": "ABDUL AZIZ",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.32,
+    "jmlhrumpun": 96,
+    "pcl": "Ari rahman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "f1cdca31-119a-4e6c-81e6-c209ca12ba45__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f1cdca31-119a-4e6c-81e6-c209ca12ba45__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=52cc394e77ff436145c501b2c586f2acc68c37cff8ba5c94774d76443a9f1acb"
+      },
+      "foto_petak": {
+        "fileName": "f1cdca31-119a-4e6c-81e6-c209ca12ba45__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f1cdca31-119a-4e6c-81e6-c209ca12ba45__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=0a25fc54f9947eaa5a5f4851fbbda003ae85ab23ac53f95aca722e03d86908bb"
+      },
+      "fotoplot": {
+        "fileName": "f1cdca31-119a-4e6c-81e6-c209ca12ba45__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f1cdca31-119a-4e6c-81e6-c209ca12ba45__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=1334c22fc4a60c15c5a9a2ca70dcbd08022513826c1fdabca8d6126c548e29fe"
+      },
+      "fotoberat": {
+        "fileName": "f1cdca31-119a-4e6c-81e6-c209ca12ba45__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f1cdca31-119a-4e6c-81e6-c209ca12ba45__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=84fd98c91af55d33b360c9ae4dfa1b1141533d3ae0d1646370b1302eb342227b"
+      }
+    }
+  },
+  {
+    "assignmentId": "4d8cebfa-b941-4d88-8895-51625118624f",
+    "kecamatan": "SINGAJAYA",
+    "desa": "CIUDIAN",
+    "nks": "31110079",
+    "sls": "320511007",
+    "subsls": "C3",
+    "namakk": "ERWAN",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.22,
+    "jmlhrumpun": 98,
+    "pcl": "Ari rahman ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "4d8cebfa-b941-4d88-8895-51625118624f__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4d8cebfa-b941-4d88-8895-51625118624f__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=811f6807af0acb59e97d7dffe80ab250e126725973cff94f326e002e8896555c"
+      },
+      "foto_petak": {
+        "fileName": "4d8cebfa-b941-4d88-8895-51625118624f__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4d8cebfa-b941-4d88-8895-51625118624f__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=be28225d599de906eb52eca279d441e68e2bbea306e44cf400d32f4fa0a6608a"
+      },
+      "fotoplot": {
+        "fileName": "4d8cebfa-b941-4d88-8895-51625118624f__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4d8cebfa-b941-4d88-8895-51625118624f__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=5e9677fcb3f5f6c50b5a3bbd0e9519fe7de1ca4aade6d647ca1f285103ca4db2"
+      },
+      "fotoberat": {
+        "fileName": "4d8cebfa-b941-4d88-8895-51625118624f__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4d8cebfa-b941-4d88-8895-51625118624f__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=df144c0f73a6895553cbab2581b047feb0fd990623535cb824d6cbf9f9b6eb1f"
+      }
+    }
+  },
+  {
+    "assignmentId": "b77de69e-f366-4c1d-8060-359bd28e7f56",
+    "kecamatan": "SINGAJAYA",
+    "desa": "CIUDIAN",
+    "nks": "31110073",
+    "sls": "320511007",
+    "subsls": "A3",
+    "namakk": "OHA",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.04,
+    "jmlhrumpun": 95,
+    "pcl": "Ari rahman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "b77de69e-f366-4c1d-8060-359bd28e7f56__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b77de69e-f366-4c1d-8060-359bd28e7f56__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4c7aa4e2d67d95b1e074c37f74e475c705873046ed51300bd3c7bef5c84fd36e"
+      },
+      "foto_petak": {
+        "fileName": "b77de69e-f366-4c1d-8060-359bd28e7f56__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b77de69e-f366-4c1d-8060-359bd28e7f56__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3a930e77d024b67939e9318c965ddf32fd89d60fc579067e79d0b1533afb83ca"
+      },
+      "fotoplot": {
+        "fileName": "b77de69e-f366-4c1d-8060-359bd28e7f56__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b77de69e-f366-4c1d-8060-359bd28e7f56__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4df2ccc1026094e2e0b1d0e6f9acdc7f9c598c2a1d44bedcf5458cdd58d97017"
+      },
+      "fotoberat": {
+        "fileName": "b77de69e-f366-4c1d-8060-359bd28e7f56__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b77de69e-f366-4c1d-8060-359bd28e7f56__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=efe6f0f116b5d250a061345326da19e43f17c11da242d85dbc3da73b64950516"
+      }
+    }
+  },
+  {
+    "assignmentId": "f31ab09a-1086-4050-89b2-2b7c218a83d1",
+    "kecamatan": "SINGAJAYA",
+    "desa": "SUKAWANGI",
+    "nks": "31110052",
+    "sls": "320511005",
+    "subsls": "A2",
+    "namakk": "AWAN",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.5,
+    "jmlhrumpun": 99,
+    "pcl": "Ari rahman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "f31ab09a-1086-4050-89b2-2b7c218a83d1__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f31ab09a-1086-4050-89b2-2b7c218a83d1__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7bc7b078c3f31c77a0cadfc5a1fa3462cb2f4b7cb4e36eb51aa7603703cc9461"
+      },
+      "foto_petak": {
+        "fileName": "f31ab09a-1086-4050-89b2-2b7c218a83d1__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f31ab09a-1086-4050-89b2-2b7c218a83d1__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=25e7a1c8c4a4a3926e26e41a2566167e11ebc8f5d994a32e3b2567b700e9fb39"
+      },
+      "fotoplot": {
+        "fileName": "f31ab09a-1086-4050-89b2-2b7c218a83d1__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f31ab09a-1086-4050-89b2-2b7c218a83d1__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=843b67bfe391c45f0f3558781b4d05d8adc577a9bac75feec3831f789c5f41ab"
+      },
+      "fotoberat": {
+        "fileName": "f31ab09a-1086-4050-89b2-2b7c218a83d1__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f31ab09a-1086-4050-89b2-2b7c218a83d1__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f7716c27da6d7bb1eb2c71253b075a0894d422184b1031a102952b7a9a0631c1"
+      }
+    }
+  },
+  {
+    "assignmentId": "0c37b7d9-7326-4f32-9b6e-212bce821c0f",
+    "kecamatan": "CISOMPET",
+    "desa": "NEGLASARI",
+    "nks": "32090031",
+    "sls": "320509003",
+    "subsls": "A1",
+    "namakk": "UMAR SAID ",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.43,
+    "jmlhrumpun": 95,
+    "pcl": "Suhendan ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "0c37b7d9-7326-4f32-9b6e-212bce821c0f__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/0c37b7d9-7326-4f32-9b6e-212bce821c0f__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9bff31d7e4baa9ca0227f093346747dcb17a0c122597af97c29d468ab8acdc56"
+      },
+      "foto_petak": {
+        "fileName": "0c37b7d9-7326-4f32-9b6e-212bce821c0f__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/0c37b7d9-7326-4f32-9b6e-212bce821c0f__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=2e6a30950236616658e42ec26c0a9ff8e07b17f2ef5030252e1bc297c39f1883"
+      },
+      "fotoplot": {
+        "fileName": "0c37b7d9-7326-4f32-9b6e-212bce821c0f__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/0c37b7d9-7326-4f32-9b6e-212bce821c0f__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000604Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e7a0fd8f28c2a53dcb83db152eb6fe1023995a84bc183e433f56d7f58a09b52a"
+      },
+      "fotoberat": {
+        "fileName": "0c37b7d9-7326-4f32-9b6e-212bce821c0f__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/0c37b7d9-7326-4f32-9b6e-212bce821c0f__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=89f6f92709957f770cbc7df742b326aef052a8998f489b6b4c866082a0123fb4"
+      }
+    }
+  },
+  {
+    "assignmentId": "b26ed5b5-11df-4cc3-aaf9-036286cc8eb1",
+    "kecamatan": "PAKENJENG",
+    "desa": "KARANGSARI",
+    "nks": "",
+    "sls": "0046",
+    "subsls": "00",
+    "namakk": "RUKMAN",
+    "bulan": "OKTOBER",
+    "komoditas": "JAGUNG",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 13.33,
+    "jmlhrumpun": 32,
+    "pcl": "NUNUNG ISKANDAR",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "b26ed5b5-11df-4cc3-aaf9-036286cc8eb1__fotobidang__g_1792389317933.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b26ed5b5-11df-4cc3-aaf9-036286cc8eb1__fotobidang__g_1792389317933.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e783da27b444dd8537f6b621ed3204b4a20bd5cfd2a48f9c308d6501532e372e"
+      },
+      "foto_petak": {
+        "fileName": "b26ed5b5-11df-4cc3-aaf9-036286cc8eb1__foto_petak__g_1792389450077.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b26ed5b5-11df-4cc3-aaf9-036286cc8eb1__foto_petak__g_1792389450077.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4df6c2584cab813d1ec3e3cc0f671142594b2f339fd4250627a0d2ef72279401"
+      },
+      "fotoplot": {
+        "fileName": "b26ed5b5-11df-4cc3-aaf9-036286cc8eb1__fotoplot__g_1792389575639.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b26ed5b5-11df-4cc3-aaf9-036286cc8eb1__fotoplot__g_1792389575639.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f41a99e1e94d2c8dd8f77cd279969c1da3ee5de506d049eb88ce1bbb98992409"
+      },
+      "fotoberat": {
+        "fileName": "b26ed5b5-11df-4cc3-aaf9-036286cc8eb1__fotoberat__g_1792389675483.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b26ed5b5-11df-4cc3-aaf9-036286cc8eb1__fotoberat__g_1792389675483.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=d0fd72c1405797f37573e3bd209c97a932e03bcffb119d40f39d1f14224389d0"
+      }
+    }
+  },
+  {
+    "assignmentId": "a99404bc-fca9-462d-9f9b-fc85664ad914",
+    "kecamatan": "PAKENJENG",
+    "desa": "KARANGSARI",
+    "nks": "",
+    "sls": "0046",
+    "subsls": "00",
+    "namakk": "ENAN",
+    "bulan": "OKTOBER",
+    "komoditas": "JAGUNG",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 10.51,
+    "jmlhrumpun": 29,
+    "pcl": "NUNUNG ISKANDAR",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "a99404bc-fca9-462d-9f9b-fc85664ad914__fotobidang__g_1792121194766.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/a99404bc-fca9-462d-9f9b-fc85664ad914__fotobidang__g_1792121194766.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4f1d47bdbc9b46dfb0f0ed2b2ce673a5b442d7d3f8e230b85e9fef5be9a596d1"
+      },
+      "foto_petak": {
+        "fileName": "a99404bc-fca9-462d-9f9b-fc85664ad914__foto_petak__g_1792121237226.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/a99404bc-fca9-462d-9f9b-fc85664ad914__foto_petak__g_1792121237226.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c0a8e48402af7fba183b29029577741b431af14696ebcfa6dbeb2b5b507f319e"
+      },
+      "fotoplot": {
+        "fileName": "a99404bc-fca9-462d-9f9b-fc85664ad914__fotoplot__g_1792121328183.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/a99404bc-fca9-462d-9f9b-fc85664ad914__fotoplot__g_1792121328183.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3b6449c7784d9bd53f7335ca687110b7d5474e39cd7101bf0dc7ed955b9fd16f"
+      },
+      "fotoberat": {
+        "fileName": "a99404bc-fca9-462d-9f9b-fc85664ad914__fotoberat__g_1792121532061.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/a99404bc-fca9-462d-9f9b-fc85664ad914__fotoberat__g_1792121532061.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=833a3a8f94089564d86b1b8735bf4b5183272e89d6481c9cb4c634592a14c64d"
+      }
+    }
+  },
+  {
+    "assignmentId": "4b43d69f-0969-4596-a1ac-6d5209979e40",
+    "kecamatan": "MEKARMUKTI",
+    "desa": "JAGABAYA",
+    "nks": "31031102",
+    "sls": "320503110",
+    "subsls": "A2",
+    "namakk": "WANDI RUSWANDI",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.03,
+    "jmlhrumpun": 81,
+    "pcl": "DEDING JOHAN BASARAH, SP",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "4b43d69f-0969-4596-a1ac-6d5209979e40__fotobidang__c_1792640619940.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4b43d69f-0969-4596-a1ac-6d5209979e40__fotobidang__c_1792640619940.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7ba4feae5d756be9dd3a78d2250f8b4e9021a98487fc9e2decc66fee56214953"
+      },
+      "foto_petak": {
+        "fileName": "4b43d69f-0969-4596-a1ac-6d5209979e40__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4b43d69f-0969-4596-a1ac-6d5209979e40__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=1b9b65f7a535b1e2814b1485bab41edd7ea85ac0b03886b11d90fb3ce705286e"
+      },
+      "fotoplot": {
+        "fileName": "4b43d69f-0969-4596-a1ac-6d5209979e40__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4b43d69f-0969-4596-a1ac-6d5209979e40__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=07574de3f1e424bdffb2b40f45c65f772311c5693d9242ccef090354fee01b14"
+      },
+      "fotoberat": {
+        "fileName": "4b43d69f-0969-4596-a1ac-6d5209979e40__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4b43d69f-0969-4596-a1ac-6d5209979e40__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=44401c9e3d047384462f5714e76e268c594a6014e15345549cf210faac454953"
+      }
+    }
+  },
+  {
+    "assignmentId": "41d78236-c6c4-435d-887b-6575faca1a0d",
+    "kecamatan": "MEKARMUKTI",
+    "desa": "JAGABAYA",
+    "nks": "31031104",
+    "sls": "320503110",
+    "subsls": "B1",
+    "namakk": "HODIJAH",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.71,
+    "jmlhrumpun": 81,
+    "pcl": "DEDING JOHAN BASARAH, SP",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "41d78236-c6c4-435d-887b-6575faca1a0d__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/41d78236-c6c4-435d-887b-6575faca1a0d__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7fd80b7dbd180a83ecfbe3b85c70af0a804bef1293502428904513f3bc033a5a"
+      },
+      "foto_petak": {
+        "fileName": "41d78236-c6c4-435d-887b-6575faca1a0d__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/41d78236-c6c4-435d-887b-6575faca1a0d__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9904325f378da3fba8f80bd444e49957c4ea53f0fea0d4eceb00da4ddd885ccc"
+      },
+      "fotoplot": {
+        "fileName": "41d78236-c6c4-435d-887b-6575faca1a0d__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/41d78236-c6c4-435d-887b-6575faca1a0d__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=efd054c06f8323e771349262e1683b70e8f1be682b05f556d0f3f41391674867"
+      },
+      "fotoberat": {
+        "fileName": "41d78236-c6c4-435d-887b-6575faca1a0d__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/41d78236-c6c4-435d-887b-6575faca1a0d__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000605Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ebfb82b0846c9a02e611f6509cfa263782e2ada8bb26c720c3b3861fe15c4136"
+      }
+    }
+  },
+  {
+    "assignmentId": "56134a02-a6b6-4e28-8be3-710b47dade78",
+    "kecamatan": "PEUNDEUY",
+    "desa": "SUKANAGARA",
+    "nks": "31100031",
+    "sls": "320510003",
+    "subsls": "A1",
+    "namakk": "ABDUL HOLIK ",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": "",
+    "jmlhrumpun": "",
+    "pcl": "Surahman Senjaya",
+    "status_assignment": "DRAFT",
+    "photos": {
+      "foto_petak": {
+        "fileName": "56134a02-a6b6-4e28-8be3-710b47dade78__foto_petak__g_1792995022624.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/56134a02-a6b6-4e28-8be3-710b47dade78__foto_petak__g_1792995022624.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3aeb9564b989e77a8ecdeb847f08d3d710ee5271b2084a9f4fb411fb688d9b70"
+      },
+      "fotoplot": {
+        "fileName": "56134a02-a6b6-4e28-8be3-710b47dade78__fotoplot__g_1792995088747.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/56134a02-a6b6-4e28-8be3-710b47dade78__fotoplot__g_1792995088747.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=964ce61c82f232926006e48e05588bbad7cf94f09b34fd016acebcb2d3246cdb"
+      }
+    }
+  },
+  {
+    "assignmentId": "4e47c590-4c6a-46f4-94f5-cfeb2edd4714",
+    "kecamatan": "LELES",
+    "desa": "TALAGASARI",
+    "nks": "31240567",
+    "sls": "320524056",
+    "subsls": "C1",
+    "namakk": "MEMED",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.08,
+    "jmlhrumpun": 78,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "4e47c590-4c6a-46f4-94f5-cfeb2edd4714__fotobidang__c_1792909888532.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4e47c590-4c6a-46f4-94f5-cfeb2edd4714__fotobidang__c_1792909888532.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=6d8f963a183ab6d7ef22b30a844b166c13a8b9531efa19b07d799bca6c451c11"
+      },
+      "foto_petak": {
+        "fileName": "4e47c590-4c6a-46f4-94f5-cfeb2edd4714__foto_petak__g_1792909909271.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4e47c590-4c6a-46f4-94f5-cfeb2edd4714__foto_petak__g_1792909909271.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3a0df2d6263d6ef2bf8cbeb34c3e4b3d36b26eca4dfaf39fd87639448da29ec7"
+      },
+      "fotoplot": {
+        "fileName": "4e47c590-4c6a-46f4-94f5-cfeb2edd4714__fotoplot__g_1792911523748.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4e47c590-4c6a-46f4-94f5-cfeb2edd4714__fotoplot__g_1792911523748.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b7940cb6b6e6821b5a82208afdd7197dfc4a44fe747e6ba7979c586c7b0ac4a3"
+      },
+      "fotoberat": {
+        "fileName": "4e47c590-4c6a-46f4-94f5-cfeb2edd4714__fotoberat__g_1792910005633.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4e47c590-4c6a-46f4-94f5-cfeb2edd4714__fotoberat__g_1792910005633.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=052b7223597c405ed0684adf90b5e6c7702535d72dd5de4db6779c797093dba7"
+      }
+    }
+  },
+  {
+    "assignmentId": "21bb71c0-8edd-41e9-91d2-cb8928ebac73",
+    "kecamatan": "LELES",
+    "desa": "JANGKURANG",
+    "nks": "31240612",
+    "sls": "320524061",
+    "subsls": "A2",
+    "namakk": "SOMA",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.01,
+    "jmlhrumpun": 79,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "21bb71c0-8edd-41e9-91d2-cb8928ebac73__fotobidang__c_1792733175483.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/21bb71c0-8edd-41e9-91d2-cb8928ebac73__fotobidang__c_1792733175483.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=fea91cbf0cd8f2dbebbbe4aad1164cdff2b6e1e259a8904f749f96593275f5f1"
+      },
+      "foto_petak": {
+        "fileName": "21bb71c0-8edd-41e9-91d2-cb8928ebac73__foto_petak__g_1792733229717.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/21bb71c0-8edd-41e9-91d2-cb8928ebac73__foto_petak__g_1792733229717.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c2ddffe2affab6fb30d388981b5d19076e62ba95d8b47040b43f0c132056c9f0"
+      },
+      "fotoplot": {
+        "fileName": "21bb71c0-8edd-41e9-91d2-cb8928ebac73__fotoplot__g_1792733335072.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/21bb71c0-8edd-41e9-91d2-cb8928ebac73__fotoplot__g_1792733335072.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3d7e35be30e613947576362752f2864b1e447d93fd4ccc5b86519f5ed6888573"
+      },
+      "fotoberat": {
+        "fileName": "21bb71c0-8edd-41e9-91d2-cb8928ebac73__fotoberat__g_1792733379447.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/21bb71c0-8edd-41e9-91d2-cb8928ebac73__fotoberat__g_1792733379447.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e9f0ea54e2b1c0af82ba0fe8c4b72ab6e633de1cf02a8b6735640dc20de7f39c"
+      }
+    }
+  },
+  {
+    "assignmentId": "9750862c-ffc8-479a-82a6-ccb1ce619c1a",
+    "kecamatan": "LELES",
+    "desa": "LEMBANG",
+    "nks": "31240629",
+    "sls": "320524062",
+    "subsls": "C3",
+    "namakk": "DEDE SOPIANUDIN",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.31,
+    "jmlhrumpun": 80,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "9750862c-ffc8-479a-82a6-ccb1ce619c1a__fotobidang__c_1792647076668.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/9750862c-ffc8-479a-82a6-ccb1ce619c1a__fotobidang__c_1792647076668.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=196207c6db74413f8c293c38960d992e93b1a292b25223873494dd92a7f8abea"
+      },
+      "foto_petak": {
+        "fileName": "9750862c-ffc8-479a-82a6-ccb1ce619c1a__foto_petak__g_1792647113104.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/9750862c-ffc8-479a-82a6-ccb1ce619c1a__foto_petak__g_1792647113104.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=6e64ac89d0e24a9a034e016a51f7de3203468138cf91544562fa53d6d0aca5f7"
+      },
+      "fotoplot": {
+        "fileName": "9750862c-ffc8-479a-82a6-ccb1ce619c1a__fotoplot__g_1792647187670.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/9750862c-ffc8-479a-82a6-ccb1ce619c1a__fotoplot__g_1792647187670.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=129c41077acd686544a908ce9935854f88762e1a67981d59c3317d18e5f5e2b4"
+      },
+      "fotoberat": {
+        "fileName": "9750862c-ffc8-479a-82a6-ccb1ce619c1a__fotoberat__g_1792647217950.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/9750862c-ffc8-479a-82a6-ccb1ce619c1a__fotoberat__g_1792647217950.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=536cb949b11029152e56245fc706e9ba7dae198ac35198d3d36434bcba145ded"
+      }
+    }
+  },
+  {
+    "assignmentId": "5b56653c-66e0-4eb3-943d-75fa3b623c9e",
+    "kecamatan": "LELES",
+    "desa": "LEMBANG",
+    "nks": "31240627",
+    "sls": "320524062",
+    "subsls": "C1",
+    "namakk": "RIDWAN",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.37,
+    "jmlhrumpun": 83,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "5b56653c-66e0-4eb3-943d-75fa3b623c9e__fotobidang__c_1792646084663.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5b56653c-66e0-4eb3-943d-75fa3b623c9e__fotobidang__c_1792646084663.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a46065e328f63f9ae1446e3a39f0258ed00638b2229926a3ec226e8f9726b386"
+      },
+      "foto_petak": {
+        "fileName": "5b56653c-66e0-4eb3-943d-75fa3b623c9e__foto_petak__g_1792646154152.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5b56653c-66e0-4eb3-943d-75fa3b623c9e__foto_petak__g_1792646154152.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7a63779f7cbfc095c7b3668d71b47ffa66c277070501f5c02be00dd456ce7d66"
+      },
+      "fotoplot": {
+        "fileName": "5b56653c-66e0-4eb3-943d-75fa3b623c9e__fotoplot__g_1792646224545.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5b56653c-66e0-4eb3-943d-75fa3b623c9e__fotoplot__g_1792646224545.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=50adb0561f25359f79f3f56a354bf5bebea232566d133b6cee0ac82cbdb2e2cd"
+      },
+      "fotoberat": {
+        "fileName": "5b56653c-66e0-4eb3-943d-75fa3b623c9e__fotoberat__g_1792646304830.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5b56653c-66e0-4eb3-943d-75fa3b623c9e__fotoberat__g_1792646304830.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ac71e8734021a235589fdba967a3b275cdb201fc987eed4588e07577548b51eb"
+      }
+    }
+  },
+  {
+    "assignmentId": "8c12a42a-8321-4cd6-bf72-fb59da7a668c",
+    "kecamatan": "MEKARMUKTI",
+    "desa": "JAGABAYA",
+    "nks": "31031106",
+    "sls": "320503110",
+    "subsls": "B3",
+    "namakk": "NANDANG LUKMANUL HAKIM",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.89,
+    "jmlhrumpun": 81,
+    "pcl": "DEDING JOHAN BASARAH, SP",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "8c12a42a-8321-4cd6-bf72-fb59da7a668c__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/8c12a42a-8321-4cd6-bf72-fb59da7a668c__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=414e3c066b3473709cfaf50da4a33a3091e15157b554cbcecca9bbc20c48044b"
+      },
+      "foto_petak": {
+        "fileName": "8c12a42a-8321-4cd6-bf72-fb59da7a668c__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/8c12a42a-8321-4cd6-bf72-fb59da7a668c__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9bfbd43c7a5b8abccc66354a0e1a9596e89ee2e3db49ba4dad6cf3b6517b0816"
+      },
+      "fotoplot": {
+        "fileName": "8c12a42a-8321-4cd6-bf72-fb59da7a668c__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/8c12a42a-8321-4cd6-bf72-fb59da7a668c__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c025064041932efa9e9b283a238216d3815a27298947ee3644aa9a2365a99ae2"
+      },
+      "fotoberat": {
+        "fileName": "8c12a42a-8321-4cd6-bf72-fb59da7a668c__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/8c12a42a-8321-4cd6-bf72-fb59da7a668c__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7c635ab17fc81e29d2fbf53d1664b32574b14813316bac3900558a2659d87092"
+      }
+    }
+  },
+  {
+    "assignmentId": "acb6f234-32e1-4bb0-8b32-ef0d7369c049",
+    "kecamatan": "MEKARMUKTI",
+    "desa": "JAGABAYA",
+    "nks": "31031108",
+    "sls": "320503110",
+    "subsls": "C2",
+    "namakk": "RUDIANA",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.69,
+    "jmlhrumpun": 81,
+    "pcl": "DEDING JOHAN BASARAH, SP",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "acb6f234-32e1-4bb0-8b32-ef0d7369c049__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/acb6f234-32e1-4bb0-8b32-ef0d7369c049__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a841b20e0b7b9f710b79ef3e29f91bed63e765b1ac2df2b1e53969bdc141e619"
+      },
+      "foto_petak": {
+        "fileName": "acb6f234-32e1-4bb0-8b32-ef0d7369c049__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/acb6f234-32e1-4bb0-8b32-ef0d7369c049__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9c9a8c40c67c4681d9bfbaa43f6dfc1b7c08f160c656d2e04b487dcdab5d40e5"
+      },
+      "fotoplot": {
+        "fileName": "acb6f234-32e1-4bb0-8b32-ef0d7369c049__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/acb6f234-32e1-4bb0-8b32-ef0d7369c049__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9ea6f52794fd41e73898131a68c683ee181d74e720fa967b5a0ffb09032e8833"
+      },
+      "fotoberat": {
+        "fileName": "acb6f234-32e1-4bb0-8b32-ef0d7369c049__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/acb6f234-32e1-4bb0-8b32-ef0d7369c049__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=0e9cf08cc0700abc810b30d3872f79f685e69036f6a598e0ac6228b5b56c4d61"
+      }
+    }
+  },
+  {
+    "assignmentId": "5d3929f8-f838-43ab-b3c6-badd7318d5d3",
+    "kecamatan": "SINGAJAYA",
+    "desa": "GIRIMUKTI",
+    "nks": "",
+    "sls": "0045",
+    "subsls": "00",
+    "namakk": "AHMA",
+    "bulan": "OKTOBER",
+    "komoditas": "UBI KAYU",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 13.06,
+    "jmlhrumpun": 6,
+    "pcl": "Ari rahman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "5d3929f8-f838-43ab-b3c6-badd7318d5d3__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5d3929f8-f838-43ab-b3c6-badd7318d5d3__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=47fd487fdbabd3e4d11c3711dda0fa53b255291c094478aabab7667d72a9d52c"
+      },
+      "foto_petak": {
+        "fileName": "5d3929f8-f838-43ab-b3c6-badd7318d5d3__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5d3929f8-f838-43ab-b3c6-badd7318d5d3__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=af295ec2ce8dd73766f37bc6fa04133ad7473cd470d7abda205336a1a0736a92"
+      },
+      "fotoplot": {
+        "fileName": "5d3929f8-f838-43ab-b3c6-badd7318d5d3__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5d3929f8-f838-43ab-b3c6-badd7318d5d3__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=8b10538d513de66e7d70701da55c995fb5a5cada8e63bd832020690da3f9b1e0"
+      },
+      "fotoberat": {
+        "fileName": "5d3929f8-f838-43ab-b3c6-badd7318d5d3__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/5d3929f8-f838-43ab-b3c6-badd7318d5d3__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=094d1bb442ddd57349c6f421cd9d0abe94d494d0c7f7d5a49edfd0b73afb9850"
+      }
+    }
+  },
+  {
+    "assignmentId": "05fb8a57-a772-42f1-840d-7877bcb66c70",
+    "kecamatan": "SINGAJAYA",
+    "desa": "SUKAMULYA",
+    "nks": "",
+    "sls": "0003",
+    "subsls": "00",
+    "namakk": "JAKARIA",
+    "bulan": "OKTOBER",
+    "komoditas": "UBI JALAR",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 6,
+    "jmlhrumpun": 20,
+    "pcl": "Ari rahman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "05fb8a57-a772-42f1-840d-7877bcb66c70__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/05fb8a57-a772-42f1-840d-7877bcb66c70__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=970dc00252d894a48326125718d6f7cd188d64753db1eb92ce719a283627a130"
+      },
+      "foto_petak": {
+        "fileName": "05fb8a57-a772-42f1-840d-7877bcb66c70__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/05fb8a57-a772-42f1-840d-7877bcb66c70__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7bf1933e9d428aded60a609ce930db63225a8dd989fdb443e91282d0ef9770f9"
+      },
+      "fotoplot": {
+        "fileName": "05fb8a57-a772-42f1-840d-7877bcb66c70__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/05fb8a57-a772-42f1-840d-7877bcb66c70__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4d1618504ebaefd88d4fad5875006eaa07c8890ed3716060700fa7f3e07c498f"
+      },
+      "fotoberat": {
+        "fileName": "05fb8a57-a772-42f1-840d-7877bcb66c70__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/05fb8a57-a772-42f1-840d-7877bcb66c70__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=252dd44d2d9dd9e6216e84c47d1479199d15a8f314488b956721405be7a5e946"
+      }
+    }
+  },
+  {
+    "assignmentId": "cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a",
+    "kecamatan": "SINGAJAYA",
+    "desa": "SUKAMULYA",
+    "nks": "",
+    "sls": "0003",
+    "subsls": "00",
+    "namakk": "TETENG",
+    "bulan": "OKTOBER",
+    "komoditas": "UBI KAYU",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 11.33,
+    "jmlhrumpun": 7,
+    "pcl": "Ari rahman",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e708cfa0f3f2ef32bb30c99c14cd93e1d927596df2430e989c563707a5edef96"
+      },
+      "foto_petak": {
+        "fileName": "cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9af8d37d17cbb18acc6abcb2fecc9b1f2996938badca3fd56f252d49ac88bcb7"
+      },
+      "fotoplot": {
+        "fileName": "cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=8b3716d25d0f437533bc23ff589ec2d102c5de01499db7c9897adaaa97d37f74"
+      },
+      "fotoberat": {
+        "fileName": "cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/cc2c51b9-c02a-4ba0-9478-aff0d51f7e9a__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a836a001f5e0f6fc2b3f13c53cabaf6bd79fb5b3d90778af1f75aec768c41457"
+      }
+    }
+  },
+  {
+    "assignmentId": "501a51fd-1203-4ac8-a66d-f52ab87a3b01",
+    "kecamatan": "BAYONGBONG",
+    "desa": "CIBURUY",
+    "nks": "",
+    "sls": "0007",
+    "subsls": "00",
+    "namakk": "DAMAN",
+    "bulan": "OKTOBER",
+    "komoditas": "UBI KAYU",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 12.04,
+    "jmlhrumpun": 9,
+    "pcl": "IIP SOFIAN",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "501a51fd-1203-4ac8-a66d-f52ab87a3b01__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/501a51fd-1203-4ac8-a66d-f52ab87a3b01__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b07bdaca4c50227ed83d6abd7d2f63e76f396c94e64b474937083461af7cb096"
+      },
+      "foto_petak": {
+        "fileName": "501a51fd-1203-4ac8-a66d-f52ab87a3b01__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/501a51fd-1203-4ac8-a66d-f52ab87a3b01__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4eebcd0395f3889c698e1a396e7dcd31ccf5e7f7c2e52b7d1184adb909851bc3"
+      },
+      "fotoplot": {
+        "fileName": "501a51fd-1203-4ac8-a66d-f52ab87a3b01__fotoplot__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/501a51fd-1203-4ac8-a66d-f52ab87a3b01__fotoplot__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c498a817b33576a07c885788e17b34e9153bda3c1e06e45bd1e73b3a4b2f910e"
+      },
+      "fotoberat": {
+        "fileName": "501a51fd-1203-4ac8-a66d-f52ab87a3b01__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/501a51fd-1203-4ac8-a66d-f52ab87a3b01__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=0b2edad0badb8664f5045c54f254c067a5f93e9b234c67998c1fdbb41ecb4635"
+      }
+    }
+  },
+  {
+    "assignmentId": "1fcf109f-d5a9-4e7a-b518-f093099f885d",
+    "kecamatan": "KADUNGORA",
+    "desa": "MEKARBAKTI",
+    "nks": "31280156",
+    "sls": "320528015",
+    "subsls": "B3",
+    "namakk": "TATA",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.72,
+    "jmlhrumpun": 81,
+    "pcl": "Rizky Siregar ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "1fcf109f-d5a9-4e7a-b518-f093099f885d__fotobidang__c_1792467632711.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1fcf109f-d5a9-4e7a-b518-f093099f885d__fotobidang__c_1792467632711.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=07e7c65546847f37393cd6623736d2ef5a2e44232b713eb012df8a192d2c629a"
+      },
+      "foto_petak": {
+        "fileName": "1fcf109f-d5a9-4e7a-b518-f093099f885d__foto_petak__g_1792468355681.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1fcf109f-d5a9-4e7a-b518-f093099f885d__foto_petak__g_1792468355681.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=dc6218b66184cb5059bac65d45be034b84087f9b14878623e075e6dbd9283eef"
+      },
+      "fotoplot": {
+        "fileName": "1fcf109f-d5a9-4e7a-b518-f093099f885d__fotoplot__g_1792468379755.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1fcf109f-d5a9-4e7a-b518-f093099f885d__fotoplot__g_1792468379755.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=6d1103015ea434c6a3bc3d2c8b622fd7d59451bc9d2c63b11fc7d67b238b65a1"
+      },
+      "fotoberat": {
+        "fileName": "1fcf109f-d5a9-4e7a-b518-f093099f885d__fotoberat__g_1792468398025.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/1fcf109f-d5a9-4e7a-b518-f093099f885d__fotoberat__g_1792468398025.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f6e91d3fdf8ef66b05896d97740444035e2c8c3f242b1340682f8f7804dcd27f"
+      }
+    }
+  },
+  {
+    "assignmentId": "4a4a6e6b-06eb-4101-b4b6-caff22f67a94",
+    "kecamatan": "KADUNGORA",
+    "desa": "MEKARBAKTI",
+    "nks": "31280154",
+    "sls": "320528015",
+    "subsls": "B1",
+    "namakk": "DADANG",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.14,
+    "jmlhrumpun": 81,
+    "pcl": "Rizky Siregar ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "4a4a6e6b-06eb-4101-b4b6-caff22f67a94__fotobidang__c_1792467562193.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4a4a6e6b-06eb-4101-b4b6-caff22f67a94__fotobidang__c_1792467562193.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ab6f897cfdacb4d9dd64b03e604c33bd1a283d812becbe0829e1fcf05bd2e38d"
+      },
+      "foto_petak": {
+        "fileName": "4a4a6e6b-06eb-4101-b4b6-caff22f67a94__foto_petak__g_1792467020036.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4a4a6e6b-06eb-4101-b4b6-caff22f67a94__foto_petak__g_1792467020036.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b8d2d1b21afbd965c48ef380d12350ee7e133d16cde72f33abdfdd1235ceddc5"
+      },
+      "fotoplot": {
+        "fileName": "4a4a6e6b-06eb-4101-b4b6-caff22f67a94__fotoplot__g_1792467035005.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4a4a6e6b-06eb-4101-b4b6-caff22f67a94__fotoplot__g_1792467035005.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9fb494656e9a4b0e61f45434465d4986531e121653a7a53783521bb8f5722ace"
+      },
+      "fotoberat": {
+        "fileName": "4a4a6e6b-06eb-4101-b4b6-caff22f67a94__fotoberat__g_1792467076797.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4a4a6e6b-06eb-4101-b4b6-caff22f67a94__fotoberat__g_1792467076797.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000606Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=fe64577ab7f59162b1fe2ac7c86811ec0293b30a462fec80d96ac9a7f3f1a272"
+      }
+    }
+  },
+  {
+    "assignmentId": "4c00f3ce-98a7-4f5f-92bd-666cf49b5d99",
+    "kecamatan": "CIBALONG",
+    "desa": "SAGARA",
+    "nks": "33080027",
+    "sls": "320508002",
+    "subsls": "C1",
+    "namakk": "KARTIM",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI LADANG",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.26,
+    "jmlhrumpun": 81,
+    "pcl": "ROHIMAT ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "4c00f3ce-98a7-4f5f-92bd-666cf49b5d99__fotobidang__g_1792396170319.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4c00f3ce-98a7-4f5f-92bd-666cf49b5d99__fotobidang__g_1792396170319.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b002b0780556bdfc5700e64fb671ad6f8d2e71757c3503a0192166f881cd1242"
+      },
+      "foto_petak": {
+        "fileName": "4c00f3ce-98a7-4f5f-92bd-666cf49b5d99__foto_petak__g_1792396238281.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4c00f3ce-98a7-4f5f-92bd-666cf49b5d99__foto_petak__g_1792396238281.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7aefcdc1dcdcefd4f86620a0e43801d217559ecc3bd79dd419f8969357cb7056"
+      },
+      "fotoplot": {
+        "fileName": "4c00f3ce-98a7-4f5f-92bd-666cf49b5d99__fotoplot__g_1792396342285.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4c00f3ce-98a7-4f5f-92bd-666cf49b5d99__fotoplot__g_1792396342285.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4c05bd3a5457f579c81fa8967170bf000bd6e341f2613e9e763ca0df2226eea1"
+      },
+      "fotoberat": {
+        "fileName": "4c00f3ce-98a7-4f5f-92bd-666cf49b5d99__fotoberat__g_1792396503814.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/4c00f3ce-98a7-4f5f-92bd-666cf49b5d99__fotoberat__g_1792396503814.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c757f62c438a8cbdf4eaa3c60759a33432f243be40330d1d7b5c58b4de435438"
+      }
+    }
+  },
+  {
+    "assignmentId": "ba7697af-4568-46d7-90cb-ffcb97659c28",
+    "kecamatan": "CIBALONG",
+    "desa": "SAGARA",
+    "nks": "33080028",
+    "sls": "320508002",
+    "subsls": "C2",
+    "namakk": "KARTIM",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI LADANG",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.08,
+    "jmlhrumpun": 80,
+    "pcl": "ROHIMAT ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "ba7697af-4568-46d7-90cb-ffcb97659c28__fotobidang__g_1792398126292.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/ba7697af-4568-46d7-90cb-ffcb97659c28__fotobidang__g_1792398126292.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=31624c3f51c0077eb4a9f97e37b08912e714d455b6af57fec26b4e4ffb21ace2"
+      },
+      "foto_petak": {
+        "fileName": "ba7697af-4568-46d7-90cb-ffcb97659c28__foto_petak__g_1792398207383.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/ba7697af-4568-46d7-90cb-ffcb97659c28__foto_petak__g_1792398207383.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=004aedada26e6d6612d2a631ab92ee8da8be54e85a2dfc228eefc72f3cce7e9f"
+      },
+      "fotoplot": {
+        "fileName": "ba7697af-4568-46d7-90cb-ffcb97659c28__fotoplot__g_1792398286659.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/ba7697af-4568-46d7-90cb-ffcb97659c28__fotoplot__g_1792398286659.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=edb8927c487863d805fe275d1cfff8cf2fb6cd38b68a5eb8dedf1562d51d13a9"
+      },
+      "fotoberat": {
+        "fileName": "ba7697af-4568-46d7-90cb-ffcb97659c28__fotoberat__g_1792398378220.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/ba7697af-4568-46d7-90cb-ffcb97659c28__fotoberat__g_1792398378220.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=fe46e003b80833faf1411809798a1e8744ed34b80840d4abd9ea2c719f79c87f"
+      }
+    }
+  },
+  {
+    "assignmentId": "2b36f4b2-cf94-436f-a702-ab18a8975a21",
+    "kecamatan": "BAYONGBONG",
+    "desa": "MEKARSARI",
+    "nks": "31150226",
+    "sls": "320515022",
+    "subsls": "B3",
+    "namakk": "ANDRIYANA",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.64,
+    "jmlhrumpun": 81,
+    "pcl": "IIP SOFIAN",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "2b36f4b2-cf94-436f-a702-ab18a8975a21__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/2b36f4b2-cf94-436f-a702-ab18a8975a21__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=1ec8f805cdc948b724ce175ea527d9fd61771d2ed0df8ed8c0c45f57084d2cc4"
+      },
+      "foto_petak": {
+        "fileName": "2b36f4b2-cf94-436f-a702-ab18a8975a21__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/2b36f4b2-cf94-436f-a702-ab18a8975a21__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=594f57b0a4a6b2cc13be02fa5147b23799d4988135a986252c4433054f954313"
+      },
+      "fotoplot": {
+        "fileName": "2b36f4b2-cf94-436f-a702-ab18a8975a21__fotoplot__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/2b36f4b2-cf94-436f-a702-ab18a8975a21__fotoplot__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ca230115ceadb4f74fcc828e55b1f77a88018fb6ce8bc60ccfdaf32112668ee6"
+      },
+      "fotoberat": {
+        "fileName": "2b36f4b2-cf94-436f-a702-ab18a8975a21__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/2b36f4b2-cf94-436f-a702-ab18a8975a21__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c7f5acd5e89c420918c88f1ab7c7ae6cbbc098e52413e8e2a0ceeea37556473a"
+      }
+    }
+  },
+  {
+    "assignmentId": "caeee29b-7ef8-4636-98ae-44a690ca2e66",
+    "kecamatan": "BAYONGBONG",
+    "desa": "SIRNAGALIH",
+    "nks": "32150203",
+    "sls": "320515020",
+    "subsls": "A3",
+    "namakk": "SUNARYA",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.74,
+    "jmlhrumpun": 81,
+    "pcl": "IIP SOFIAN",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "caeee29b-7ef8-4636-98ae-44a690ca2e66__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/caeee29b-7ef8-4636-98ae-44a690ca2e66__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=50ccd50d84411ca2b7729bf9865f5b0ce4f720f47b26cc1cabd15e910ecd0aa9"
+      },
+      "foto_petak": {
+        "fileName": "caeee29b-7ef8-4636-98ae-44a690ca2e66__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/caeee29b-7ef8-4636-98ae-44a690ca2e66__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a245e3b66a531f486f86273216ad4ece0dfc2a5a2a1e357a68e86df3513b7de7"
+      },
+      "fotoplot": {
+        "fileName": "caeee29b-7ef8-4636-98ae-44a690ca2e66__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/caeee29b-7ef8-4636-98ae-44a690ca2e66__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e97154631657151345ae13012b925c024a9b7e6d78192964f4b6914032c39967"
+      },
+      "fotoberat": {
+        "fileName": "caeee29b-7ef8-4636-98ae-44a690ca2e66__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/caeee29b-7ef8-4636-98ae-44a690ca2e66__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c7552996ef1655587cf87db5517433ce60624371281c401667ec0e1cc3cf4642"
+      }
+    }
+  },
+  {
+    "assignmentId": "751bb2a6-c297-4aaf-be1e-a75b0f3c67ff",
+    "kecamatan": "CIKELET",
+    "desa": "TIPAR",
+    "nks": "31060215",
+    "sls": "320506021",
+    "subsls": "B2",
+    "namakk": "UBAD",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.19,
+    "jmlhrumpun": 65,
+    "pcl": "ENDIN SAEPUDIN ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "751bb2a6-c297-4aaf-be1e-a75b0f3c67ff__fotobidang__g_1792114750019.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/751bb2a6-c297-4aaf-be1e-a75b0f3c67ff__fotobidang__g_1792114750019.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ce20b3fea8a2635257ba058ef835d80a526fb6e1e61f3ecce6dd1881dab5e1af"
+      },
+      "foto_petak": {
+        "fileName": "751bb2a6-c297-4aaf-be1e-a75b0f3c67ff__foto_petak__g_1792115356509.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/751bb2a6-c297-4aaf-be1e-a75b0f3c67ff__foto_petak__g_1792115356509.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4f8db66ba2eb05146ace913563c2dafa986d1bcfaec2610135881dd8ee99f79b"
+      },
+      "fotoplot": {
+        "fileName": "751bb2a6-c297-4aaf-be1e-a75b0f3c67ff__fotoplot__g_1792110675812.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/751bb2a6-c297-4aaf-be1e-a75b0f3c67ff__fotoplot__g_1792110675812.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=70ad9c290557423def76b72c34ae1c581ebd096ba521b6ec526bd8b78785d8ed"
+      },
+      "fotoberat": {
+        "fileName": "751bb2a6-c297-4aaf-be1e-a75b0f3c67ff__fotoberat__g_1792115597358.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/751bb2a6-c297-4aaf-be1e-a75b0f3c67ff__fotoberat__g_1792115597358.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b9bd388f034f8fce8db8284f57bada96e6b5eae4098d4c1ab85412d3e775976c"
+      }
+    }
+  },
+  {
+    "assignmentId": "23110405-9211-47e4-bd48-0154ba592425",
+    "kecamatan": "CIKELET",
+    "desa": "TIPAR",
+    "nks": "31060217",
+    "sls": "320506021",
+    "subsls": "C1",
+    "namakk": "ENED JUNAEDI",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.19,
+    "jmlhrumpun": 68,
+    "pcl": "ENDIN SAEPUDIN ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "23110405-9211-47e4-bd48-0154ba592425__fotobidang__g_1792257625538.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/23110405-9211-47e4-bd48-0154ba592425__fotobidang__g_1792257625538.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=92236985dcd4e3de2931a6773cde2957acf292e785c6b53bb7c4690fa0daa8e1"
+      },
+      "foto_petak": {
+        "fileName": "23110405-9211-47e4-bd48-0154ba592425__foto_petak__g_1792110143160.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/23110405-9211-47e4-bd48-0154ba592425__foto_petak__g_1792110143160.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4702d15b94d204a01f8b05687df76f5c8cdca14864f919aa10e1250b1db5a112"
+      },
+      "fotoplot": {
+        "fileName": "23110405-9211-47e4-bd48-0154ba592425__fotoplot__g_1792110202382.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/23110405-9211-47e4-bd48-0154ba592425__fotoplot__g_1792110202382.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f0948e7c9d7d6a8e0b6e6bee71d73a994407218243b7cfe2a4150be931c0d015"
+      },
+      "fotoberat": {
+        "fileName": "23110405-9211-47e4-bd48-0154ba592425__fotoberat__g_1792257901094.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/23110405-9211-47e4-bd48-0154ba592425__fotoberat__g_1792257901094.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=922b944bec95ed69935540aabc66684a33379957b28544ac0fce9118136efd33"
+      }
+    }
+  },
+  {
+    "assignmentId": "19084fc6-2617-41cf-a27d-17d23f9b3461",
+    "kecamatan": "CIKELET",
+    "desa": "TIPAR",
+    "nks": "31060219",
+    "sls": "320506021",
+    "subsls": "C3",
+    "namakk": "YAYA",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.89,
+    "jmlhrumpun": 64,
+    "pcl": "Endin Saepudin ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "19084fc6-2617-41cf-a27d-17d23f9b3461__fotobidang__g_1792256996634.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/19084fc6-2617-41cf-a27d-17d23f9b3461__fotobidang__g_1792256996634.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b9789a78dff2f82c429f86cd0512de620c782988f1469c6c9be9c8a4f370b9d5"
+      },
+      "foto_petak": {
+        "fileName": "19084fc6-2617-41cf-a27d-17d23f9b3461__foto_petak__g_1792109692049.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/19084fc6-2617-41cf-a27d-17d23f9b3461__foto_petak__g_1792109692049.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=51fb4744c9d930032bccc459bef64afb35fcecf52b9d6a4e87b8c5a4bdc29981"
+      },
+      "fotoplot": {
+        "fileName": "19084fc6-2617-41cf-a27d-17d23f9b3461__fotoplot__g_1792109777008.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/19084fc6-2617-41cf-a27d-17d23f9b3461__fotoplot__g_1792109777008.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=99484c7dd902090cf3c0746084153eaca4f12cd6752992d0d804ae7dec511ccc"
+      },
+      "fotoberat": {
+        "fileName": "19084fc6-2617-41cf-a27d-17d23f9b3461__fotoberat__g_1792257162777.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/19084fc6-2617-41cf-a27d-17d23f9b3461__fotoberat__g_1792257162777.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000607Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ed9f5025a3777d65f1212d77a3928adb315b6e994d5189e4489b4ecc19475830"
+      }
+    }
+  },
+  {
+    "assignmentId": "970cebda-d642-47ef-bdd4-5dc99bdc97c8",
+    "kecamatan": "LELES",
+    "desa": "CANGKUANG",
+    "nks": "31240605",
+    "sls": "320524060",
+    "subsls": "B2",
+    "namakk": "EMEN",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.33,
+    "jmlhrumpun": 79,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "970cebda-d642-47ef-bdd4-5dc99bdc97c8__fotobidang__c_1791866160383.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/970cebda-d642-47ef-bdd4-5dc99bdc97c8__fotobidang__c_1791866160383.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=446a86e048ad6cac9c367975510a3d99623bc6096bcab661f50b82b65b10eb28"
+      },
+      "foto_petak": {
+        "fileName": "970cebda-d642-47ef-bdd4-5dc99bdc97c8__foto_petak__g_1791866191984.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/970cebda-d642-47ef-bdd4-5dc99bdc97c8__foto_petak__g_1791866191984.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=ff355c2fb231e2be63ecb0ab165e77fdc3f9558fc0798702a87ed79d704d3595"
+      },
+      "fotoplot": {
+        "fileName": "970cebda-d642-47ef-bdd4-5dc99bdc97c8__fotoplot__g_1791866318919.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/970cebda-d642-47ef-bdd4-5dc99bdc97c8__fotoplot__g_1791866318919.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f8a880b203231756b55dc1accd247f127ae0b291f1eaad6b9df5dad494225e40"
+      },
+      "fotoberat": {
+        "fileName": "970cebda-d642-47ef-bdd4-5dc99bdc97c8__fotoberat__g_1791866403666.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/970cebda-d642-47ef-bdd4-5dc99bdc97c8__fotoberat__g_1791866403666.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3d3f585719b30cc0154357137b1d018129515b8412d9aa11542e5e9e1b5810d5"
+      }
+    }
+  },
+  {
+    "assignmentId": "681c9f71-e5d2-49cf-87cd-d6f28c7531cf",
+    "kecamatan": "LELES",
+    "desa": "TALAGASARI",
+    "nks": "31240561",
+    "sls": "320524056",
+    "subsls": "A1",
+    "namakk": "DEDE SAHIDIN",
+    "bulan": "OKTOBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.2,
+    "jmlhrumpun": 76,
+    "pcl": "Roni Subhan",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "681c9f71-e5d2-49cf-87cd-d6f28c7531cf__fotobidang__c_1791864427575.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/681c9f71-e5d2-49cf-87cd-d6f28c7531cf__fotobidang__c_1791864427575.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=18446ce3966606abdbedab1eeb12aaab344cac015f7b2841f9aeb0c99fe299b5"
+      },
+      "foto_petak": {
+        "fileName": "681c9f71-e5d2-49cf-87cd-d6f28c7531cf__foto_petak__g_1791864455459.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/681c9f71-e5d2-49cf-87cd-d6f28c7531cf__foto_petak__g_1791864455459.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b0abfacf6ac69a3b726b6f2dae3af6c9dfc14709bd13192972322020a452fae7"
+      },
+      "fotoplot": {
+        "fileName": "681c9f71-e5d2-49cf-87cd-d6f28c7531cf__fotoplot__g_1791864672223.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/681c9f71-e5d2-49cf-87cd-d6f28c7531cf__fotoplot__g_1791864672223.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=4324d097faa5a3508110eb1a8f20da223360f4912622288d92f3934e13b13d7a"
+      },
+      "fotoberat": {
+        "fileName": "681c9f71-e5d2-49cf-87cd-d6f28c7531cf__fotoberat__g_1791864701126.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/681c9f71-e5d2-49cf-87cd-d6f28c7531cf__fotoberat__g_1791864701126.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=2c0cd2f3ad81a379699500c13054aa855f81056aaca48be83458c47f5d9a974f"
+      }
+    }
+  },
+  {
+    "assignmentId": "bfc20df7-4d1e-4aa2-a818-cd22fcb611d4",
+    "kecamatan": "CIHURIP",
+    "desa": "JAYAMUKTI",
+    "nks": "31111064",
+    "sls": "320511106",
+    "subsls": "B1",
+    "namakk": "DADANG SURYANA",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.26,
+    "jmlhrumpun": 148,
+    "pcl": "Indra BJ",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "bfc20df7-4d1e-4aa2-a818-cd22fcb611d4__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/bfc20df7-4d1e-4aa2-a818-cd22fcb611d4__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=23c52dc9521d5822b5659ff6a44abe0359899388737395e51fd4f00c7aee7aa9"
+      },
+      "foto_petak": {
+        "fileName": "bfc20df7-4d1e-4aa2-a818-cd22fcb611d4__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/bfc20df7-4d1e-4aa2-a818-cd22fcb611d4__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=206cc96c98bcf2a6b687bb4d3e2ee3ff8fb5e6f75d72004a51aa23723df74143"
+      },
+      "fotoplot": {
+        "fileName": "bfc20df7-4d1e-4aa2-a818-cd22fcb611d4__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/bfc20df7-4d1e-4aa2-a818-cd22fcb611d4__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=26b882d1762081112eb42c017a9c5bae992dd483f2a45472e4af15a9c23e7d77"
+      },
+      "fotoberat": {
+        "fileName": "bfc20df7-4d1e-4aa2-a818-cd22fcb611d4__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/bfc20df7-4d1e-4aa2-a818-cd22fcb611d4__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=74e432e08a25b069647ad051da64c682c30d6f7fed0fabde290cd3c7ee8fd0ea"
+      }
+    }
+  },
+  {
+    "assignmentId": "c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0",
+    "kecamatan": "CIKELET",
+    "desa": "TIPAR",
+    "nks": "31060211",
+    "sls": "320506021",
+    "subsls": "A1",
+    "namakk": "MAMAT",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "CADANGAN",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 5.4,
+    "jmlhrumpun": 67,
+    "pcl": "Endin Saepudin ",
+    "status_assignment": "APPROVED BY Pengawas",
+    "photos": {
+      "fotobidang": {
+        "fileName": "c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0__fotobidang__c.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0__fotobidang__c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=773ea4f628b4a1417a74f58c177a87e6f7eeedf7ca382668afe8bb801316d1de"
+      },
+      "foto_petak": {
+        "fileName": "c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=3f0c7b86a96ad82e58593c92180eb069a8f4e555b1ca276351f18bd619097de1"
+      },
+      "fotoplot": {
+        "fileName": "c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=79c36bc5d8873f9b2f0a88adbe084009983c76a07235bed69e47bb8c58babfa3"
+      },
+      "fotoberat": {
+        "fileName": "c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/c6d1a7e2-47bb-433e-9aa7-b5ef135da6b0__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=1b95dbab2ba490ae3cb5d104b9af270034b0c7d60d608cd954e349add6c6eeaf"
+      }
+    }
+  },
+  {
+    "assignmentId": "b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2",
+    "kecamatan": "BAYONGBONG",
+    "desa": "PANEMBONG",
+    "nks": "31150018",
+    "sls": "320515001",
+    "subsls": "C2",
+    "namakk": "MAMAT RAHMAT",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.58,
+    "jmlhrumpun": 81,
+    "pcl": "IIP SOFIAN",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=6e488a0047885ed758ab3694df109243575c91d725d64acb98f2fa55a6adc20a"
+      },
+      "foto_petak": {
+        "fileName": "b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f046ea4320f5d5bd96e50ab59b5e8da46faa61093778ed09bf9c9a38db4796ec"
+      },
+      "fotoplot": {
+        "fileName": "b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=d69448ca9401deb368e4f4b08bbf873697bff80246b9cb5259818769e1e27234"
+      },
+      "fotoberat": {
+        "fileName": "b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/b0e7af2d-64dd-4f09-8a47-e95d04a1c5a2__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7475061a4ccc86eeede6bce1887e3442eb2b5ace1608766b607a7dc5479ff136"
+      }
+    }
+  },
+  {
+    "assignmentId": "21394d4e-c309-49b2-b9bf-975a09f01575",
+    "kecamatan": "BAYONGBONG",
+    "desa": "BANJARSARI",
+    "nks": "31150195",
+    "sls": "320515019",
+    "subsls": "B2",
+    "namakk": "DADANG SURYANA",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 3.9,
+    "jmlhrumpun": 81,
+    "pcl": "IIP SOFIAN",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "21394d4e-c309-49b2-b9bf-975a09f01575__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/21394d4e-c309-49b2-b9bf-975a09f01575__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=d7ec3d5992df709292dc64eee2d175d0e7db2ac3011eab87da428dd1886e343e"
+      },
+      "foto_petak": {
+        "fileName": "21394d4e-c309-49b2-b9bf-975a09f01575__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/21394d4e-c309-49b2-b9bf-975a09f01575__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9fc90231e4e8d28e82e9554c7e9bf5b4f7d74a99b3823fe42364d6ec1a826bfb"
+      },
+      "fotoplot": {
+        "fileName": "21394d4e-c309-49b2-b9bf-975a09f01575__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/21394d4e-c309-49b2-b9bf-975a09f01575__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=94295495a253a13c99ab47afa4f0393214ad5cf443a0a9154716ed4dd0233b21"
+      },
+      "fotoberat": {
+        "fileName": "21394d4e-c309-49b2-b9bf-975a09f01575__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/21394d4e-c309-49b2-b9bf-975a09f01575__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=bcb144325fc4d9a47fe1405c9c06dcdf0435095060b107ee9c46cc703a396c07"
+      }
+    }
+  },
+  {
+    "assignmentId": "f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b",
+    "kecamatan": "BAYONGBONG",
+    "desa": "CIBURUY",
+    "nks": "31150184",
+    "sls": "320515018",
+    "subsls": "B1",
+    "namakk": "AGUS RAHMAT HIDAYAT",
+    "bulan": "SEPTEMBER",
+    "komoditas": "PADI SAWAH",
+    "status_sampel": "UTAMA",
+    "hasil_cacah": "1 - Ya, berhasil diubin",
+    "beratbersih": 4.2,
+    "jmlhrumpun": 81,
+    "pcl": "IIP SOFIAN",
+    "status_assignment": "SUBMITTED BY Pencacah",
+    "photos": {
+      "fotobidang": {
+        "fileName": "f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b__fotobidang__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b__fotobidang__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=defaf6e1c0ec62bf4af6ac54216243ae685be556ac12f9828aeda3a7ced994bf"
+      },
+      "foto_petak": {
+        "fileName": "f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b__foto_petak__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b__foto_petak__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c3ff9c506af34ce81ee3ede21e1f1183db4f536f406e03fb25694b4d2c665f57"
+      },
+      "fotoplot": {
+        "fileName": "f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b__fotoplot__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b__fotoplot__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b6abdb141e20f05226b0aaa6fdc0c078a68005daa3b3977f154fafdcc79830d0"
+      },
+      "fotoberat": {
+        "fileName": "f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b__fotoberat__g.jpg",
+        "presignedUrl": "https://sisnas-fasih-assignment.obj.bps.go.id/6f581089-c787-4c0f-a307-0564f1e4e293/f03f0ea1-e8e5-4c23-80a2-6e5fd821ee0b__fotoberat__g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261114T000608Z&X-Amz-SignedHeaders=host&X-Amz-Credential=PSFBSAZRMCCGPADBDMNHOGPDNHBFDCPEDFFFMBANN%2F20261114%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=232b92bc9b985a70eb95f1616d8d409c2edd10775ab3a325c4cdc14f403c3b40"
+      }
+    }
+  }
+]

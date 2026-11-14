@@ -1,0 +1,39 @@
+name: Analyze Ubinan Photos & Sync to Supabase
+
+on:
+  workflow_dispatch:
+    inputs:
+      subround:
+        description: "Kode Subround (SR1 / SR2 / SR3)"
+        required: false
+        default: "SR3"
+      upload_id:
+        description: "ID Upload di tabel raw_scrape_uploads Supabase"
+        required: false
+        default: "latest"
+
+jobs:
+  analyze-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: |
+          pip install pillow opencv-python-headless numpy pandas scipy
+
+      - name: Download New Photos from Supabase Queue & Run Analysis
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python analyze_photos.py
+          python sync_to_supabase.py
+

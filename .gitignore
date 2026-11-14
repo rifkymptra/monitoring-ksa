@@ -1,0 +1,21 @@
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Python
+__pycache__/
+*.pyc
+
+# Raw Photos & Local Data (Disimpan di Lokal / Supabase Storage, jangan push ribuan JPG ke Git)
+S1/
+S2/
+S3/
+hasil_foto_ubinan/
+hasil_analisis/*.html
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
