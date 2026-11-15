@@ -15,6 +15,17 @@ import {
   X,
   Database,
   ShieldCheck,
+  Users,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  ArrowUpRight,
+  FileCheck2,
+  AlertTriangle,
+  Sparkles,
+  MapPin,
+  Moon,
+  Sun,
 } from "lucide-react";
 import {
   SUBROUND_OPTIONS,
@@ -23,8 +34,35 @@ import {
 
 type TabType = "exec" | "clusters" | "pairs" | "scraper";
 
+const PERIOD_MAP: Record<string, string> = {
+  SR3: "6f581089-c787-4c0f-a307-0564f1e4e293",
+  SR2: "d182137c-c614-48ca-be9b-1df41f906c0e",
+  SR1: "d74be6a7-567c-498b-ae2a-4ac7a163c7c5",
+};
+
+function getFasihAssignmentUrl(subround?: string, assignmentId?: string): string {
+  const srKey = String(subround || "SR3").trim().toUpperCase();
+  const periodId = PERIOD_MAP[srKey] || PERIOD_MAP.SR3;
+  return `https://fasih-sm.bps.go.id/app/assignment/${periodId}/${assignmentId || ""}/`;
+}
+
+function buildPageNumbers(current: number, total: number): (number | "...")[] {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+  const pages: (number | "...")[] = [1];
+  if (current > 3) pages.push("...");
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  for (let i = start; i <= end; i++) pages.push(i);
+  if (current < total - 2) pages.push("...");
+  pages.push(total);
+  return pages;
+}
+
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<TabType>("exec");
+  const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const [dataSource, setDataSource] = useState<string>("loading");
   const [summary, setSummary] = useState<any>({
@@ -39,18 +77,30 @@ export default function DashboardPage() {
   const [clusters, setClusters] = useState<any[]>([]);
   const [pairs, setPairs] = useState<any[]>([]);
 
+  // Executive Officer Table States
+  const [pclSearch, setPclSearch] = useState("");
+  const [pclFilterType, setPclFilterType] = useState<"all" | "cross_pcl" | "multi_sample">("all");
+  const [pclPage, setPclPage] = useState(1);
+  const pclPageSize = 10;
+
   // Filter States - Clusters
   const [cScen, setCScen] = useState("");
+  const [cSr, setCSr] = useState("");
   const [cSize, setCSize] = useState(0);
   const [cPcl, setCPcl] = useState(0);
   const [cJenis, setCJenis] = useState("");
   const [cSearch, setCSearch] = useState("");
+  const [clusterPage, setClusterPage] = useState(1);
+  const [clusterPageSize, setClusterPageSize] = useState(10);
 
   // Filter States - Pairs
   const [pScen, setPScen] = useState("");
+  const [pSr, setPSr] = useState("");
   const [pKat, setPKat] = useState("");
   const [pJenis, setPJenis] = useState("");
   const [pSearch, setPSearch] = useState("");
+  const [pairPage, setPairPage] = useState(1);
+  const [pairPageSize, setPairPageSize] = useState(10);
 
   // Scraper Tab States
   const [selectedSr, setSelectedSr] = useState(SUBROUND_OPTIONS[0]);
@@ -70,6 +120,24 @@ export default function DashboardPage() {
     caption: string;
   }>({ open: false, src: "", caption: "" });
 
+  // Load saved theme preference
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("ksa_theme");
+      if (saved === "dark") setDarkMode(true);
+    } catch {}
+  }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem("ksa_theme", next ? "dark" : "light");
+      } catch {}
+      return next;
+    });
+  };
+
   useEffect(() => {
     fetch("/api/audit-data")
       .then((r) => r.json())
@@ -81,6 +149,19 @@ export default function DashboardPage() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setClusterPage(1);
+  }, [cScen, cSr, cSize, cPcl, cJenis, cSearch, clusterPageSize]);
+
+  useEffect(() => {
+    setPairPage(1);
+  }, [pScen, pSr, pKat, pJenis, pSearch, pairPageSize]);
+
+  useEffect(() => {
+    setPclPage(1);
+  }, [pclSearch, pclFilterType]);
 
   // Matrix Ringkasan Skenario
   const scenarioSummary = useMemo(() => {
@@ -108,6 +189,111 @@ export default function DashboardPage() {
     }
     return Object.values(map).sort((a, b) => a.code.localeCompare(b.code));
   }, [pairs]);
+
+  // Rekapitulasi Per Petugas (PCL)
+  const officerSummary = useMemo(() => {
+    const map: Record<
+      string,
+      {
+        pcl: string;
+        kecamatans: Set<string>;
+        subrounds: Set<string>;
+        clustersCount: number;
+        photosCount: number;
+        crossPclClusters: number;
+        diffSampleClusters: number;
+        sameSampleClusters: number;
+        samplesInvolved: Set<string>;
+      }
+    > = {};
+
+    for (const c of clusters) {
+      const members = Array.isArray(c.members) ? c.members : [];
+      const pclsInCluster = new Set<string>();
+      const assignmentsInCluster = new Set<string>();
+
+      for (const m of members) {
+        const name = (m.pcl || "Tanpa Nama").trim();
+        pclsInCluster.add(name);
+        if (m.assignmentId) assignmentsInCluster.add(String(m.assignmentId));
+      }
+
+      const isCrossPcl = pclsInCluster.size > 1;
+      const isDiffSample = assignmentsInCluster.size > 1;
+
+      const countedForCluster = new Set<string>();
+      for (const m of members) {
+        const name = (m.pcl || "Tanpa Nama").trim();
+        if (!map[name]) {
+          map[name] = {
+            pcl: name,
+            kecamatans: new Set(),
+            subrounds: new Set(),
+            clustersCount: 0,
+            photosCount: 0,
+            crossPclClusters: 0,
+            diffSampleClusters: 0,
+            sameSampleClusters: 0,
+            samplesInvolved: new Set(),
+          };
+        }
+        map[name].photosCount++;
+        if (m.kecamatan) map[name].kecamatans.add(m.kecamatan);
+        if (m.subround) map[name].subrounds.add(m.subround);
+        if (m.assignmentId) map[name].samplesInvolved.add(String(m.assignmentId));
+
+        if (!countedForCluster.has(name)) {
+          countedForCluster.add(name);
+          map[name].clustersCount++;
+          if (isCrossPcl) {
+            map[name].crossPclClusters++;
+          } else if (isDiffSample) {
+            map[name].diffSampleClusters++;
+          } else {
+            map[name].sameSampleClusters++;
+          }
+        }
+      }
+    }
+
+    return Object.values(map)
+      .map((item) => ({
+        ...item,
+        kecamatanList: Array.from(item.kecamatans).sort().join(", "),
+        subroundList: Array.from(item.subrounds).sort().join(", "),
+        sampleCount: item.samplesInvolved.size,
+      }))
+      .sort((a, b) => {
+        if (b.clustersCount !== a.clustersCount) return b.clustersCount - a.clustersCount;
+        if (b.crossPclClusters !== a.crossPclClusters)
+          return b.crossPclClusters - a.crossPclClusters;
+        return b.photosCount - a.photosCount;
+      });
+  }, [clusters]);
+
+  const filteredOfficers = useMemo(() => {
+    const q = pclSearch.trim().toLowerCase();
+    return officerSummary.filter((o) => {
+      if (pclFilterType === "cross_pcl" && o.crossPclClusters === 0) return false;
+      if (
+        pclFilterType === "multi_sample" &&
+        o.diffSampleClusters === 0 &&
+        o.crossPclClusters === 0
+      )
+        return false;
+      if (q) {
+        const hay = `${o.pcl} ${o.kecamatanList}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }, [officerSummary, pclSearch, pclFilterType]);
+
+  const totalPclPages = Math.max(1, Math.ceil(filteredOfficers.length / pclPageSize));
+  const paginatedOfficers = useMemo(() => {
+    const start = (pclPage - 1) * pclPageSize;
+    return filteredOfficers.slice(start, start + pclPageSize);
+  }, [filteredOfficers, pclPage]);
 
   // Top Kecamatan Summary
   const topKecamatans = useMemo(() => {
@@ -140,6 +326,13 @@ export default function DashboardPage() {
     const q = cSearch.trim().toLowerCase();
     return clusters.filter((c) => {
       if (cScen && !String(c.skenario_terlibat || "").includes(cScen)) return false;
+      if (cSr) {
+        const hasSrInHeader = String(c.daftar_subround || "").includes(cSr);
+        const hasSrInMembers = Array.isArray(c.members)
+          ? c.members.some((m: any) => m.subround === cSr)
+          : false;
+        if (!hasSrInHeader && !hasSrInMembers) return false;
+      }
       if (cSize > 0 && Number(c.jumlah_foto || 0) < cSize) return false;
       if (cPcl > 0 && Number(c.jumlah_petugas || 0) < cPcl) return false;
       if (cJenis && !String(c.daftar_jenis_foto || "").includes(cJenis)) return false;
@@ -151,27 +344,38 @@ export default function DashboardPage() {
       }
       return true;
     });
-  }, [clusters, cScen, cSize, cPcl, cJenis, cSearch]);
+  }, [clusters, cScen, cSr, cSize, cPcl, cJenis, cSearch]);
+
+  const totalClusterPages = Math.max(
+    1,
+    Math.ceil(filteredClusters.length / clusterPageSize)
+  );
+  const paginatedClusters = useMemo(() => {
+    const start = (clusterPage - 1) * clusterPageSize;
+    return filteredClusters.slice(start, start + clusterPageSize);
+  }, [filteredClusters, clusterPage, clusterPageSize]);
 
   // Filtered Pairs
   const filteredPairs = useMemo(() => {
     const q = pSearch.trim().toLowerCase();
     return pairs.filter((p) => {
       if (pScen && p.skenario_kode !== pScen) return false;
+      if (pSr && p.sr_1 !== pSr && p.sr_2 !== pSr) return false;
       if (pKat && !String(p.kategori_temuan || "").startsWith(pKat)) return false;
-      if (
-        pJenis &&
-        p.jenis_1 !== pJenis &&
-        p.jenis_2 !== pJenis
-      )
-        return false;
+      if (pJenis && p.jenis_1 !== pJenis && p.jenis_2 !== pJenis) return false;
       if (q) {
-        const hay = `${p.pcl_1} ${p.pcl_2} ${p.kec_1} ${p.kec_2} ${p.desa_1} ${p.desa_2} ${p.namakk_1} ${p.namakk_2} ${p.nks_1} ${p.nks_2}`.toLowerCase();
+        const hay = `${p.pcl_1} ${p.pcl_2} ${p.kec_1} ${p.kec_2} ${p.desa_1} ${p.desa_2} ${p.namakk_1} ${p.namakk_2} ${p.nks_1} ${p.nks_2} ${p.assign_1} ${p.assign_2}`.toLowerCase();
         if (!hay.includes(q)) return false;
       }
       return true;
     });
-  }, [pairs, pScen, pKat, pJenis, pSearch]);
+  }, [pairs, pScen, pSr, pKat, pJenis, pSearch]);
+
+  const totalPairPages = Math.max(1, Math.ceil(filteredPairs.length / pairPageSize));
+  const paginatedPairs = useMemo(() => {
+    const start = (pairPage - 1) * pairPageSize;
+    return filteredPairs.slice(start, start + pairPageSize);
+  }, [filteredPairs, pairPage, pairPageSize]);
 
   const consoleScript = useMemo(
     () => generateFasihConsoleScript(customPeriodId, selectedSr.code),
@@ -182,6 +386,42 @@ export default function DashboardPage() {
     await navigator.clipboard.writeText(consoleScript);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleDownloadOfficerCsv = () => {
+    const headers = [
+      "No",
+      "Nama Petugas",
+      "Kecamatan",
+      "Subround",
+      "Total Grup Duplikat",
+      "Total Foto Terlibat",
+      "Total Sampel Terlibat",
+      "Grup Lintas Petugas",
+      "Grup Antar Sampel Sendiri",
+      "Grup Lintas Jenis (1 Sampel)",
+    ];
+    const rows = filteredOfficers.map((o, i) => [
+      i + 1,
+      `"${o.pcl.replace(/"/g, '""')}"`,
+      `"${o.kecamatanList.replace(/"/g, '""')}"`,
+      `"${o.subroundList}"`,
+      o.clustersCount,
+      o.photosCount,
+      o.sampleCount,
+      o.crossPclClusters,
+      o.diffSampleClusters,
+      o.sameSampleClusters,
+    ]);
+    const csvContent =
+      "\uFEFF" + [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `rekap_duplikasi_per_petugas_garut.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -212,815 +452,1489 @@ export default function DashboardPage() {
     }
   };
 
+  const changeClusterPage = (nextPage: number) => {
+    const target = Math.max(1, Math.min(totalClusterPages, nextPage));
+    setClusterPage(target);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const changePairPage = (nextPage: number) => {
+    const target = Math.max(1, Math.min(totalPairPages, nextPage));
+    setPairPage(target);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      {/* Topbar */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 px-6 py-3.5">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white font-extrabold flex items-center justify-center shadow-sm">
-              KSA
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-base font-bold text-slate-900">
-                  Audit & Deteksi Duplikasi Foto Ubinan
-                </h1>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  <Database className="w-3 h-3" />
-                  {dataSource === "supabase" ? "Supabase Cloud" : "Data Lokal Aktif"}
-                </span>
-              </div>
-              <p className="text-xs text-slate-500">
-                BPS Kabupaten Garut · Sistem Kendali Mutu Dokumentasi FASIH-SM
-              </p>
-            </div>
-          </div>
-
-          <nav className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
-            <button
+    <div className={darkMode ? "dark" : ""}>
+      <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 selection:bg-blue-600 selection:text-white">
+        {/* Top Navigation Bar */}
+        <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div
               onClick={() => setActiveTab("exec")}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition ${
-                activeTab === "exec"
-                  ? "bg-white text-blue-600 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
+              className="flex items-center gap-3.5 cursor-pointer group"
             >
-              <BarChart3 className="w-3.5 h-3.5" />
-              Ringkasan Eksekutif
-            </button>
-            <button
-              onClick={() => setActiveTab("clusters")}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition ${
-                activeTab === "clusters"
-                  ? "bg-white text-blue-600 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <Layers className="w-3.5 h-3.5" />
-              Kelompok Foto Sama ({clusters.length})
-            </button>
-            <button
-              onClick={() => setActiveTab("pairs")}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition ${
-                activeTab === "pairs"
-                  ? "bg-white text-blue-600 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <GitCompare className="w-3.5 h-3.5" />
-              Perbandingan Pasangan ({pairs.length})
-            </button>
-            <button
-              onClick={() => setActiveTab("scraper")}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition ${
-                activeTab === "scraper"
-                  ? "bg-white text-blue-600 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <Terminal className="w-3.5 h-3.5" />
-              Tarik Data FASIH
-            </button>
-          </nav>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-6 py-6">
-        {/* KPI Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-2xs">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Total Foto Diperiksa
-            </div>
-            <div className="text-2xl font-extrabold text-slate-900 mt-1">
-              {summary.total_photos.toLocaleString("id-ID")}
-            </div>
-            <div className="text-xs text-slate-500 mt-0.5">
-              Dari {summary.total_assignments.toLocaleString("id-ID")} Assignment Ubinan
-            </div>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-2xs">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Kelompok (Cluster) Duplikat
-            </div>
-            <div className="text-2xl font-extrabold text-blue-600 mt-1">
-              {summary.total_clusters.toLocaleString("id-ID")} Grup
-            </div>
-            <div className="text-xs text-slate-500 mt-0.5">
-              {summary.multi_photo_clusters} grup berisi ≥ 3 foto sekaligus
-            </div>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-2xs">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Grup Lintas Petugas
-            </div>
-            <div className="text-2xl font-extrabold text-rose-600 mt-1">
-              {summary.cross_pcl_clusters.toLocaleString("id-ID")} Grup
-            </div>
-            <div className="text-xs text-slate-500 mt-0.5">
-              Foto yang sama dipakai ≥ 2 petugas berbeda
-            </div>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-2xs">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Pasangan File Identik 100%
-            </div>
-            <div className="text-2xl font-extrabold text-amber-600 mt-1">
-              {summary.exact_pairs.toLocaleString("id-ID")}
-            </div>
-            <div className="text-xs text-slate-500 mt-0.5">
-              Total keseluruhan: {summary.total_pairs.toLocaleString("id-ID")} pasangan
-            </div>
-          </div>
-        </div>
-
-        {/* TAB 1: RINGKASAN EKSEKUTIF */}
-        {activeTab === "exec" && (
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Matriks Skenario */}
-              <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl p-5">
-                <h2 className="text-sm font-bold text-slate-900">
-                  Matriks Temuan Berdasarkan Skenario Pemeriksaan
-                </h2>
-                <p className="text-xs text-slate-500 mb-4">
-                  Klik pada baris skenario untuk melihat langsung daftar perbandingan fotonya.
-                </p>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs text-left border-collapse">
-                    <thead>
-                      <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 uppercase text-[11px]">
-                        <th className="py-2.5 px-3">Kode</th>
-                        <th className="py-2.5 px-3">Skenario Pemeriksaan</th>
-                        <th className="py-2.5 px-3 text-center">SHA-256</th>
-                        <th className="py-2.5 px-3 text-center">Kompresi</th>
-                        <th className="py-2.5 px-3 text-center">Objek/ORB</th>
-                        <th className="py-2.5 px-3 text-center">Total</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {scenarioSummary.map((s) => (
-                        <tr
-                          key={s.code}
-                          onClick={() => {
-                            setPScen(s.code);
-                            setActiveTab("pairs");
-                          }}
-                          className="hover:bg-slate-50 cursor-pointer transition"
-                        >
-                          <td className="py-2.5 px-3">
-                            <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-indigo-50 text-indigo-700">
-                              {s.code}
-                            </span>
-                          </td>
-                          <td className="py-2.5 px-3 font-medium text-slate-800">
-                            {s.desc}
-                          </td>
-                          <td className="py-2.5 px-3 text-center">{s.kat1}</td>
-                          <td className="py-2.5 px-3 text-center">{s.kat2}</td>
-                          <td className="py-2.5 px-3 text-center">{s.kat3}</td>
-                          <td className="py-2.5 px-3 text-center font-bold text-blue-600">
-                            {s.total}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+              <div className="w-11 h-11 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 p-1.5 flex items-center justify-center shadow-2xs group-hover:border-blue-300 dark:group-hover:border-blue-500 transition">
+                <img
+                  src="/bps_logo.webp"
+                  alt="Logo BPS"
+                  className="w-full h-full object-contain"
+                />
               </div>
-
-              {/* Top Kecamatan */}
-              <div className="lg:col-span-5 bg-white border border-slate-200 rounded-xl p-5">
-                <h2 className="text-sm font-bold text-slate-900">
-                  Sebaran Kelompok Duplikasi per Kecamatan (Top 12)
-                </h2>
-                <p className="text-xs text-slate-500 mb-4">
-                  Klik nama kecamatan untuk memfilter kelompok foto di kecamatan tersebut.
-                </p>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs text-left border-collapse">
-                    <thead>
-                      <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 uppercase text-[11px]">
-                        <th className="py-2.5 px-3">Kecamatan</th>
-                        <th className="py-2.5 px-3 text-center">Grup</th>
-                        <th className="py-2.5 px-3 text-center">Foto</th>
-                        <th className="py-2.5 px-3 text-center">Petugas</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {topKecamatans.map((k) => (
-                        <tr
-                          key={k.kec}
-                          onClick={() => {
-                            setCSearch(k.kec);
-                            setActiveTab("clusters");
-                          }}
-                          className="hover:bg-slate-50 cursor-pointer transition"
-                        >
-                          <td className="py-2.5 px-3 font-semibold text-slate-800">
-                            {k.kec}
-                          </td>
-                          <td className="py-2.5 px-3 text-center">{k.clusters}</td>
-                          <td className="py-2.5 px-3 text-center font-semibold text-blue-600">
-                            {k.photos}
-                          </td>
-                          <td className="py-2.5 px-3 text-center">{k.pcls.size}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="text-sm sm:text-base font-bold tracking-tight text-slate-900 dark:text-white">
+                    Quality Assurance Foto Ubinan KSA
+                  </h1>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    {dataSource === "supabase" ? "Supabase Cloud" : "Data Lokal"}
+                  </span>
                 </div>
-              </div>
-            </div>
-
-            <div className="bg-white border border-slate-200 rounded-xl p-5 flex items-start gap-4">
-              <div className="p-2.5 rounded-xl bg-blue-50 text-blue-600 shrink-0">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <div className="text-xs text-slate-600 space-y-1">
-                <div className="font-bold text-slate-900 text-sm">
-                  Metodologi Pemeriksaan 3 Tahap (Bebas Bias Watermark FASIH)
-                </div>
-                <p>
-                  1. <b>Content-Area Cropping</b>: Memotong 26% bagian bawah gambar (tempat banner tanggal, koordinat GPS, dan logo FASIH berada) agar pendeteksian murni menilai objek sawah, petak, sketsa, dan timbangan.
-                </p>
-                <p>
-                  2. <b>SHA-256 & Multi-Perceptual Hash (pHash/dHash + Rotasi)</b>: Menangkap file yang identik 100% secara biner maupun foto yang telah dikompres ulang oleh aplikasi/WhatsApp atau diputar.
-                </p>
-                <p>
-                  3. <b>OpenCV ORB + RANSAC Homography Verification</b>: Menangkap foto yang diambil beruntun di lokasi/timbangan yang sama, di-crop, atau diganti teks tanggal watermark-nya.
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                  BPS Kabupaten Garut · Sistem Deteksi Duplikasi Dokumentasi FASIH-SM
                 </p>
               </div>
             </div>
-          </div>
-        )}
 
-        {/* TAB 2: KELOMPOK FOTO SAMA (MULTI-FOTO CLUSTERS) */}
-        {activeTab === "clusters" && (
-          <div>
-            <div className="bg-white border border-slate-200 rounded-xl p-4 mb-5 flex flex-wrap items-end gap-3">
-              <div>
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Skenario
-                </label>
-                <select
-                  value={cScen}
-                  onChange={(e) => setCScen(e.target.value)}
-                  className="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white"
-                >
-                  <option value="">Semua Skenario</option>
-                  <option value="Skenario 1">Skenario 1 - Antar Petugas (SR Sama)</option>
-                  <option value="Skenario 2">Skenario 2 - Petugas Sama (Lintas SR)</option>
-                  <option value="Skenario 3">Skenario 3 - Antar Petugas (Lintas SR)</option>
-                  <option value="Skenario 4">Skenario 4 - Petugas Sama (Beda Sampel)</option>
-                  <option value="Skenario 5A">Skenario 5A - Lintas Jenis (1 Sampel)</option>
-                  <option value="Skenario 5B">Skenario 5B - Lintas Jenis (Beda Sampel)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Jumlah Foto
-                </label>
-                <select
-                  value={cSize}
-                  onChange={(e) => setCSize(Number(e.target.value))}
-                  className="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white"
-                >
-                  <option value={0}>Semua (≥ 2 Foto)</option>
-                  <option value={3}>Multi-Duplikat (≥ 3 Foto)</option>
-                  <option value={5}>Duplikasi Masif (≥ 5 Foto)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Petugas
-                </label>
-                <select
-                  value={cPcl}
-                  onChange={(e) => setCPcl(Number(e.target.value))}
-                  className="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white"
-                >
-                  <option value={0}>Semua</option>
-                  <option value={2}>Lintas Petugas (≥ 2 Petugas)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Jenis Foto
-                </label>
-                <select
-                  value={cJenis}
-                  onChange={(e) => setCJenis(e.target.value)}
-                  className="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white"
-                >
-                  <option value="">Semua Jenis</option>
-                  <option value="fotobidang">fotobidang (Sketsa)</option>
-                  <option value="foto_petak">foto_petak</option>
-                  <option value="fotoplot">fotoplot</option>
-                  <option value="fotoberat">fotoberat (Timbangan)</option>
-                </select>
-              </div>
-
-              <div className="flex-1 min-w-[200px]">
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Cari Petugas / Kecamatan / Desa / KK
-                </label>
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
-                  <input
-                    type="text"
-                    value={cSearch}
-                    onChange={(e) => setCSearch(e.target.value)}
-                    placeholder="Ketik nama petugas, kecamatan, KK..."
-                    className="w-full text-xs border border-slate-300 rounded-lg pl-8 pr-3 py-2"
-                  />
-                </div>
-              </div>
-
-              <button
-                onClick={() => {
-                  setCScen("");
-                  setCSize(0);
-                  setCPcl(0);
-                  setCJenis("");
-                  setCSearch("");
-                }}
-                className="flex items-center gap-1 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                Reset
-              </button>
-
-              <div className="text-xs font-bold text-blue-600 ml-auto py-2">
-                Menampilkan {filteredClusters.length} grup
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {filteredClusters.slice(0, 80).map((c) => (
-                <div
-                  key={c.cluster_id}
-                  className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xs"
-                >
-                  <div className="bg-slate-50 px-4 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-mono text-xs font-bold bg-slate-200 text-slate-800 px-2 py-0.5 rounded">
-                        {c.cluster_id}
-                      </span>
-                      <span
-                        className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
-                          c.jumlah_petugas > 1
-                            ? "bg-rose-50 text-rose-700 border border-rose-200"
-                            : "bg-indigo-50 text-indigo-700 border border-indigo-200"
-                        }`}
-                      >
-                        {c.jumlah_foto} Foto Sama
-                      </span>
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-700">
-                        {c.primary_tag}
-                      </span>
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-600">
-                        Subround: {c.daftar_subround}
-                      </span>
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-600">
-                        Jenis: {c.daftar_jenis_foto}
-                      </span>
-                    </div>
-                    <div className="text-xs text-slate-600">
-                      Kecamatan: <b>{c.daftar_kecamatan}</b> · Petugas ({c.jumlah_petugas}):{" "}
-                      <b>{c.daftar_petugas}</b>
-                    </div>
-                  </div>
-
-                  <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
-                    {(c.members || []).map((m: any, idx: number) => (
-                      <div
-                        key={idx}
-                        className="border border-slate-200 rounded-lg overflow-hidden bg-white flex flex-col"
-                      >
-                        <div
-                          onClick={() =>
-                            setLightbox({
-                              open: true,
-                              src: m.image_url,
-                              caption: `[${m.subround} - ${m.jenis_foto}] Petugas: ${m.pcl} | ${m.kecamatan} - ${m.desa} | KK: ${m.namakk} (NKS: ${m.nks})`,
-                            })
-                          }
-                          className="relative h-48 bg-slate-900 cursor-zoom-in overflow-hidden group"
-                        >
-                          <span className="absolute top-2 left-2 z-10 bg-slate-900/80 text-white text-[11px] font-bold px-2 py-0.5 rounded">
-                            #{idx + 1}
-                          </span>
-                          <span className="absolute top-2 right-2 z-10 bg-blue-600/90 text-white text-[11px] font-semibold px-2 py-0.5 rounded">
-                            {m.subround} · {m.jenis_foto}
-                          </span>
-                          <img
-                            src={m.image_url}
-                            alt={m.jenis_foto}
-                            loading="lazy"
-                            className="w-full h-full object-contain group-hover:scale-105 transition duration-200"
-                          />
-                        </div>
-                        <div className="p-2.5 text-xs space-y-1">
-                          <div className="font-bold text-slate-900 truncate">
-                            👮 {m.pcl || "-"}
-                          </div>
-                          <div className="text-slate-600 font-medium truncate">
-                            📍 {m.kecamatan} - {m.desa}
-                          </div>
-                          <div className="text-slate-700 truncate">
-                            👤 <b>{m.namakk || "-"}</b>{" "}
-                            <span className="text-slate-400">(NKS: {m.nks || "-"})</span>
-                          </div>
-                          <div className="text-slate-800">
-                            ⚖️ Berat: <b>{m.beratbersih ?? "-"} kg</b> · Rumpun:{" "}
-                            {m.jmlhrumpun ?? "-"}
-                          </div>
-                          <div className="font-mono text-[10px] text-slate-400 truncate">
-                            ID: {m.assignmentId}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TAB 3: PERBANDINGAN PASANGAN (2 FOTO) */}
-        {activeTab === "pairs" && (
-          <div>
-            <div className="bg-white border border-slate-200 rounded-xl p-4 mb-5 flex flex-wrap items-end gap-3">
-              <div>
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Skenario
-                </label>
-                <select
-                  value={pScen}
-                  onChange={(e) => setPScen(e.target.value)}
-                  className="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white"
-                >
-                  <option value="">Semua Skenario</option>
-                  <option value="Skenario 1">Skenario 1 - Antar Petugas (SR Sama)</option>
-                  <option value="Skenario 2">Skenario 2 - Petugas Sama (Lintas SR)</option>
-                  <option value="Skenario 3">Skenario 3 - Antar Petugas (Lintas SR)</option>
-                  <option value="Skenario 4">Skenario 4 - Petugas Sama (Beda Sampel)</option>
-                  <option value="Skenario 5A">Skenario 5A - Lintas Jenis (1 Sampel)</option>
-                  <option value="Skenario 5B">Skenario 5B - Lintas Jenis (Beda Sampel)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Tingkat Deteksi
-                </label>
-                <select
-                  value={pKat}
-                  onChange={(e) => setPKat(e.target.value)}
-                  className="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white"
-                >
-                  <option value="">Semua Tingkat</option>
-                  <option value="1.">1. Identik 100% (SHA-256)</option>
-                  <option value="2.">2. Foto Sama (Beda Kompresi)</option>
-                  <option value="3.">3. Objek Sama (Crop / Geser / Edit Watermark)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Jenis Foto
-                </label>
-                <select
-                  value={pJenis}
-                  onChange={(e) => setPJenis(e.target.value)}
-                  className="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white"
-                >
-                  <option value="">Semua Jenis</option>
-                  <option value="fotobidang">fotobidang</option>
-                  <option value="foto_petak">foto_petak</option>
-                  <option value="fotoplot">fotoplot</option>
-                  <option value="fotoberat">fotoberat</option>
-                </select>
-              </div>
-
-              <div className="flex-1 min-w-[200px]">
-                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
-                  Cari Petugas / Kecamatan / Desa / KK
-                </label>
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
-                  <input
-                    type="text"
-                    value={pSearch}
-                    onChange={(e) => setPSearch(e.target.value)}
-                    placeholder="Ketik nama petugas, kecamatan, KK..."
-                    className="w-full text-xs border border-slate-300 rounded-lg pl-8 pr-3 py-2"
-                  />
-                </div>
-              </div>
-
-              <button
-                onClick={() => {
-                  setPScen("");
-                  setPKat("");
-                  setPJenis("");
-                  setPSearch("");
-                }}
-                className="flex items-center gap-1 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                Reset
-              </button>
-
-              <div className="text-xs font-bold text-blue-600 ml-auto py-2">
-                Menampilkan {filteredPairs.length} pasangan
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {filteredPairs.slice(0, 80).map((f, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xs"
-                >
-                  <div className="bg-slate-50 px-4 py-2.5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700">
-                        {f.skenario_kode}: {f.skenario_deskripsi}
-                      </span>
-                      <span
-                        className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-                          String(f.kategori_temuan).startsWith("1.")
-                            ? "bg-rose-50 text-rose-700"
-                            : String(f.kategori_temuan).startsWith("2.")
-                            ? "bg-amber-50 text-amber-700"
-                            : "bg-sky-50 text-sky-700"
-                        }`}
-                      >
-                        {f.kategori_temuan}
-                      </span>
-                    </div>
-                    <div className="text-xs text-slate-600">
-                      Kemiripan: <b>{f.skor_kemiripan_pct}%</b> ·{" "}
-                      <span className="text-slate-400">{f.metode_deteksi}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[1, 2].map((num) => {
-                      const imgUrl = f[`image_url_${num}`];
-                      const sr = f[`sr_${num}`];
-                      const jenis = f[`jenis_${num}`];
-                      const pcl = f[`pcl_${num}`];
-                      const kec = f[`kec_${num}`];
-                      const desa = f[`desa_${num}`];
-                      const kk = f[`namakk_${num}`];
-                      const nks = f[`nks_${num}`];
-                      const berat = f[`berat_${num}`];
-                      const rumpun = f[`rumpun_${num}`];
-                      const res = f[`res_${num}`];
-                      const aid = f[`assign_${num}`];
-
-                      return (
-                        <div
-                          key={num}
-                          className="flex gap-3.5 border border-slate-200 rounded-lg p-3 bg-slate-50/40"
-                        >
-                          <div
-                            onClick={() =>
-                              setLightbox({
-                                open: true,
-                                src: imgUrl,
-                                caption: `[${sr} - ${jenis}] ${pcl} | ${kec} - ${desa} | KK: ${kk}`,
-                              })
-                            }
-                            className="relative w-44 h-48 bg-slate-900 rounded-lg overflow-hidden shrink-0 cursor-zoom-in"
-                          >
-                            <span className="absolute top-2 right-2 z-10 bg-blue-600/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded">
-                              {sr} · {jenis}
-                            </span>
-                            <img
-                              src={imgUrl}
-                              alt={jenis}
-                              loading="lazy"
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                          <div className="text-xs space-y-1.5 flex-1 min-w-0">
-                            <div className="font-bold text-slate-900 text-sm">
-                              👮 {pcl || "-"}
-                            </div>
-                            <div className="text-slate-700 font-medium">
-                              📍 {kec} - {desa}
-                            </div>
-                            <div className="text-slate-700">
-                              👤 Sampel/KK: <b>{kk || "-"}</b> (NKS: {nks || "-"})
-                            </div>
-                            <div className="text-slate-800">
-                              ⚖️ Berat Bersih: <b>{berat ?? "-"} kg</b> · Rumpun:{" "}
-                              {rumpun ?? "-"}
-                            </div>
-                            <div className="text-slate-400 text-[11px] pt-1 font-mono break-all">
-                              Resolusi: {res} · ID: {aid}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TAB 4: TARIK DATA FASIH (SCRAPER & SYNC) */}
-        {activeTab === "scraper" && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {/* Kolom Kiri: Generator Script Console */}
-            <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl p-6 space-y-4">
-              <div>
-                <h2 className="text-base font-bold text-slate-900">
-                  Langkah 1: Salin Kode Penarik Data FASIH-SM (Ramah Server)
-                </h2>
-                <p className="text-xs text-slate-500 mt-1">
-                  Karena FASIH-SM dilindungi SSO BPS & Cloudflare/F5 WAF, penarikan daftar assignment dan Presigned URL paling aman dijalankan langsung dari Console tab tempat kamu sudah login FASIH-SM.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Pilih Periode Subround
-                  </label>
-                  <select
-                    value={selectedSr.code}
-                    onChange={(e) => {
-                      const found = SUBROUND_OPTIONS.find(
-                        (o) => o.code === e.target.value
-                      );
-                      if (found) {
-                        setSelectedSr(found);
-                        setCustomPeriodId(found.surveyPeriodId);
-                      }
-                    }}
-                    className="w-full text-xs border border-slate-300 rounded-lg px-3 py-2.5 bg-white font-medium"
-                  >
-                    {SUBROUND_OPTIONS.map((o) => (
-                      <option key={o.code} value={o.code}>
-                        {o.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Survey Period ID (Bisa disesuaikan)
-                  </label>
-                  <input
-                    type="text"
-                    value={customPeriodId}
-                    onChange={(e) => setCustomPeriodId(e.target.value)}
-                    className="w-full text-xs font-mono border border-slate-300 rounded-lg px-3 py-2.5"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 pt-1">
+            <div className="flex items-center gap-2 max-w-full">
+              <nav className="flex items-center gap-1 bg-slate-100/90 dark:bg-slate-800/90 p-1 rounded-xl border border-slate-200/60 dark:border-slate-700/70 overflow-x-auto">
                 <button
-                  onClick={handleCopyScript}
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-xs transition cursor-pointer"
+                  onClick={() => setActiveTab("exec")}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap cursor-pointer ${
+                    activeTab === "exec"
+                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs"
+                      : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                  }`}
                 >
-                  {copied ? (
-                    <>
-                      <Check className="w-4 h-4" />
-                      Kode Berhasil Disalin!
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-4 h-4" />
-                      Salin Kode Console ({selectedSr.code})
-                    </>
-                  )}
+                  <BarChart3 className="w-3.5 h-3.5" />
+                  Ringkasan & Petugas
                 </button>
-
-                <a
-                  href="https://fasih-sm.bps.go.id"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3.5 py-2.5 rounded-lg transition"
+                <button
+                  onClick={() => setActiveTab("clusters")}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap cursor-pointer ${
+                    activeTab === "clusters"
+                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs"
+                      : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                  }`}
                 >
-                  Buka FASIH-SM
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
+                  <Layers className="w-3.5 h-3.5" />
+                  Kelompok Foto Sama
+                  <span className="ml-0.5 px-1.5 py-0.2 rounded-md text-[10px] bg-slate-200/70 dark:bg-slate-700 text-slate-700 dark:text-slate-200">
+                    {clusters.length}
+                  </span>
+                </button>
+                <button
+                  onClick={() => setActiveTab("pairs")}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap cursor-pointer ${
+                    activeTab === "pairs"
+                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs"
+                      : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                  }`}
+                >
+                  <GitCompare className="w-3.5 h-3.5" />
+                  Perbandingan Pasangan
+                  <span className="ml-0.5 px-1.5 py-0.2 rounded-md text-[10px] bg-slate-200/70 dark:bg-slate-700 text-slate-700 dark:text-slate-200">
+                    {pairs.length}
+                  </span>
+                </button>
+                <button
+                  onClick={() => setActiveTab("scraper")}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap cursor-pointer ${
+                    activeTab === "scraper"
+                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs"
+                      : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                  }`}
+                >
+                  <Terminal className="w-3.5 h-3.5" />
+                  Tarik Data FASIH
+                </button>
+              </nav>
 
-              <div className="relative">
-                <pre className="bg-slate-900 text-slate-100 text-[11px] font-mono p-4 rounded-xl overflow-x-auto max-h-72 leading-relaxed">
-                  {consoleScript}
-                </pre>
+              {/* Dark Mode Toggle Button */}
+              <button
+                onClick={toggleDarkMode}
+                title={darkMode ? "Beralih ke Mode Terang" : "Beralih ke Mode Gelap"}
+                className="p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition cursor-pointer shrink-0"
+              >
+                {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+          {/* Minimalist Modern KPI Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 shadow-2xs hover:border-slate-300 dark:hover:border-slate-700 transition flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  Populasi Pemeriksaan
+                </span>
+                <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center">
+                  <Database className="w-4 h-4" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <div className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                  {summary.total_photos.toLocaleString("id-ID")}{" "}
+                  <span className="text-xs font-normal text-slate-400">foto</span>
+                </div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Dari{" "}
+                  <span className="font-semibold text-slate-700 dark:text-slate-200">
+                    {summary.total_assignments.toLocaleString("id-ID")}
+                  </span>{" "}
+                  assignment ubinan (SR1–SR3)
+                </div>
               </div>
             </div>
 
-            {/* Kolom Kanan: Upload JSON & Trigger Analisis */}
-            <div className="lg:col-span-5 bg-white border border-slate-200 rounded-xl p-6 flex flex-col justify-between space-y-4">
-              <div className="space-y-4">
-                <div>
-                  <h2 className="text-base font-bold text-slate-900">
-                    Langkah 2: Unggah File JSON Hasil Scrape
-                  </h2>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Setelah script di Console selesai berjalan, browser akan mengunduh file{" "}
-                    <code className="bg-slate-100 px-1.5 py-0.5 rounded">
-                      rekap_foto_ubinan_...json
-                    </code>
-                    . Unggah file tersebut di sini untuk disimpan ke Supabase & memicu analisis otomatis via GitHub Actions.
-                  </p>
+            <div
+              onClick={() => {
+                setCScen("");
+                setCSr("");
+                setCSize(0);
+                setCPcl(0);
+                setActiveTab("clusters");
+              }}
+              className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 shadow-2xs hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-sm transition cursor-pointer group flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                  Kelompok Foto Sama
+                </span>
+                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                  <Layers className="w-4 h-4" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-extrabold tracking-tight text-blue-600 dark:text-blue-400">
+                    {summary.total_clusters.toLocaleString("id-ID")}
+                  </span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                    grup unik
+                  </span>
+                </div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
+                  <span>{summary.multi_photo_clusters} grup berisi ≥ 3 foto</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+                </div>
+              </div>
+            </div>
+
+            <div
+              onClick={() => {
+                setCPcl(2);
+                setCScen("");
+                setCSr("");
+                setCSize(0);
+                setActiveTab("clusters");
+              }}
+              className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 shadow-2xs hover:border-rose-300 dark:hover:border-rose-700 hover:shadow-sm transition cursor-pointer group flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition">
+                  Indikasi Lintas Petugas
+                </span>
+                <div className="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+                  <AlertTriangle className="w-4 h-4" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-extrabold tracking-tight text-rose-600 dark:text-rose-400">
+                    {summary.cross_pcl_clusters.toLocaleString("id-ID")}
+                  </span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                    grup lintas PCL
+                  </span>
+                </div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
+                  <span>Dipakai ≥ 2 petugas berbeda</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-rose-600 dark:group-hover:text-rose-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+                </div>
+              </div>
+            </div>
+
+            <div
+              onClick={() => {
+                setPKat("1.");
+                setPScen("");
+                setPSr("");
+                setActiveTab("pairs");
+              }}
+              className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 shadow-2xs hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-sm transition cursor-pointer group flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">
+                  File Identik 100% (SHA-256)
+                </span>
+                <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                  <FileCheck2 className="w-4 h-4" />
+                </div>
+              </div>
+              <div className="mt-3">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-extrabold tracking-tight text-amber-600 dark:text-amber-400">
+                    {summary.exact_pairs.toLocaleString("id-ID")}
+                  </span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                    dari {summary.total_pairs.toLocaleString("id-ID")} pasang
+                  </span>
+                </div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
+                  <span>Biner file persis sama tanpa ubahan</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* TAB 1: RINGKASAN EKSEKUTIF & REKAP PETUGAS */}
+          {activeTab === "exec" && (
+            <div className="space-y-6">
+              {/* REKAPITULASI PER PETUGAS */}
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl shadow-2xs overflow-hidden">
+                <div className="p-5 sm:p-6 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                        Rekapitulasi Indikasi Duplikasi per Petugas
+                      </h2>
+                      <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                        {officerSummary.length} Petugas Terlibat
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                      Rincian keterlibatan petugas berdasarkan jenis temuan: lintas petugas, antar sampel berbeda milik sendiri, maupun lintas jenis dalam 1 sampel.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    {/* Quick Filter Chips */}
+                    <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-medium">
+                      <button
+                        onClick={() => setPclFilterType("all")}
+                        className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                          pclFilterType === "all"
+                            ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-semibold"
+                            : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                        }`}
+                      >
+                        Semua ({officerSummary.length})
+                      </button>
+                      <button
+                        onClick={() => setPclFilterType("cross_pcl")}
+                        className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                          pclFilterType === "cross_pcl"
+                            ? "bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400 shadow-2xs font-semibold"
+                            : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                        }`}
+                      >
+                        Lintas Petugas
+                      </button>
+                      <button
+                        onClick={() => setPclFilterType("multi_sample")}
+                        className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                          pclFilterType === "multi_sample"
+                            ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs font-semibold"
+                            : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                        }`}
+                      >
+                        Antar Sampel Berbeda
+                      </button>
+                    </div>
+
+                    {/* Search Input */}
+                    <div className="relative min-w-[210px]">
+                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                      <input
+                        type="text"
+                        value={pclSearch}
+                        onChange={(e) => setPclSearch(e.target.value)}
+                        placeholder="Cari nama petugas / kecamatan..."
+                        className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl pl-8 pr-3 py-2 focus:outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    {/* Export CSV */}
+                    <button
+                      onClick={handleDownloadOfficerCsv}
+                      className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 px-3 py-2 rounded-xl transition cursor-pointer"
+                    >
+                      <Download className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
+                      Unduh CSV
+                    </button>
+                  </div>
                 </div>
 
-                <label className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition bg-slate-50/50">
-                  <UploadCloud className="w-10 h-10 text-blue-600 mb-2" />
-                  <span className="text-xs font-bold text-slate-800">
-                    Klik untuk memilih file JSON hasil scrape ({selectedSr.code})
-                  </span>
-                  <span className="text-[11px] text-slate-400 mt-1">
-                    Format: rekap_foto_ubinan_{customPeriodId.slice(0, 8)}....json
-                  </span>
-                  <input
-                    type="file"
-                    accept=".json"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
-                </label>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px] tracking-wider">
+                        <th className="py-3 px-4 w-10 text-center">#</th>
+                        <th className="py-3 px-4">Nama Petugas (PCL)</th>
+                        <th className="py-3 px-4">Wilayah Kecamatan</th>
+                        <th className="py-3 px-3 text-center">Subround</th>
+                        <th className="py-3 px-3 text-center">Total Grup</th>
+                        <th className="py-3 px-3 text-center">Total Foto</th>
+                        <th className="py-3 px-4">Rincian Pola Duplikasi</th>
+                        <th className="py-3 px-4 text-right">Telusuri Bukti</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800/70">
+                      {paginatedOfficers.length === 0 ? (
+                        <tr>
+                          <td colSpan={8} className="py-8 text-center text-slate-400">
+                            Tidak ada data petugas yang cocok dengan pencarian.
+                          </td>
+                        </tr>
+                      ) : (
+                        paginatedOfficers.map((o, idx) => {
+                          const rank = (pclPage - 1) * pclPageSize + idx + 1;
+                          return (
+                            <tr
+                              key={o.pcl}
+                              className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition group"
+                            >
+                              <td className="py-3 px-4 text-center font-mono text-slate-400">
+                                {rank}
+                              </td>
+                              <td className="py-3 px-4">
+                                <div className="font-bold text-slate-900 dark:text-white">
+                                  {o.pcl}
+                                </div>
+                                <div className="text-[11px] text-slate-400">
+                                  Melibatkan {o.sampleCount} sampel ubinan
+                                </div>
+                              </td>
+                              <td className="py-3 px-4 text-slate-600 dark:text-slate-300 font-medium max-w-[220px] truncate">
+                                {o.kecamatanList || "-"}
+                              </td>
+                              <td className="py-3 px-3 text-center">
+                                <span className="inline-block px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium text-[11px]">
+                                  {o.subroundList || "-"}
+                                </span>
+                              </td>
+                              <td className="py-3 px-3 text-center">
+                                <span className="text-sm font-extrabold text-slate-900 dark:text-white">
+                                  {o.clustersCount}
+                                </span>
+                              </td>
+                              <td className="py-3 px-3 text-center">
+                                <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
+                                  {o.photosCount}
+                                </span>
+                              </td>
+                              <td className="py-3 px-4">
+                                <div className="flex flex-wrap items-center gap-1.5">
+                                  {o.crossPclClusters > 0 && (
+                                    <span
+                                      title="Foto yang sama dipakai bersama petugas lain"
+                                      className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/70 dark:border-rose-800"
+                                    >
+                                      {o.crossPclClusters} Lintas Petugas
+                                    </span>
+                                  )}
+                                  {o.diffSampleClusters > 0 && (
+                                    <span
+                                      title="Foto yang sama dipakai ulang di sampel lain oleh petugas ini"
+                                      className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/70 dark:border-amber-800"
+                                    >
+                                      {o.diffSampleClusters} Antar Sampel
+                                    </span>
+                                  )}
+                                  {o.sameSampleClusters > 0 && (
+                                    <span
+                                      title="Foto dipakai ganda pada isian berbeda di dalam 1 sampel yang sama"
+                                      className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
+                                    >
+                                      {o.sameSampleClusters} Internal Sampel
+                                    </span>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="py-3 px-4 text-right whitespace-nowrap">
+                                <div className="inline-flex items-center gap-1.5">
+                                  <button
+                                    onClick={() => {
+                                      setCScen("");
+                                      setCSr("");
+                                      setCSize(0);
+                                      setCPcl(0);
+                                      setCJenis("");
+                                      setCSearch(o.pcl);
+                                      setActiveTab("clusters");
+                                    }}
+                                    className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition cursor-pointer"
+                                  >
+                                    Lihat Grup
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setPScen("");
+                                      setPSr("");
+                                      setPKat("");
+                                      setPJenis("");
+                                      setPSearch(o.pcl);
+                                      setActiveTab("pairs");
+                                    }}
+                                    className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer"
+                                  >
+                                    Pasangan
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      )}
+                    </tbody>
+                  </table>
+                </div>
 
-                {uploadStatus.type !== "idle" && (
-                  <div
-                    className={`p-3.5 rounded-lg text-xs font-medium ${
-                      uploadStatus.type === "success"
-                        ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                        : uploadStatus.type === "error"
-                        ? "bg-rose-50 text-rose-800 border border-rose-200"
-                        : "bg-blue-50 text-blue-800 border border-blue-200"
-                    }`}
-                  >
-                    {uploadStatus.msg}
+                {/* Officer Table Pagination Footer */}
+                {filteredOfficers.length > pclPageSize && (
+                  <div className="px-5 py-3.5 bg-slate-50/60 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+                    <div>
+                      Menampilkan{" "}
+                      <b className="text-slate-800 dark:text-slate-200">
+                        {(pclPage - 1) * pclPageSize + 1}–
+                        {Math.min(pclPage * pclPageSize, filteredOfficers.length)}
+                      </b>{" "}
+                      dari{" "}
+                      <b className="text-slate-800 dark:text-slate-200">
+                        {filteredOfficers.length}
+                      </b>{" "}
+                      petugas
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <button
+                        disabled={pclPage <= 1}
+                        onClick={() => setPclPage((p) => Math.max(1, p - 1))}
+                        className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      {buildPageNumbers(pclPage, totalPclPages).map((p, idx) =>
+                        p === "..." ? (
+                          <span key={`ellipsis-${idx}`} className="px-2 text-slate-400">
+                            ...
+                          </span>
+                        ) : (
+                          <button
+                            key={p}
+                            onClick={() => setPclPage(p)}
+                            className={`min-w-[30px] h-7 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                              pclPage === p
+                                ? "bg-blue-600 text-white"
+                                : "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                            }`}
+                          >
+                            {p}
+                          </button>
+                        )
+                      )}
+                      <button
+                        disabled={pclPage >= totalPclPages}
+                        onClick={() => setPclPage((p) => Math.min(totalPclPages, p + 1))}
+                        className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
 
-              <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 text-xs text-slate-600 space-y-1.5">
-                <div className="font-bold text-slate-800">
-                  💡 Cara Kerja Arsitektur Cloud Gratis (Vercel + Supabase + GitHub Actions):
+              {/* Skenario & Sebaran Kecamatan Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                {/* Matriks Skenario */}
+                <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xs">
+                  <div className="flex items-center justify-between mb-1">
+                    <h2 className="text-sm font-bold text-slate-900 dark:text-white">
+                      Matriks Temuan Berdasarkan Skenario Pemeriksaan
+                    </h2>
+                    <span className="text-[11px] text-blue-600 dark:text-blue-400 font-medium">
+                      Klik baris untuk filter
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+                    Klasifikasi pasangan temuan menurut relasi petugas, periode subround, dan sampel.
+                  </p>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs text-left border-collapse">
+                      <thead>
+                        <tr className="border-b border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px] tracking-wider">
+                          <th className="py-2.5 px-3">Kode</th>
+                          <th className="py-2.5 px-3">Skenario Pemeriksaan</th>
+                          <th className="py-2.5 px-2.5 text-center">SHA-256</th>
+                          <th className="py-2.5 px-2.5 text-center">Kompresi</th>
+                          <th className="py-2.5 px-2.5 text-center">Objek/ORB</th>
+                          <th className="py-2.5 px-3 text-right">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800/70">
+                        {scenarioSummary.map((s) => (
+                          <tr
+                            key={s.code}
+                            onClick={() => {
+                              setPScen(s.code);
+                              setActiveTab("pairs");
+                            }}
+                            className="hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition group"
+                          >
+                            <td className="py-3 px-3 whitespace-nowrap">
+                              <span className="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 group-hover:bg-indigo-600 group-hover:text-white transition">
+                                {s.code}
+                              </span>
+                            </td>
+                            <td className="py-3 px-3 font-medium text-slate-800 dark:text-slate-200">
+                              {s.desc}
+                            </td>
+                            <td className="py-3 px-2.5 text-center text-slate-600 dark:text-slate-400">
+                              {s.kat1}
+                            </td>
+                            <td className="py-3 px-2.5 text-center text-slate-600 dark:text-slate-400">
+                              {s.kat2}
+                            </td>
+                            <td className="py-3 px-2.5 text-center text-slate-600 dark:text-slate-400">
+                              {s.kat3}
+                            </td>
+                            <td className="py-3 px-3 text-right font-extrabold text-blue-600 dark:text-blue-400">
+                              {s.total}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <p>
-                  1. File JSON berisi metadata dan Presigned URL S3 (aktif 7 hari) dikirim ke tabel{" "}
-                  <code>raw_scrape_uploads</code> di Supabase.
-                </p>
-                <p>
-                  2. GitHub Actions otomatis mengunduh foto dari S3 FASIH, menjalankan algoritma{" "}
-                  <b>SHA-256 + pHash + OpenCV ORB</b>, lalu mengunggah foto terkompresi (WebP) ke{" "}
-                  <b>Supabase Storage</b>.
-                </p>
+
+                {/* Top Kecamatan */}
+                <div className="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xs">
+                  <div className="flex items-center justify-between mb-1">
+                    <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                      <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Sebaran Kecamatan (Top 12)
+                    </h2>
+                    <span className="text-[11px] text-blue-600 dark:text-blue-400 font-medium">
+                      Klik untuk filter
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+                    Kecamatan dengan frekuensi keterlibatan foto duplikat tertinggi.
+                  </p>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs text-left border-collapse">
+                      <thead>
+                        <tr className="border-b border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px] tracking-wider">
+                          <th className="py-2.5 px-3">Kecamatan</th>
+                          <th className="py-2.5 px-3 text-center">Grup</th>
+                          <th className="py-2.5 px-3 text-center">Foto</th>
+                          <th className="py-2.5 px-3 text-center">Petugas</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800/70">
+                        {topKecamatans.map((k) => {
+                          const maxPhotos = topKecamatans[0]?.photos || 1;
+                          const pct = Math.round((k.photos / maxPhotos) * 100);
+                          return (
+                            <tr
+                              key={k.kec}
+                              onClick={() => {
+                                setCSearch(k.kec);
+                                setActiveTab("clusters");
+                              }}
+                              className="hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition"
+                            >
+                              <td className="py-2.5 px-3">
+                                <div className="font-semibold text-slate-800 dark:text-slate-200">
+                                  {k.kec}
+                                </div>
+                                <div className="w-full bg-slate-100 dark:bg-slate-800 h-1 rounded-full mt-1 overflow-hidden">
+                                  <div
+                                    className="bg-blue-500 h-full rounded-full"
+                                    style={{ width: `${pct}%` }}
+                                  />
+                                </div>
+                              </td>
+                              <td className="py-2.5 px-3 text-center font-medium text-slate-700 dark:text-slate-300">
+                                {k.clusters}
+                              </td>
+                              <td className="py-2.5 px-3 text-center font-bold text-blue-600 dark:text-blue-400">
+                                {k.photos}
+                              </td>
+                              <td className="py-2.5 px-3 text-center text-slate-600 dark:text-slate-400">
+                                {k.pcls.size}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
+
+              {/* Metodologi Banner */}
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 flex flex-col sm:flex-row items-start gap-4 shadow-2xs">
+                <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 shrink-0">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div className="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 leading-relaxed">
+                  <div className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-1.5">
+                    Metodologi Deteksi 3 Lapis (Bebas Bias Watermark FASIH)
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  </div>
+                  <p>
+                    <b>1. Content-Area Cropping</b>: Memotong otomatis 26% area bawah dan 5% area atas foto (tempat template banner waktu, koordinat GPS, serta logo FASIH berada) sehingga perbandingan murni menguji kesamaan visual objek sawah, petak, sketsa bidang, maupun timbangan.
+                  </p>
+                  <p>
+                    <b>2. SHA-256 & Multi-Orientation Perceptual Hashing (pHash/dHash)</b>: Menangkap file yang sama persis 100% maupun foto yang telah mengalami kompresi ulang (mis. dikirim lewat WhatsApp) atau dirotasi 90°/180°/270°.
+                  </p>
+                  <p>
+                    <b>3. OpenCV ORB Keypoints + RANSAC Geometric Verification</b>: Memverifikasi kesamaan titik fitur geometris untuk mendeteksi foto yang diambil beruntun di objek yang sama, di-crop sebagian, atau diganti teks watermark-nya.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: KELOMPOK FOTO SAMA (MULTI-FOTO CLUSTERS + PAGINATION) */}
+          {activeTab === "clusters" && (
+            <div className="space-y-4">
+              {/* Filter Bar */}
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 shadow-2xs flex flex-wrap items-end gap-3">
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Skenario
+                  </label>
+                  <select
+                    value={cScen}
+                    onChange={(e) => setCScen(e.target.value)}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="">Semua Skenario</option>
+                    <option value="Skenario 1">Skenario 1 - Antar Petugas (SR Sama)</option>
+                    <option value="Skenario 2">Skenario 2 - Petugas Sama (Lintas SR)</option>
+                    <option value="Skenario 3">Skenario 3 - Antar Petugas (Lintas SR)</option>
+                    <option value="Skenario 4">Skenario 4 - Petugas Sama (Beda Sampel)</option>
+                    <option value="Skenario 5A">Skenario 5A - Lintas Jenis (1 Sampel)</option>
+                    <option value="Skenario 5B">Skenario 5B - Lintas Jenis (Beda Sampel)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Subround
+                  </label>
+                  <select
+                    value={cSr}
+                    onChange={(e) => setCSr(e.target.value)}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="">Semua Subround</option>
+                    <option value="SR1">SR1 (Jan–Apr)</option>
+                    <option value="SR2">SR2 (Mei–Agu)</option>
+                    <option value="SR3">SR3 (Sep–Des)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Jumlah Foto
+                  </label>
+                  <select
+                    value={cSize}
+                    onChange={(e) => setCSize(Number(e.target.value))}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value={0}>Semua (≥ 2 Foto)</option>
+                    <option value={3}>Multi-Duplikat (≥ 3 Foto)</option>
+                    <option value={5}>Duplikasi Masif (≥ 5 Foto)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Relasi Petugas
+                  </label>
+                  <select
+                    value={cPcl}
+                    onChange={(e) => setCPcl(Number(e.target.value))}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value={0}>Semua</option>
+                    <option value={2}>Lintas Petugas (≥ 2 Petugas)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Jenis Foto
+                  </label>
+                  <select
+                    value={cJenis}
+                    onChange={(e) => setCJenis(e.target.value)}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="">Semua Jenis</option>
+                    <option value="fotobidang">fotobidang (Sketsa)</option>
+                    <option value="foto_petak">foto_petak</option>
+                    <option value="fotoplot">fotoplot</option>
+                    <option value="fotoberat">fotoberat (Timbangan)</option>
+                  </select>
+                </div>
+
+                <div className="flex-1 min-w-[200px]">
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Cari Petugas / Kecamatan / Desa / KK / ID
+                  </label>
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                    <input
+                      type="text"
+                      value={cSearch}
+                      onChange={(e) => setCSearch(e.target.value)}
+                      placeholder="Ketik nama petugas, kecamatan, KK..."
+                      className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl pl-8 pr-3 py-2 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => {
+                    setCScen("");
+                    setCSr("");
+                    setCSize(0);
+                    setCPcl(0);
+                    setCJenis("");
+                    setCSearch("");
+                  }}
+                  className="flex items-center gap-1 text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-2 rounded-xl transition cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  Reset
+                </button>
+              </div>
+
+              {/* Top Pagination & Page Size Control */}
+              <div className="flex flex-wrap items-center justify-between gap-3 px-1">
+                <div className="text-xs text-slate-600 dark:text-slate-400">
+                  Menampilkan{" "}
+                  <b className="text-slate-900 dark:text-white">
+                    {filteredClusters.length === 0
+                      ? 0
+                      : (clusterPage - 1) * clusterPageSize + 1}
+                    –
+                    {Math.min(clusterPage * clusterPageSize, filteredClusters.length)}
+                  </b>{" "}
+                  dari{" "}
+                  <b className="text-blue-600 dark:text-blue-400">
+                    {filteredClusters.length}
+                  </b>{" "}
+                  kelompok foto sama
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                    <span>Per halaman:</span>
+                    <select
+                      value={clusterPageSize}
+                      onChange={(e) => setClusterPageSize(Number(e.target.value))}
+                      className="border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold"
+                    >
+                      <option value={10}>10 grup</option>
+                      <option value={20}>20 grup</option>
+                      <option value={50}>50 grup</option>
+                    </select>
+                  </div>
+
+                  <div className="flex items-center gap-1">
+                    <button
+                      disabled={clusterPage <= 1}
+                      onClick={() => changeClusterPage(clusterPage - 1)}
+                      className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <span className="text-xs font-semibold px-2 text-slate-700 dark:text-slate-300">
+                      Hal {clusterPage} / {totalClusterPages}
+                    </span>
+                    <button
+                      disabled={clusterPage >= totalClusterPages}
+                      onClick={() => changeClusterPage(clusterPage + 1)}
+                      className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Cluster Cards List */}
+              <div className="space-y-4">
+                {paginatedClusters.map((c) => (
+                  <div
+                    key={c.cluster_id}
+                    className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden shadow-2xs"
+                  >
+                    <div className="bg-slate-50/80 dark:bg-slate-800/60 px-4 py-3 border-b border-slate-200/70 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-mono text-xs font-bold bg-slate-200/80 dark:bg-slate-700 text-slate-800 dark:text-slate-100 px-2 py-0.5 rounded-md">
+                          {c.cluster_id}
+                        </span>
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                            c.jumlah_petugas > 1
+                              ? "bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
+                              : "bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
+                          }`}
+                        >
+                          {c.jumlah_foto} Foto Sama
+                        </span>
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
+                          {c.primary_tag}
+                        </span>
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+                          Subround: {c.daftar_subround}
+                        </span>
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+                          Jenis: {c.daftar_jenis_foto}
+                        </span>
+                      </div>
+                      <div className="text-xs text-slate-600 dark:text-slate-300">
+                        Kecamatan: <b>{c.daftar_kecamatan}</b> · Petugas ({c.jumlah_petugas}):{" "}
+                        <b>{c.daftar_petugas}</b>
+                      </div>
+                    </div>
+
+                    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
+                      {(c.members || []).map((m: any, idx: number) => {
+                        const fasihUrl = getFasihAssignmentUrl(m.subround, m.assignmentId);
+                        return (
+                          <div
+                            key={idx}
+                            className="border border-slate-200/80 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-slate-900/80 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 transition"
+                          >
+                            <div>
+                              <div
+                                onClick={() =>
+                                  setLightbox({
+                                    open: true,
+                                    src: m.image_url,
+                                    caption: `[${m.subround} - ${m.jenis_foto}] Petugas: ${m.pcl} | ${m.kecamatan} - ${m.desa} | KK: ${m.namakk} (NKS: ${m.nks})`,
+                                  })
+                                }
+                                className="relative h-48 bg-slate-900 cursor-zoom-in overflow-hidden group"
+                              >
+                                <span className="absolute top-2 left-2 z-10 bg-slate-900/80 text-white text-[11px] font-bold px-2 py-0.5 rounded-md">
+                                  #{idx + 1}
+                                </span>
+                                <span className="absolute top-2 right-2 z-10 bg-blue-600/90 text-white text-[11px] font-semibold px-2 py-0.5 rounded-md">
+                                  {m.subround} · {m.jenis_foto}
+                                </span>
+                                <img
+                                  src={m.image_url}
+                                  alt={m.jenis_foto}
+                                  loading="lazy"
+                                  className="w-full h-full object-contain group-hover:scale-105 transition duration-200"
+                                />
+                              </div>
+                              <div className="p-3 text-xs space-y-1">
+                                <div className="font-bold text-slate-900 dark:text-white truncate">
+                                  👮 {m.pcl || "-"}
+                                </div>
+                                <div className="text-slate-600 dark:text-slate-300 font-medium truncate">
+                                  📍 {m.kecamatan} - {m.desa}
+                                </div>
+                                <div className="text-slate-700 dark:text-slate-300 truncate">
+                                  👤 <b>{m.namakk || "-"}</b>{" "}
+                                  <span className="text-slate-400">(NKS: {m.nks || "-"})</span>
+                                </div>
+                                <div className="text-slate-800 dark:text-slate-200">
+                                  ⚖️ Berat: <b>{m.beratbersih ?? "-"} kg</b> · Rumpun:{" "}
+                                  {m.jmlhrumpun ?? "-"}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Assignment ID + Direct FASIH Link Footer */}
+                            <div className="px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                              <div
+                                title={m.assignmentId}
+                                className="font-mono text-[10px] text-slate-500 dark:text-slate-400 truncate"
+                              >
+                                ID: {m.assignmentId}
+                              </div>
+                              {m.assignmentId && (
+                                <a
+                                  href={fasihUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-bold bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition shrink-0"
+                                >
+                                  Buka FASIH
+                                  <ExternalLink className="w-2.5 h-2.5" />
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom Full Pagination Bar */}
+              {totalClusterPages > 1 && (
+                <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-5 py-3.5 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+                  <div className="text-xs text-slate-500 dark:text-slate-400">
+                    Halaman <b className="text-slate-800 dark:text-slate-200">{clusterPage}</b> dari{" "}
+                    <b className="text-slate-800 dark:text-slate-200">{totalClusterPages}</b> (
+                    {filteredClusters.length} grup)
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button
+                      disabled={clusterPage <= 1}
+                      onClick={() => changeClusterPage(clusterPage - 1)}
+                      className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed flex items-center gap-1"
+                    >
+                      <ChevronLeft className="w-3.5 h-3.5" />
+                      Sebelumnya
+                    </button>
+                    {buildPageNumbers(clusterPage, totalClusterPages).map((p, idx) =>
+                      p === "..." ? (
+                        <span key={`c-ell-${idx}`} className="px-2 text-slate-400 text-xs">
+                          ...
+                        </span>
+                      ) : (
+                        <button
+                          key={p}
+                          onClick={() => changeClusterPage(p)}
+                          className={`min-w-[32px] h-8 rounded-xl text-xs font-semibold transition cursor-pointer ${
+                            clusterPage === p
+                              ? "bg-blue-600 text-white shadow-2xs"
+                              : "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      )
+                    )}
+                    <button
+                      disabled={clusterPage >= totalClusterPages}
+                      onClick={() => changeClusterPage(clusterPage + 1)}
+                      className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed flex items-center gap-1"
+                    >
+                      Berikutnya
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 3: PERBANDINGAN PASANGAN (2 FOTO + PAGINATION) */}
+          {activeTab === "pairs" && (
+            <div className="space-y-4">
+              {/* Filter Bar */}
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 shadow-2xs flex flex-wrap items-end gap-3">
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Skenario
+                  </label>
+                  <select
+                    value={pScen}
+                    onChange={(e) => setPScen(e.target.value)}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="">Semua Skenario</option>
+                    <option value="Skenario 1">Skenario 1 - Antar Petugas (SR Sama)</option>
+                    <option value="Skenario 2">Skenario 2 - Petugas Sama (Lintas SR)</option>
+                    <option value="Skenario 3">Skenario 3 - Antar Petugas (Lintas SR)</option>
+                    <option value="Skenario 4">Skenario 4 - Petugas Sama (Beda Sampel)</option>
+                    <option value="Skenario 5A">Skenario 5A - Lintas Jenis (1 Sampel)</option>
+                    <option value="Skenario 5B">Skenario 5B - Lintas Jenis (Beda Sampel)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Subround
+                  </label>
+                  <select
+                    value={pSr}
+                    onChange={(e) => setPSr(e.target.value)}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="">Semua Subround</option>
+                    <option value="SR1">SR1 (Jan–Apr)</option>
+                    <option value="SR2">SR2 (Mei–Agu)</option>
+                    <option value="SR3">SR3 (Sep–Des)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Tingkat Deteksi
+                  </label>
+                  <select
+                    value={pKat}
+                    onChange={(e) => setPKat(e.target.value)}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="">Semua Tingkat</option>
+                    <option value="1.">1. Identik 100% (SHA-256)</option>
+                    <option value="2.">2. Foto Sama (Beda Kompresi)</option>
+                    <option value="3.">3. Objek Sama (Crop / Geser / Edit Watermark)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Jenis Foto
+                  </label>
+                  <select
+                    value={pJenis}
+                    onChange={(e) => setPJenis(e.target.value)}
+                    className="text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="">Semua Jenis</option>
+                    <option value="fotobidang">fotobidang</option>
+                    <option value="foto_petak">foto_petak</option>
+                    <option value="fotoplot">fotoplot</option>
+                    <option value="fotoberat">fotoberat</option>
+                  </select>
+                </div>
+
+                <div className="flex-1 min-w-[200px]">
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                    Cari Petugas / Kecamatan / Desa / KK / ID
+                  </label>
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                    <input
+                      type="text"
+                      value={pSearch}
+                      onChange={(e) => setPSearch(e.target.value)}
+                      placeholder="Ketik nama petugas, kecamatan, KK..."
+                      className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl pl-8 pr-3 py-2 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => {
+                    setPScen("");
+                    setPSr("");
+                    setPKat("");
+                    setPJenis("");
+                    setPSearch("");
+                  }}
+                  className="flex items-center gap-1 text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-2 rounded-xl transition cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  Reset
+                </button>
+              </div>
+
+              {/* Top Pagination & Page Size Control */}
+              <div className="flex flex-wrap items-center justify-between gap-3 px-1">
+                <div className="text-xs text-slate-600 dark:text-slate-400">
+                  Menampilkan{" "}
+                  <b className="text-slate-900 dark:text-white">
+                    {filteredPairs.length === 0 ? 0 : (pairPage - 1) * pairPageSize + 1}–
+                    {Math.min(pairPage * pairPageSize, filteredPairs.length)}
+                  </b>{" "}
+                  dari{" "}
+                  <b className="text-blue-600 dark:text-blue-400">
+                    {filteredPairs.length}
+                  </b>{" "}
+                  pasangan temuan
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                    <span>Per halaman:</span>
+                    <select
+                      value={pairPageSize}
+                      onChange={(e) => setPairPageSize(Number(e.target.value))}
+                      className="border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold"
+                    >
+                      <option value={10}>10 pasang</option>
+                      <option value={20}>20 pasang</option>
+                      <option value={50}>50 pasang</option>
+                    </select>
+                  </div>
+
+                  <div className="flex items-center gap-1">
+                    <button
+                      disabled={pairPage <= 1}
+                      onClick={() => changePairPage(pairPage - 1)}
+                      className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <span className="text-xs font-semibold px-2 text-slate-700 dark:text-slate-300">
+                      Hal {pairPage} / {totalPairPages}
+                    </span>
+                    <button
+                      disabled={pairPage >= totalPairPages}
+                      onClick={() => changePairPage(pairPage + 1)}
+                      className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pairs Cards List */}
+              <div className="space-y-4">
+                {paginatedPairs.map((f, idx) => (
+                  <div
+                    key={`${f.assign_1}-${f.assign_2}-${idx}`}
+                    className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden shadow-2xs"
+                  >
+                    <div className="bg-slate-50/80 dark:bg-slate-800/60 px-4 py-2.5 border-b border-slate-200/70 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300">
+                          {f.skenario_kode}: {f.skenario_deskripsi}
+                        </span>
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
+                            String(f.kategori_temuan).startsWith("1.")
+                              ? "bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300"
+                              : String(f.kategori_temuan).startsWith("2.")
+                              ? "bg-amber-50 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300"
+                              : "bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300"
+                          }`}
+                        >
+                          {f.kategori_temuan}
+                        </span>
+                      </div>
+                      <div className="text-xs text-slate-600 dark:text-slate-300">
+                        Kemiripan: <b>{f.skor_kemiripan_pct}%</b> ·{" "}
+                        <span className="text-slate-400">{f.metode_deteksi}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {[1, 2].map((num) => {
+                        const imgUrl = f[`image_url_${num}`];
+                        const sr = f[`sr_${num}`];
+                        const jenis = f[`jenis_${num}`];
+                        const pcl = f[`pcl_${num}`];
+                        const kec = f[`kec_${num}`];
+                        const desa = f[`desa_${num}`];
+                        const kk = f[`namakk_${num}`];
+                        const nks = f[`nks_${num}`];
+                        const berat = f[`berat_${num}`];
+                        const rumpun = f[`rumpun_${num}`];
+                        const res = f[`res_${num}`];
+                        const aid = f[`assign_${num}`];
+                        const fasihUrl = getFasihAssignmentUrl(sr, aid);
+
+                        return (
+                          <div
+                            key={num}
+                            className="flex flex-col sm:flex-row gap-3.5 border border-slate-200/80 dark:border-slate-800 rounded-xl p-3 bg-slate-50/40 dark:bg-slate-800/30"
+                          >
+                            <div
+                              onClick={() =>
+                                setLightbox({
+                                  open: true,
+                                  src: imgUrl,
+                                  caption: `[${sr} - ${jenis}] ${pcl} | ${kec} - ${desa} | KK: ${kk}`,
+                                })
+                              }
+                              className="relative sm:w-44 h-48 bg-slate-900 rounded-lg overflow-hidden shrink-0 cursor-zoom-in group"
+                            >
+                              <span className="absolute top-2 right-2 z-10 bg-blue-600/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
+                                {sr} · {jenis}
+                              </span>
+                              <img
+                                src={imgUrl}
+                                alt={jenis}
+                                loading="lazy"
+                                className="w-full h-full object-contain group-hover:scale-105 transition duration-200"
+                              />
+                            </div>
+                            <div className="text-xs flex flex-col justify-between flex-1 min-w-0">
+                              <div className="space-y-1.5">
+                                <div className="font-bold text-slate-900 dark:text-white text-sm">
+                                  👮 {pcl || "-"}
+                                </div>
+                                <div className="text-slate-700 dark:text-slate-300 font-medium">
+                                  📍 {kec} - {desa}
+                                </div>
+                                <div className="text-slate-700 dark:text-slate-300">
+                                  👤 Sampel/KK: <b>{kk || "-"}</b> (NKS: {nks || "-"})
+                                </div>
+                                <div className="text-slate-800 dark:text-slate-200">
+                                  ⚖️ Berat Bersih: <b>{berat ?? "-"} kg</b> · Rumpun:{" "}
+                                  {rumpun ?? "-"}
+                                </div>
+                                <div className="text-slate-400 text-[11px] font-mono break-all">
+                                  Resolusi: {res} · ID: {aid}
+                                </div>
+                              </div>
+
+                              {aid && (
+                                <div className="pt-2 mt-2 border-t border-slate-200/70 dark:border-slate-700/70 flex items-center justify-end">
+                                  <a
+                                    href={fasihUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition"
+                                  >
+                                    Buka di FASIH-SM
+                                    <ExternalLink className="w-3 h-3" />
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom Full Pagination Bar */}
+              {totalPairPages > 1 && (
+                <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-5 py-3.5 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+                  <div className="text-xs text-slate-500 dark:text-slate-400">
+                    Halaman <b className="text-slate-800 dark:text-slate-200">{pairPage}</b> dari{" "}
+                    <b className="text-slate-800 dark:text-slate-200">{totalPairPages}</b> (
+                    {filteredPairs.length} pasangan)
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button
+                      disabled={pairPage <= 1}
+                      onClick={() => changePairPage(pairPage - 1)}
+                      className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed flex items-center gap-1"
+                    >
+                      <ChevronLeft className="w-3.5 h-3.5" />
+                      Sebelumnya
+                    </button>
+                    {buildPageNumbers(pairPage, totalPairPages).map((p, idx) =>
+                      p === "..." ? (
+                        <span key={`p-ell-${idx}`} className="px-2 text-slate-400 text-xs">
+                          ...
+                        </span>
+                      ) : (
+                        <button
+                          key={p}
+                          onClick={() => changePairPage(p)}
+                          className={`min-w-[32px] h-8 rounded-xl text-xs font-semibold transition cursor-pointer ${
+                            pairPage === p
+                              ? "bg-blue-600 text-white shadow-2xs"
+                              : "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      )
+                    )}
+                    <button
+                      disabled={pairPage >= totalPairPages}
+                      onClick={() => changePairPage(pairPage + 1)}
+                      className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed flex items-center gap-1"
+                    >
+                      Berikutnya
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 4: TARIK DATA FASIH (SCRAPER & SYNC) */}
+          {activeTab === "scraper" && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Kolom Kiri: Generator Script Console */}
+              <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-2xs">
+                <div>
+                  <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                    Langkah 1: Salin Kode Penarik Data FASIH-SM (Ramah Server)
+                  </h2>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    Karena FASIH-SM dilindungi SSO BPS & Cloudflare/F5 WAF, penarikan daftar assignment dan Presigned URL paling aman dijalankan langsung dari Console tab tempat kamu sudah login FASIH-SM.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                      Pilih Periode Subround
+                    </label>
+                    <select
+                      value={selectedSr.code}
+                      onChange={(e) => {
+                        const found = SUBROUND_OPTIONS.find(
+                          (o) => o.code === e.target.value
+                        );
+                        if (found) {
+                          setSelectedSr(found);
+                          setCustomPeriodId(found.surveyPeriodId);
+                        }
+                      }}
+                      className="w-full text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium"
+                    >
+                      {SUBROUND_OPTIONS.map((o) => (
+                        <option key={o.code} value={o.code}>
+                          {o.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                      Survey Period ID (Bisa disesuaikan)
+                    </label>
+                    <input
+                      type="text"
+                      value={customPeriodId}
+                      onChange={(e) => setCustomPeriodId(e.target.value)}
+                      className="w-full text-xs font-mono border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl px-3 py-2.5"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3 pt-1">
+                  <button
+                    onClick={handleCopyScript}
+                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs transition cursor-pointer"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        Kode Berhasil Disalin!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        Salin Kode Console ({selectedSr.code})
+                      </>
+                    )}
+                  </button>
+
+                  <a
+                    href="https://fasih-sm.bps.go.id"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3.5 py-2.5 rounded-xl transition"
+                  >
+                    Buka FASIH-SM
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+
+                <div className="relative">
+                  <pre className="bg-slate-900 text-slate-100 text-[11px] font-mono p-4 rounded-xl overflow-x-auto max-h-72 leading-relaxed border border-slate-800">
+                    {consoleScript}
+                  </pre>
+                </div>
+              </div>
+
+              {/* Kolom Kanan: Upload JSON & Trigger Analisis */}
+              <div className="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-4 shadow-2xs">
+                <div className="space-y-4">
+                  <div>
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                      Langkah 2: Unggah File JSON Hasil Scrape
+                    </h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                      Setelah script di Console selesai berjalan, browser akan mengunduh file{" "}
+                      <code className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
+                        rekap_foto_ubinan_...json
+                      </code>
+                      . Unggah file tersebut di sini untuk disimpan ke Supabase & memicu analisis otomatis via GitHub Actions.
+                    </p>
+                  </div>
+
+                  <label className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition bg-slate-50/50 dark:bg-slate-800/30">
+                    <UploadCloud className="w-10 h-10 text-blue-600 dark:text-blue-400 mb-2" />
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                      Klik untuk memilih file JSON hasil scrape ({selectedSr.code})
+                    </span>
+                    <span className="text-[11px] text-slate-400 mt-1">
+                      Format: rekap_foto_ubinan_{customPeriodId.slice(0, 8)}....json
+                    </span>
+                    <input
+                      type="file"
+                      accept=".json"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                  </label>
+
+                  {uploadStatus.type !== "idle" && (
+                    <div
+                      className={`p-3.5 rounded-xl text-xs font-medium ${
+                        uploadStatus.type === "success"
+                          ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                          : uploadStatus.type === "error"
+                          ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
+                          : "bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800"
+                      }`}
+                    >
+                      {uploadStatus.msg}
+                    </div>
+                  )}
+                </div>
+
+                <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 rounded-xl p-4 text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+                  <div className="font-bold text-slate-800 dark:text-white">
+                    💡 Cara Kerja Update Inkremental Otomatis:
+                  </div>
+                  <p>
+                    1. File JSON hasil scrape dikirim ke tabel{" "}
+                    <code>raw_scrape_uploads</code> di Supabase.
+                  </p>
+                  <p>
+                    2. GitHub Actions otomatis bangun, memeriksa <code>photo_catalog</code>, dan <b>hanya mengunduh foto baru</b> yang belum pernah diproses sebelumnya.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </main>
+
+        {/* Lightbox Modal */}
+        {lightbox.open && (
+          <div
+            onClick={() => setLightbox({ open: false, src: "", caption: "" })}
+            className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xs flex flex-col items-center justify-center p-6"
+          >
+            <button
+              onClick={() => setLightbox({ open: false, src: "", caption: "" })}
+              className="absolute top-5 right-6 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <img
+              src={lightbox.src}
+              alt="Zoom Preview"
+              className="max-w-[92vw] max-h-[82vh] object-contain rounded-lg shadow-2xl bg-black"
+            />
+            <div className="mt-3 bg-black/70 text-white text-xs md:text-sm px-4 py-2 rounded-lg">
+              {lightbox.caption}
             </div>
           </div>
         )}
-      </main>
-
-      {/* Lightbox Modal */}
-      {lightbox.open && (
-        <div
-          onClick={() => setLightbox({ open: false, src: "", caption: "" })}
-          className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xs flex flex-col items-center justify-center p-6"
-        >
-          <button
-            onClick={() => setLightbox({ open: false, src: "", caption: "" })}
-            className="absolute top-5 right-6 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center"
-          >
-            <X className="w-5 h-5" />
-          </button>
-          <img
-            src={lightbox.src}
-            alt="Zoom Preview"
-            className="max-w-[92vw] max-h-[82vh] object-contain rounded-lg shadow-2xl bg-black"
-          />
-          <div className="mt-3 bg-black/70 text-white text-xs md:text-sm px-4 py-2 rounded-lg">
-            {lightbox.caption}
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
-

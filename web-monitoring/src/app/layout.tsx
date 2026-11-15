@@ -5,8 +5,12 @@ export const metadata: Metadata = {
   title: "Quality Assurance Foto Ubinan KSA - BPS Kabupaten Garut",
   description:
     "Sistem Audit & Deteksi Duplikasi Foto Dokumentasi Ubinan FASIH-SM BPS Kabupaten Garut",
+  icons: {
+    icon: "/bps_logo.webp",
+    shortcut: "/bps_logo.webp",
+    apple: "/bps_logo.webp",
+  },
 };
-
 
 export default function RootLayout({
   children,
@@ -21,4 +25,3 @@ export default function RootLayout({
     </html>
   );
 }
-
