@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     "Sistem Audit & Deteksi Duplikasi Foto Dokumentasi Ubinan FASIH-SM BPS Kabupaten Garut",
 };
 
+
 export default function RootLayout({
   children,
 }: {
