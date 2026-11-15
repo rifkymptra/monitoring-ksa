@@ -93,7 +93,39 @@ CREATE TABLE IF NOT EXISTS public.raw_scrape_uploads (
     uploaded_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 5. Buat Storage Bucket Publik `ubinan-photos` untuk menyimpan foto WebP
+-- 5. Tabel Katalog Hash Foto (Incremental Cache agar tidak pernah download/proses ulang foto lama)
+CREATE TABLE IF NOT EXISTS public.photo_catalog (
+    orig_filename TEXT PRIMARY KEY,
+    subround TEXT NOT NULL,
+    assignment_id TEXT NOT NULL,
+    jenis_foto TEXT NOT NULL,
+    pcl TEXT,
+    kecamatan TEXT,
+    desa TEXT,
+    nks TEXT,
+    sls TEXT,
+    subsls TEXT,
+    namakk TEXT,
+    komoditas TEXT,
+    hasil_cacah TEXT,
+    beratbersih TEXT,
+    jmlhrumpun TEXT,
+    status_assignment TEXT,
+    relpath TEXT,
+    width INTEGER,
+    height INTEGER,
+    file_size INTEGER,
+    sha256 TEXT NOT NULL,
+    phash_hex TEXT NOT NULL,
+    dhash_hex TEXT NOT NULL,
+    phash_full_hex TEXT,
+    dhash_full_hex TEXT,
+    phash_variants_hex JSONB DEFAULT '[]'::jsonb,
+    image_url TEXT,
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 6. Buat Storage Bucket Publik `ubinan-photos` untuk menyimpan foto WebP
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('ubinan-photos', 'ubinan-photos', true)
 ON CONFLICT (id) DO UPDATE SET public = true;
@@ -103,6 +135,10 @@ ALTER TABLE public.audit_summary ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.duplicate_clusters ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.duplicate_pairs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.raw_scrape_uploads ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.photo_catalog ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public Access photo_catalog" ON public.photo_catalog;
+CREATE POLICY "Public Access photo_catalog" ON public.photo_catalog FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Public Read audit_summary" ON public.audit_summary;
 CREATE POLICY "Public Read audit_summary" ON public.audit_summary FOR SELECT USING (true);

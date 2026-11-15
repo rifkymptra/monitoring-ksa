@@ -1352,7 +1352,15 @@ def main():
 
     os.makedirs("hasil_analisis", exist_ok=True)
     df_index = pd.DataFrame(
-        [{k: v for k, v in p.items() if k not in ("phash", "dhash", "phash_variants", "phash_full", "dhash_full")} for p in valid_photos]
+        [
+            {
+                **{k: v for k, v in p.items() if k not in ("phash", "dhash", "phash_variants", "phash_full", "dhash_full")},
+                "phash_full_hex": f"{p['phash_full']:016x}",
+                "dhash_full_hex": f"{p['dhash_full']:016x}",
+                "phash_variants_hex": json.dumps([f"{v:016x}" for v in p["phash_variants"]]),
+            }
+            for p in valid_photos
+        ]
     )
     df_index.to_csv("hasil_analisis/tabel_indeks_foto.csv", index=False)
     pd.DataFrame(completeness_records).to_csv("hasil_analisis/laporan_kelengkapan_foto.csv", index=False)
