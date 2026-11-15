@@ -1,7 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { getSessionFromRequest } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
+  const session = getSessionFromRequest(req);
+  if (!session || session.role !== "admin") {
+    return NextResponse.json(
+      { error: "Akses ditolak. Fitur ini hanya dapat dijalankan oleh Administrator." },
+      { status: 403 }
+    );
+  }
+
   try {
     const body = await req.json();
     const { subround, surveyPeriodId, assignments } = body;
@@ -38,7 +47,7 @@ export async function POST(req: NextRequest) {
     // 2. Opsional: Trigger GitHub Actions workflow_dispatch jika GITHUB_TOKEN & GITHUB_REPO diset di Vercel
     let githubTriggered = false;
     const ghToken = process.env.GITHUB_PAT_TOKEN;
-    const ghRepo = process.env.GITHUB_REPO; // contoh: "username/ksa-ubinan-garut"
+    const ghRepo = process.env.GITHUB_REPO;
 
     if (ghToken && ghRepo) {
       const ghRes = await fetch(
@@ -78,4 +87,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-

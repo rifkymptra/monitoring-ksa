@@ -1,9 +1,18 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { getSessionFromRequest } from "@/lib/auth";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const session = getSessionFromRequest(req);
+  if (!session) {
+    return NextResponse.json(
+      { error: "Unauthorized. Silakan login terlebih dahulu." },
+      { status: 401 }
+    );
+  }
+
   // 1. Jika Supabase sudah dikonfigurasi, ambil langsung dari Supabase Database
   if (isSupabaseConfigured && supabase) {
     try {
@@ -23,7 +32,8 @@ export async function GET() {
             total_clusters: clusters.length,
             multi_photo_clusters: clusters.filter((c: any) => c.jumlah_foto >= 3).length,
             cross_pcl_clusters: clusters.filter((c: any) => c.jumlah_petugas >= 2).length,
-            exact_pairs: pairs?.filter((p: any) => String(p.kategori_temuan).startsWith("1.")).length || 0,
+            exact_pairs:
+              pairs?.filter((p: any) => String(p.kategori_temuan).startsWith("1.")).length || 0,
           },
           clusters,
           pairs: pairs || [],
@@ -60,4 +70,3 @@ export async function GET() {
     pairs: [],
   });
 }
-

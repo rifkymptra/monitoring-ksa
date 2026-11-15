@@ -125,17 +125,41 @@ CREATE TABLE IF NOT EXISTS public.photo_catalog (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 6. Buat Storage Bucket Publik `ubinan-photos` untuk menyimpan foto WebP
+-- 6. Tabel Akun Pengguna & Hak Akses (Role: 'admin' atau 'user')
+CREATE TABLE IF NOT EXISTS public.app_users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'user' CHECK (role IN ('admin', 'user')),
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Seed 2 Akun Default:
+-- 1) username: admin      | password default: ksa3205admin (Role: admin - akses penuh termasuk Tarik Data FASIH & Kelola User)
+-- 2) username: pemeriksa  | password default: ksa3205      (Role: user  - akses seluruh hasil pemeriksaan kecuali Tarik Data FASIH)
+INSERT INTO public.app_users (username, password_hash, full_name, role, is_active)
+VALUES
+    ('admin', '48f75826a8ba74f63cb666adcde90a86faabaa24b96cae86dda1f87665551e99', 'Administrator KSA BPS Garut', 'admin', true),
+    ('pemeriksa', '66854a8a0f68c9d90650127eeb9bc9137630985956e70b257eb7329f9c15d514', 'Tim Pemeriksa KSA / Ubinan', 'user', true)
+ON CONFLICT (username) DO NOTHING;
+
+-- 7. Buat Storage Bucket Publik `ubinan-photos` untuk menyimpan foto WebP
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('ubinan-photos', 'ubinan-photos', true)
 ON CONFLICT (id) DO UPDATE SET public = true;
 
--- 6. Aktifkan Row Level Security (RLS) dengan Policy Read Publik & Write Anon/Service
+-- 8. Aktifkan Row Level Security (RLS)
 ALTER TABLE public.audit_summary ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.duplicate_clusters ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.duplicate_pairs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.raw_scrape_uploads ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.photo_catalog ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.app_users ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public Access app_users" ON public.app_users;
+CREATE POLICY "Public Access app_users" ON public.app_users FOR ALL USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Public Access photo_catalog" ON public.photo_catalog;
 CREATE POLICY "Public Access photo_catalog" ON public.photo_catalog FOR ALL USING (true) WITH CHECK (true);
@@ -161,4 +185,3 @@ CREATE POLICY "Public Access raw_scrape_uploads" ON public.raw_scrape_uploads FO
 DROP POLICY IF EXISTS "Public Access ubinan-photos" ON storage.objects;
 CREATE POLICY "Public Access ubinan-photos" ON storage.objects
 FOR ALL USING (bucket_id = 'ubinan-photos') WITH CHECK (bucket_id = 'ubinan-photos');
-

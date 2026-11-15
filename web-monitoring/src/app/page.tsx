@@ -26,6 +26,18 @@ import {
   MapPin,
   Moon,
   Sun,
+  Lock,
+  LogOut,
+  LogIn,
+  Eye,
+  EyeOff,
+  Cpu,
+  ScanSearch,
+  Fingerprint,
+  UserPlus,
+  Trash2,
+  KeyRound,
+  CheckCircle2,
 } from "lucide-react";
 import {
   SUBROUND_OPTIONS,
@@ -33,6 +45,12 @@ import {
 } from "@/lib/scraperTemplate";
 
 type TabType = "exec" | "clusters" | "pairs" | "scraper";
+
+interface AuthUser {
+  username: string;
+  fullName: string;
+  role: "admin" | "user";
+}
 
 const PERIOD_MAP: Record<string, string> = {
   SR3: "6f581089-c787-4c0f-a307-0564f1e4e293",
@@ -61,9 +79,19 @@ function buildPageNumbers(current: number, total: number): (number | "...")[] {
 }
 
 export default function DashboardPage() {
+  // Auth & Theme States
+  const [authChecking, setAuthChecking] = useState(true);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
+
   const [activeTab, setActiveTab] = useState<TabType>("exec");
   const [darkMode, setDarkMode] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState<string>("loading");
   const [summary, setSummary] = useState<any>({
     total_photos: 0,
@@ -102,7 +130,7 @@ export default function DashboardPage() {
   const [pairPage, setPairPage] = useState(1);
   const [pairPageSize, setPairPageSize] = useState(10);
 
-  // Scraper Tab States
+  // Scraper & Admin User Management States
   const [selectedSr, setSelectedSr] = useState(SUBROUND_OPTIONS[0]);
   const [customPeriodId, setCustomPeriodId] = useState(
     SUBROUND_OPTIONS[0].surveyPeriodId
@@ -112,6 +140,16 @@ export default function DashboardPage() {
     type: "idle" | "loading" | "success" | "error";
     msg: string;
   }>({ type: "idle", msg: "" });
+
+  const [userList, setUserList] = useState<any[]>([]);
+  const [newUsername, setNewUsername] = useState("");
+  const [newFullName, setNewFullName] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newRole, setNewRole] = useState<"user" | "admin">("user");
+  const [userMsg, setUserMsg] = useState<{ type: "idle" | "ok" | "err"; text: string }>({
+    type: "idle",
+    text: "",
+  });
 
   // Lightbox Modal
   const [lightbox, setLightbox] = useState<{
@@ -138,17 +176,129 @@ export default function DashboardPage() {
     });
   };
 
+  // Check active session on mount
   useEffect(() => {
-    fetch("/api/audit-data")
+    fetch("/api/auth/me")
       .then((r) => r.json())
+      .then((res) => {
+        if (res.authenticated && res.user) {
+          setCurrentUser(res.user);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setAuthChecking(false));
+  }, []);
+
+  // Fetch audit data only when authenticated
+  useEffect(() => {
+    if (!currentUser) return;
+    setLoading(true);
+    fetch("/api/audit-data")
+      .then((r) => {
+        if (!r.ok) throw new Error("Unauthorized");
+        return r.json();
+      })
       .then((res) => {
         setDataSource(res.source || "local_json");
         if (res.summary) setSummary(res.summary);
         if (Array.isArray(res.clusters)) setClusters(res.clusters);
         if (Array.isArray(res.pairs)) setPairs(res.pairs);
       })
+      .catch(() => {})
       .finally(() => setLoading(false));
-  }, []);
+
+    if (currentUser.role === "admin") {
+      fetchUsersList();
+    }
+  }, [currentUser]);
+
+  const fetchUsersList = () => {
+    fetch("/api/users")
+      .then((r) => r.json())
+      .then((res) => {
+        if (Array.isArray(res.users)) setUserList(res.users);
+      })
+      .catch(() => {});
+  };
+
+  const handleLoginSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError("");
+    setLoginLoading(true);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: loginUsername,
+          password: loginPassword,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setLoginError(data.error || "Gagal masuk. Periksa kembali akun Anda.");
+        return;
+      }
+      setCurrentUser(data.user);
+      setShowLoginModal(false);
+      setLoginUsername("");
+      setLoginPassword("");
+      setActiveTab("exec");
+    } catch {
+      setLoginError("Terjadi gangguan jaringan saat menghubungi server.");
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
+    setCurrentUser(null);
+    setClusters([]);
+    setPairs([]);
+    setActiveTab("exec");
+  };
+
+  const handleSaveUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setUserMsg({ type: "idle", text: "" });
+    try {
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: newUsername,
+          fullName: newFullName,
+          password: newPassword,
+          role: newRole,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal menyimpan user");
+      setUserMsg({ type: "ok", text: data.message });
+      setNewUsername("");
+      setNewFullName("");
+      setNewPassword("");
+      fetchUsersList();
+    } catch (err: any) {
+      setUserMsg({ type: "err", text: err?.message || "Gagal menyimpan user" });
+    }
+  };
+
+  const handleDeleteUser = async (uname: string) => {
+    if (!confirm(`Hapus akun '${uname}'?`)) return;
+    try {
+      const res = await fetch(`/api/users?username=${encodeURIComponent(uname)}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal menghapus user");
+      setUserMsg({ type: "ok", text: data.message });
+      fetchUsersList();
+    } catch (err: any) {
+      setUserMsg({ type: "err", text: err?.message || "Gagal menghapus user" });
+    }
+  };
 
   // Reset pagination when filters change
   useEffect(() => {
@@ -464,6 +614,328 @@ export default function DashboardPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // ============================================================================
+  // RENDER 1: PUBLIC LANDING PAGE (SAAT BELUM LOGIN)
+  // ============================================================================
+  if (!currentUser) {
+    return (
+      <div className={darkMode ? "dark" : ""}>
+        <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col justify-between relative overflow-hidden transition-colors duration-200 selection:bg-blue-600 selection:text-white">
+          {/* Subtle Ambient Background Glow */}
+          <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[750px] h-[400px] bg-gradient-to-tr from-blue-500/10 via-indigo-500/10 to-emerald-500/10 blur-3xl rounded-full" />
+
+          {/* Public Topbar */}
+          <header className="relative z-20 border-b border-slate-200/70 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-1.5 flex items-center justify-center shadow-2xs">
+                  <img
+                    src="/bps_logo.webp"
+                    alt="Logo BPS"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div>
+                  <div className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">
+                    BPS Kabupaten Garut
+                  </div>
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                    Quality Assurance Survei KSA & Ubinan
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <button
+                  onClick={toggleDarkMode}
+                  title={darkMode ? "Mode Terang" : "Mode Gelap"}
+                  className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition cursor-pointer"
+                >
+                  {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </button>
+
+                <button
+                  onClick={() => setShowLoginModal(true)}
+                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-sm transition cursor-pointer"
+                >
+                  <LogIn className="w-3.5 h-3.5" />
+                  Masuk Sistem
+                </button>
+              </div>
+            </div>
+          </header>
+
+          {/* Hero & Introduction Content */}
+          <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-14">
+            {/* Hero Section */}
+            <div className="text-center max-w-3xl mx-auto space-y-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 border border-blue-200/70 dark:border-blue-800/80">
+                <Sparkles className="w-3.5 h-3.5" />
+                Sistem Kendali Mutu Dokumentasi FASIH-SM · Kabupaten Garut
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                Audit & Deteksi Duplikasi Foto{" "}
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                  Ubinan Padi
+                </span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                Platform cerdas berbasis <b>Computer Vision</b> untuk memverifikasi keaslian foto dokumentasi lapangan Survei Ubinan (Subround 1, 2, dan 3). Mendeteksi secara otomatis indikasi penggunaan foto berulang lintas petugas, lintas subround, maupun lintas sampel secara presisi.
+              </p>
+
+              <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={() => setShowLoginModal(true)}
+                  disabled={authChecking}
+                  className="inline-flex items-center gap-2.5 bg-slate-900 dark:bg-blue-600 hover:bg-slate-800 dark:hover:bg-blue-500 text-white text-xs sm:text-sm font-bold px-6 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+                >
+                  <Lock className="w-4 h-4" />
+                  {authChecking ? "Memeriksa Sesi..." : "Masuk ke Ruang Pemeriksaan"}
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-4 pt-2 text-[11px] text-slate-400 dark:text-slate-500">
+                <span className="flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  Bebas Bias Watermark FASIH
+                </span>
+                <span className="flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  Sinkronisasi Inkremental Otomatis
+                </span>
+                <span className="flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  Akses Terproteksi Hak Akses (Role-Based)
+                </span>
+              </div>
+            </div>
+
+            {/* 3 Core Technology Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-2xs space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                  <ScanSearch className="w-5 h-5" />
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                  1. Content-Area Cropping
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Memotong otomatis 26% area bawah dan 5% area atas foto (lokasi banner waktu, koordinat GPS, dan logo FASIH) sehingga pengujian murni menilai objek sawah, petak, sketsa bidang, serta timbangan.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-2xs space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                  <Fingerprint className="w-5 h-5" />
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                  2. SHA-256 & Multi-Rotation pHash
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Mengombinasikan sidik jari kriptografi <b>SHA-256</b> untuk menangkap file identik 100% dan <b>Perceptual Hash (pHash/dHash)</b> 8 orientasi untuk mendeteksi foto yang dikompres ulang via WhatsApp atau diputar.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-2xs space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                  <Cpu className="w-5 h-5" />
+                </div>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                  3. OpenCV ORB + RANSAC Homography
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Mencocokkan ribuan titik fitur geometris (keypoints) dengan verifikasi matriks homografi RANSAC untuk mengenali foto yang diambil beruntun di titik yang sama, di-crop, atau diedit teks tanggalnya.
+                </p>
+              </div>
+            </div>
+
+            {/* 6 Scenarios Overview Card */}
+            <div className="bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xs">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-5 border-b border-slate-100 dark:border-slate-800">
+                <div>
+                  <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                    Cakupan 6 Skenario Pemeriksaan Dokumentasi
+                  </h2>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    Seluruh foto dari 4 variabel kuesioner (<code>fotobidang</code>, <code>foto_petak</code>, <code>fotoplot</code>, <code>fotoberat</code>) diuji silang secara menyeluruh.
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
+                  <ShieldCheck className="w-4 h-4" />
+                  Standar Kendali Mutu BPS
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-5 text-xs">
+                {[
+                  {
+                    code: "Skenario 1",
+                    title: "Antar Petugas (Subround Sama)",
+                    desc: "Mendeteksi satu foto yang digunakan bersama oleh dua atau lebih petugas berbeda pada periode subround yang sama.",
+                  },
+                  {
+                    code: "Skenario 2",
+                    title: "Petugas Sama (Lintas Subround)",
+                    desc: "Mendeteksi petugas yang menggunakan kembali foto dari subround sebelumnya (misal foto SR1/SR2 diunggah lagi di SR3).",
+                  },
+                  {
+                    code: "Skenario 3",
+                    title: "Antar Petugas (Lintas Subround)",
+                    desc: "Mendeteksi foto milik suatu petugas di subround lama yang dipakai oleh petugas lain pada subround berikutnya.",
+                  },
+                  {
+                    code: "Skenario 4",
+                    title: "Petugas Sama (Antar Sampel Berbeda)",
+                    desc: "Mendeteksi petugas yang memakai foto yang sama untuk dua rumah tangga/sampel NKS berbeda di subround yang sama.",
+                  },
+                  {
+                    code: "Skenario 5A",
+                    title: "Lintas Jenis Foto (1 Sampel Sama)",
+                    desc: "Mendeteksi salah unggah atau duplikasi antar blok isian dalam satu sampel (misal foto_petak diisi sama dengan fotoplot).",
+                  },
+                  {
+                    code: "Skenario 5B",
+                    title: "Lintas Jenis Foto (Beda Sampel)",
+                    desc: "Mendeteksi foto dari variabel tertentu yang digunakan ulang sebagai variabel lain pada sampel ubinan berbeda.",
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.code}
+                    className="p-4 rounded-xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800 space-y-1.5"
+                  >
+                    <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-100/80 dark:bg-blue-950 text-blue-700 dark:text-blue-300">
+                      {item.code}
+                    </span>
+                    <div className="font-bold text-slate-900 dark:text-white">
+                      {item.title}
+                    </div>
+                    <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </main>
+
+          {/* Footer */}
+          <footer className="relative z-10 border-t border-slate-200/70 dark:border-slate-800/80 py-5 text-center text-xs text-slate-400 dark:text-slate-500">
+            © {new Date().getFullYear()} Badan Pusat Statistik Kabupaten Garut · Sistem Monitoring & Audit Dokumentasi KSA/Ubinan
+          </footer>
+
+          {/* FLOATING LOGIN MODAL */}
+          {showLoginModal && (
+            <div
+              onClick={() => setShowLoginModal(false)}
+              className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4"
+            >
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+              >
+                <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-1.5 flex items-center justify-center">
+                      <img
+                        src="/bps_logo.webp"
+                        alt="Logo BPS"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                        Masuk ke Dashboard Audit
+                      </h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        Gunakan akun Pemeriksa atau Administrator BPS
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowLoginModal(false)}
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <form onSubmit={handleLoginSubmit} className="p-6 space-y-4">
+                  {loginError && (
+                    <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 text-xs font-medium text-rose-700 dark:text-rose-300">
+                      {loginError}
+                    </div>
+                  )}
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      autoFocus
+                      value={loginUsername}
+                      onChange={(e) => setLoginUsername(e.target.value)}
+                      placeholder="Contoh: pemeriksa atau admin"
+                      className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                      Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        required
+                        value={loginPassword}
+                        onChange={(e) => setLoginPassword(e.target.value)}
+                        placeholder="Masukkan password..."
+                        className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-xl pl-3.5 pr-10 py-2.5 focus:outline-none focus:border-blue-500"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((s) => !s)}
+                        className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="w-4 h-4" />
+                        ) : (
+                          <Eye className="w-4 h-4" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loginLoading}
+                    className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-xs font-bold py-3 rounded-xl shadow-sm transition cursor-pointer"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    {loginLoading ? "Memverifikasi Akun..." : "Masuk Sekarang"}
+                  </button>
+
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400 dark:text-slate-500 flex items-center justify-between">
+                    <span>🔒 Koneksi Terenkripsi (HTTP-Only Session)</span>
+                    <span>BPS Kab. Garut (3205)</span>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // ============================================================================
+  // RENDER 2: AUTHENTICATED DASHBOARD (ADMIN & USER)
+  // ============================================================================
   return (
     <div className={darkMode ? "dark" : ""}>
       <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 selection:bg-blue-600 selection:text-white">
@@ -497,7 +969,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 max-w-full">
+            <div className="flex flex-wrap items-center gap-2 max-w-full">
               <nav className="flex items-center gap-1 bg-slate-100/90 dark:bg-slate-800/90 p-1 rounded-xl border border-slate-200/60 dark:border-slate-700/70 overflow-x-auto">
                 <button
                   onClick={() => setActiveTab("exec")}
@@ -538,27 +1010,57 @@ export default function DashboardPage() {
                     {pairs.length}
                   </span>
                 </button>
-                <button
-                  onClick={() => setActiveTab("scraper")}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap cursor-pointer ${
-                    activeTab === "scraper"
-                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs"
-                      : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
-                  }`}
-                >
-                  <Terminal className="w-3.5 h-3.5" />
-                  Tarik Data FASIH
-                </button>
+
+                {/* Tab Tarik Data FASIH & Admin HANYA muncul untuk Role Admin */}
+                {currentUser.role === "admin" && (
+                  <button
+                    onClick={() => setActiveTab("scraper")}
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap cursor-pointer ${
+                      activeTab === "scraper"
+                        ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs"
+                        : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    <Terminal className="w-3.5 h-3.5" />
+                    Tarik Data FASIH
+                  </button>
+                )}
               </nav>
 
-              {/* Dark Mode Toggle Button */}
-              <button
-                onClick={toggleDarkMode}
-                title={darkMode ? "Beralih ke Mode Terang" : "Beralih ke Mode Gelap"}
-                className="p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition cursor-pointer shrink-0"
-              >
-                {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
+              {/* User Role Badge + Dark Mode + Logout */}
+              <div className="flex items-center gap-1.5">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200/70 dark:border-slate-700 text-xs">
+                  <span className="font-semibold text-slate-700 dark:text-slate-200">
+                    {currentUser.username}
+                  </span>
+                  <span
+                    className={`px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${
+                      currentUser.role === "admin"
+                        ? "bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300"
+                        : "bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300"
+                    }`}
+                  >
+                    {currentUser.role}
+                  </span>
+                </div>
+
+                <button
+                  onClick={toggleDarkMode}
+                  title={darkMode ? "Beralih ke Mode Terang" : "Beralih ke Mode Gelap"}
+                  className="p-2 rounded-xl border border-slate-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition cursor-pointer shrink-0"
+                >
+                  {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </button>
+
+                <button
+                  onClick={handleLogout}
+                  title="Keluar / Logout"
+                  className="flex items-center gap-1 px-2.5 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 bg-white dark:bg-slate-800 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-xs font-semibold transition cursor-pointer shrink-0"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span className="hidden md:inline">Keluar</span>
+                </button>
+              </div>
             </div>
           </div>
         </header>
@@ -714,7 +1216,6 @@ export default function DashboardPage() {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2.5">
-                    {/* Quick Filter Chips */}
                     <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-medium">
                       <button
                         onClick={() => setPclFilterType("all")}
@@ -748,7 +1249,6 @@ export default function DashboardPage() {
                       </button>
                     </div>
 
-                    {/* Search Input */}
                     <div className="relative min-w-[210px]">
                       <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
                       <input
@@ -760,7 +1260,6 @@ export default function DashboardPage() {
                       />
                     </div>
 
-                    {/* Export CSV */}
                     <button
                       onClick={handleDownloadOfficerCsv}
                       className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 px-3 py-2 rounded-xl transition cursor-pointer"
@@ -789,7 +1288,9 @@ export default function DashboardPage() {
                       {paginatedOfficers.length === 0 ? (
                         <tr>
                           <td colSpan={8} className="py-8 text-center text-slate-400">
-                            Tidak ada data petugas yang cocok dengan pencarian.
+                            {loading
+                              ? "Memuat data pemeriksaan..."
+                              : "Tidak ada data petugas yang cocok dengan pencarian."}
                           </td>
                         </tr>
                       ) : (
@@ -896,7 +1397,6 @@ export default function DashboardPage() {
                   </table>
                 </div>
 
-                {/* Officer Table Pagination Footer */}
                 {filteredOfficers.length > pclPageSize && (
                   <div className="px-5 py-3.5 bg-slate-50/60 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
                     <div>
@@ -952,7 +1452,6 @@ export default function DashboardPage() {
 
               {/* Skenario & Sebaran Kecamatan Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                {/* Matriks Skenario */}
                 <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xs">
                   <div className="flex items-center justify-between mb-1">
                     <h2 className="text-sm font-bold text-slate-900 dark:text-white">
@@ -1014,7 +1513,6 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                {/* Top Kecamatan */}
                 <div className="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xs">
                   <div className="flex items-center justify-between mb-1">
                     <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
@@ -1079,35 +1577,12 @@ export default function DashboardPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Metodologi Banner */}
-              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 flex flex-col sm:flex-row items-start gap-4 shadow-2xs">
-                <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 shrink-0">
-                  <ShieldCheck className="w-6 h-6" />
-                </div>
-                <div className="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 leading-relaxed">
-                  <div className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-1.5">
-                    Metodologi Deteksi 3 Lapis (Bebas Bias Watermark FASIH)
-                    <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                  </div>
-                  <p>
-                    <b>1. Content-Area Cropping</b>: Memotong otomatis 26% area bawah dan 5% area atas foto (tempat template banner waktu, koordinat GPS, serta logo FASIH berada) sehingga perbandingan murni menguji kesamaan visual objek sawah, petak, sketsa bidang, maupun timbangan.
-                  </p>
-                  <p>
-                    <b>2. SHA-256 & Multi-Orientation Perceptual Hashing (pHash/dHash)</b>: Menangkap file yang sama persis 100% maupun foto yang telah mengalami kompresi ulang (mis. dikirim lewat WhatsApp) atau dirotasi 90°/180°/270°.
-                  </p>
-                  <p>
-                    <b>3. OpenCV ORB Keypoints + RANSAC Geometric Verification</b>: Memverifikasi kesamaan titik fitur geometris untuk mendeteksi foto yang diambil beruntun di objek yang sama, di-crop sebagian, atau diganti teks watermark-nya.
-                  </p>
-                </div>
-              </div>
             </div>
           )}
 
           {/* TAB 2: KELOMPOK FOTO SAMA (MULTI-FOTO CLUSTERS + PAGINATION) */}
           {activeTab === "clusters" && (
             <div className="space-y-4">
-              {/* Filter Bar */}
               <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 shadow-2xs flex flex-wrap items-end gap-3">
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
@@ -1222,7 +1697,6 @@ export default function DashboardPage() {
                 </button>
               </div>
 
-              {/* Top Pagination & Page Size Control */}
               <div className="flex flex-wrap items-center justify-between gap-3 px-1">
                 <div className="text-xs text-slate-600 dark:text-slate-400">
                   Menampilkan{" "}
@@ -1276,7 +1750,6 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Cluster Cards List */}
               <div className="space-y-4">
                 {paginatedClusters.map((c) => (
                   <div
@@ -1363,7 +1836,6 @@ export default function DashboardPage() {
                               </div>
                             </div>
 
-                            {/* Assignment ID + Direct FASIH Link Footer */}
                             <div className="px-3 py-2 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
                               <div
                                 title={m.assignmentId}
@@ -1391,7 +1863,6 @@ export default function DashboardPage() {
                 ))}
               </div>
 
-              {/* Bottom Full Pagination Bar */}
               {totalClusterPages > 1 && (
                 <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-5 py-3.5 shadow-2xs flex flex-wrap items-center justify-between gap-3">
                   <div className="text-xs text-slate-500 dark:text-slate-400">
@@ -1444,7 +1915,6 @@ export default function DashboardPage() {
           {/* TAB 3: PERBANDINGAN PASANGAN (2 FOTO + PAGINATION) */}
           {activeTab === "pairs" && (
             <div className="space-y-4">
-              {/* Filter Bar */}
               <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 shadow-2xs flex flex-wrap items-end gap-3">
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
@@ -1545,7 +2015,6 @@ export default function DashboardPage() {
                 </button>
               </div>
 
-              {/* Top Pagination & Page Size Control */}
               <div className="flex flex-wrap items-center justify-between gap-3 px-1">
                 <div className="text-xs text-slate-600 dark:text-slate-400">
                   Menampilkan{" "}
@@ -1596,7 +2065,6 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Pairs Cards List */}
               <div className="space-y-4">
                 {paginatedPairs.map((f, idx) => (
                   <div
@@ -1709,7 +2177,6 @@ export default function DashboardPage() {
                 ))}
               </div>
 
-              {/* Bottom Full Pagination Bar */}
               {totalPairPages > 1 && (
                 <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl px-5 py-3.5 shadow-2xs flex flex-wrap items-center justify-between gap-3">
                   <div className="text-xs text-slate-500 dark:text-slate-400">
@@ -1759,153 +2226,307 @@ export default function DashboardPage() {
             </div>
           )}
 
-          {/* TAB 4: TARIK DATA FASIH (SCRAPER & SYNC) */}
-          {activeTab === "scraper" && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Kolom Kiri: Generator Script Console */}
-              <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-2xs">
-                <div>
-                  <h2 className="text-base font-bold text-slate-900 dark:text-white">
-                    Langkah 1: Salin Kode Penarik Data FASIH-SM (Ramah Server)
-                  </h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    Karena FASIH-SM dilindungi SSO BPS & Cloudflare/F5 WAF, penarikan daftar assignment dan Presigned URL paling aman dijalankan langsung dari Console tab tempat kamu sudah login FASIH-SM.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Pilih Periode Subround
-                    </label>
-                    <select
-                      value={selectedSr.code}
-                      onChange={(e) => {
-                        const found = SUBROUND_OPTIONS.find(
-                          (o) => o.code === e.target.value
-                        );
-                        if (found) {
-                          setSelectedSr(found);
-                          setCustomPeriodId(found.surveyPeriodId);
-                        }
-                      }}
-                      className="w-full text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium"
-                    >
-                      {SUBROUND_OPTIONS.map((o) => (
-                        <option key={o.code} value={o.code}>
-                          {o.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Survey Period ID (Bisa disesuaikan)
-                    </label>
-                    <input
-                      type="text"
-                      value={customPeriodId}
-                      onChange={(e) => setCustomPeriodId(e.target.value)}
-                      className="w-full text-xs font-mono border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl px-3 py-2.5"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-3 pt-1">
-                  <button
-                    onClick={handleCopyScript}
-                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs transition cursor-pointer"
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="w-4 h-4" />
-                        Kode Berhasil Disalin!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        Salin Kode Console ({selectedSr.code})
-                      </>
-                    )}
-                  </button>
-
-                  <a
-                    href="https://fasih-sm.bps.go.id"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3.5 py-2.5 rounded-xl transition"
-                  >
-                    Buka FASIH-SM
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-                <div className="relative">
-                  <pre className="bg-slate-900 text-slate-100 text-[11px] font-mono p-4 rounded-xl overflow-x-auto max-h-72 leading-relaxed border border-slate-800">
-                    {consoleScript}
-                  </pre>
-                </div>
-              </div>
-
-              {/* Kolom Kanan: Upload JSON & Trigger Analisis */}
-              <div className="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-4 shadow-2xs">
-                <div className="space-y-4">
+          {/* TAB 4: TARIK DATA FASIH & MANAJEMEN AKUN (KHUSUS ADMIN) */}
+          {activeTab === "scraper" && currentUser.role === "admin" && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                {/* Kolom Kiri: Generator Script Console */}
+                <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-2xs">
                   <div>
                     <h2 className="text-base font-bold text-slate-900 dark:text-white">
-                      Langkah 2: Unggah File JSON Hasil Scrape
+                      Langkah 1: Salin Kode Penarik Data FASIH-SM (Ramah Server)
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                      Setelah script di Console selesai berjalan, browser akan mengunduh file{" "}
-                      <code className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
-                        rekap_foto_ubinan_...json
-                      </code>
-                      . Unggah file tersebut di sini untuk disimpan ke Supabase & memicu analisis otomatis via GitHub Actions.
+                      Karena FASIH-SM dilindungi SSO BPS & Cloudflare/F5 WAF, penarikan daftar assignment dan Presigned URL paling aman dijalankan langsung dari Console tab tempat kamu sudah login FASIH-SM.
                     </p>
                   </div>
 
-                  <label className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition bg-slate-50/50 dark:bg-slate-800/30">
-                    <UploadCloud className="w-10 h-10 text-blue-600 dark:text-blue-400 mb-2" />
-                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
-                      Klik untuk memilih file JSON hasil scrape ({selectedSr.code})
-                    </span>
-                    <span className="text-[11px] text-slate-400 mt-1">
-                      Format: rekap_foto_ubinan_{customPeriodId.slice(0, 8)}....json
-                    </span>
-                    <input
-                      type="file"
-                      accept=".json"
-                      onChange={handleFileUpload}
-                      className="hidden"
-                    />
-                  </label>
-
-                  {uploadStatus.type !== "idle" && (
-                    <div
-                      className={`p-3.5 rounded-xl text-xs font-medium ${
-                        uploadStatus.type === "success"
-                          ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
-                          : uploadStatus.type === "error"
-                          ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
-                          : "bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800"
-                      }`}
-                    >
-                      {uploadStatus.msg}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                        Pilih Periode Subround
+                      </label>
+                      <select
+                        value={selectedSr.code}
+                        onChange={(e) => {
+                          const found = SUBROUND_OPTIONS.find(
+                            (o) => o.code === e.target.value
+                          );
+                          if (found) {
+                            setSelectedSr(found);
+                            setCustomPeriodId(found.surveyPeriodId);
+                          }
+                        }}
+                        className="w-full text-xs border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium"
+                      >
+                        {SUBROUND_OPTIONS.map((o) => (
+                          <option key={o.code} value={o.code}>
+                            {o.label}
+                          </option>
+                        ))}
+                      </select>
                     </div>
-                  )}
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                        Survey Period ID (Bisa disesuaikan)
+                      </label>
+                      <input
+                        type="text"
+                        value={customPeriodId}
+                        onChange={(e) => setCustomPeriodId(e.target.value)}
+                        className="w-full text-xs font-mono border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl px-3 py-2.5"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-1">
+                    <button
+                      onClick={handleCopyScript}
+                      className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs transition cursor-pointer"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          Kode Berhasil Disalin!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          Salin Kode Console ({selectedSr.code})
+                        </>
+                      )}
+                    </button>
+
+                    <a
+                      href="https://fasih-sm.bps.go.id"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3.5 py-2.5 rounded-xl transition"
+                    >
+                      Buka FASIH-SM
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+
+                  <div className="relative">
+                    <pre className="bg-slate-900 text-slate-100 text-[11px] font-mono p-4 rounded-xl overflow-x-auto max-h-72 leading-relaxed border border-slate-800">
+                      {consoleScript}
+                    </pre>
+                  </div>
                 </div>
 
-                <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 rounded-xl p-4 text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
-                  <div className="font-bold text-slate-800 dark:text-white">
-                    💡 Cara Kerja Update Inkremental Otomatis:
+                {/* Kolom Kanan: Upload JSON & Trigger Analisis */}
+                <div className="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-4 shadow-2xs">
+                  <div className="space-y-4">
+                    <div>
+                      <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                        Langkah 2: Unggah File JSON Hasil Scrape
+                      </h2>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                        Setelah script di Console selesai berjalan, browser akan mengunduh file{" "}
+                        <code className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
+                          rekap_foto_ubinan_...json
+                        </code>
+                        . Unggah file tersebut di sini untuk disimpan ke Supabase & memicu analisis otomatis via GitHub Actions.
+                      </p>
+                    </div>
+
+                    <label className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition bg-slate-50/50 dark:bg-slate-800/30">
+                      <UploadCloud className="w-10 h-10 text-blue-600 dark:text-blue-400 mb-2" />
+                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                        Klik untuk memilih file JSON hasil scrape ({selectedSr.code})
+                      </span>
+                      <span className="text-[11px] text-slate-400 mt-1">
+                        Format: rekap_foto_ubinan_{customPeriodId.slice(0, 8)}....json
+                      </span>
+                      <input
+                        type="file"
+                        accept=".json"
+                        onChange={handleFileUpload}
+                        className="hidden"
+                      />
+                    </label>
+
+                    {uploadStatus.type !== "idle" && (
+                      <div
+                        className={`p-3.5 rounded-xl text-xs font-medium ${
+                          uploadStatus.type === "success"
+                            ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                            : uploadStatus.type === "error"
+                            ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
+                            : "bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800"
+                        }`}
+                      >
+                        {uploadStatus.msg}
+                      </div>
+                    )}
                   </div>
-                  <p>
-                    1. File JSON hasil scrape dikirim ke tabel{" "}
-                    <code>raw_scrape_uploads</code> di Supabase.
-                  </p>
-                  <p>
-                    2. GitHub Actions otomatis bangun, memeriksa <code>photo_catalog</code>, dan <b>hanya mengunduh foto baru</b> yang belum pernah diproses sebelumnya.
-                  </p>
+
+                  <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 rounded-xl p-4 text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+                    <div className="font-bold text-slate-800 dark:text-white">
+                      💡 Cara Kerja Update Inkremental Otomatis:
+                    </div>
+                    <p>
+                      1. File JSON hasil scrape dikirim ke tabel{" "}
+                      <code>raw_scrape_uploads</code> di Supabase.
+                    </p>
+                    <p>
+                      2. GitHub Actions otomatis bangun, memeriksa <code>photo_catalog</code>, dan <b>hanya mengunduh foto baru</b> yang belum pernah diproses sebelumnya.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* MANAJEMEN AKUN PENGGUNA (TABEL app_users) */}
+              <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-2xs space-y-5">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
+                  <div>
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                      <KeyRound className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      Manajemen Akun & Hak Akses Pengguna (Tabel <code>app_users</code>)
+                    </h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                      Tambah akun pemeriksa baru, ubah password, atau atur role (<b>user</b>: hanya lihat hasil pemeriksaan; <b>admin</b>: akses penuh termasuk Tarik Data FASIH).
+                    </p>
+                  </div>
+                </div>
+
+                {userMsg.type !== "idle" && (
+                  <div
+                    className={`p-3 rounded-xl text-xs font-medium ${
+                      userMsg.type === "ok"
+                        ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                        : "bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
+                    }`}
+                  >
+                    {userMsg.text}
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                  {/* Form Tambah / Update User */}
+                  <form
+                    onSubmit={handleSaveUser}
+                    className="lg:col-span-5 bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-800 rounded-xl p-4 space-y-3"
+                  >
+                    <div className="text-xs font-bold text-slate-800 dark:text-white flex items-center gap-1.5">
+                      <UserPlus className="w-3.5 h-3.5 text-blue-600" />
+                      Tambah / Perbarui Password Akun
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-300 mb-1">
+                          Username
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={newUsername}
+                          onChange={(e) => setNewUsername(e.target.value)}
+                          placeholder="mis. pemeriksa2"
+                          className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg px-3 py-2"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-300 mb-1">
+                          Role Akses
+                        </label>
+                        <select
+                          value={newRole}
+                          onChange={(e) => setNewRole(e.target.value as "user" | "admin")}
+                          className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg px-3 py-2"
+                        >
+                          <option value="user">User Biasa (Pemeriksa)</option>
+                          <option value="admin">Administrator</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-300 mb-1">
+                        Nama Lengkap / Jabatan
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={newFullName}
+                        onChange={(e) => setNewFullName(e.target.value)}
+                        placeholder="mis. Tim Pemeriksa KSA Garut"
+                        className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg px-3 py-2"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-300 mb-1">
+                        Password Baru
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="Ketik password..."
+                        className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg px-3 py-2"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-lg transition cursor-pointer"
+                    >
+                      Simpan Akun ke Supabase
+                    </button>
+                  </form>
+
+                  {/* Tabel Daftar User */}
+                  <div className="lg:col-span-7 overflow-x-auto">
+                    <table className="w-full text-xs text-left border-collapse">
+                      <thead>
+                        <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-slate-500 uppercase text-[10px]">
+                          <th className="py-2.5 px-3">Username</th>
+                          <th className="py-2.5 px-3">Nama Lengkap</th>
+                          <th className="py-2.5 px-3 text-center">Role</th>
+                          <th className="py-2.5 px-3 text-right">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {userList.map((u) => (
+                          <tr key={u.username}>
+                            <td className="py-2.5 px-3 font-mono font-bold text-slate-900 dark:text-white">
+                              {u.username}
+                            </td>
+                            <td className="py-2.5 px-3 text-slate-600 dark:text-slate-300">
+                              {u.full_name}
+                            </td>
+                            <td className="py-2.5 px-3 text-center">
+                              <span
+                                className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                                  u.role === "admin"
+                                    ? "bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300"
+                                    : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                                }`}
+                              >
+                                {u.role}
+                              </span>
+                            </td>
+                            <td className="py-2.5 px-3 text-right">
+                              {u.username !== currentUser.username && (
+                                <button
+                                  onClick={() => handleDeleteUser(u.username)}
+                                  className="inline-flex items-center gap-1 text-rose-600 hover:text-rose-700 text-[11px] font-semibold cursor-pointer"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                  Hapus
+                                </button>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
