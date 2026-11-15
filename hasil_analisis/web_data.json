@@ -4361,20 +4361,6 @@
         {
           "subround": "SR2",
           "assignmentId": "d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4",
-          "jenis_foto": "foto_petak",
-          "pcl": "DUDUNG WAHYUDIN",
-          "kecamatan": "SINGAJAYA",
-          "desa": "SUKAMULYA",
-          "nks": "",
-          "namakk": "SURYANA",
-          "beratbersih": 5.89,
-          "jmlhrumpun": 26,
-          "relpath": "S2/SINGAJAYA_SUKAMULYA__SURYANA__foto_petak__d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4__foto_petak__g.jpg",
-          "image_url": "/api/local-image?path=S2/SINGAJAYA_SUKAMULYA__SURYANA__foto_petak__d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4__foto_petak__g.jpg"
-        },
-        {
-          "subround": "SR2",
-          "assignmentId": "d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4",
           "jenis_foto": "fotoplot",
           "pcl": "DUDUNG WAHYUDIN",
           "kecamatan": "SINGAJAYA",
@@ -4385,6 +4371,20 @@
           "jmlhrumpun": 26,
           "relpath": "S2/SINGAJAYA_SUKAMULYA__SURYANA__fotoplot__d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4__fotoplot__g.jpg",
           "image_url": "/api/local-image?path=S2/SINGAJAYA_SUKAMULYA__SURYANA__fotoplot__d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4__fotoplot__g.jpg"
+        },
+        {
+          "subround": "SR2",
+          "assignmentId": "d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4",
+          "jenis_foto": "foto_petak",
+          "pcl": "DUDUNG WAHYUDIN",
+          "kecamatan": "SINGAJAYA",
+          "desa": "SUKAMULYA",
+          "nks": "",
+          "namakk": "SURYANA",
+          "beratbersih": 5.89,
+          "jmlhrumpun": 26,
+          "relpath": "S2/SINGAJAYA_SUKAMULYA__SURYANA__foto_petak__d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4__foto_petak__g.jpg",
+          "image_url": "/api/local-image?path=S2/SINGAJAYA_SUKAMULYA__SURYANA__foto_petak__d9dcc779-e7b0-4748-ac05-bcfe7f7d02d4__foto_petak__g.jpg"
         },
         {
           "subround": "SR3",
@@ -6090,20 +6090,6 @@
       "members": [
         {
           "subround": "SR1",
-          "assignmentId": "4eb3dbca-1c13-4932-9617-a70f7cfd2164",
-          "jenis_foto": "foto_petak",
-          "pcl": "ROHIMAT",
-          "kecamatan": "CIBALONG",
-          "desa": "SAGARA",
-          "nks": "13080027",
-          "namakk": "KARTIM",
-          "beratbersih": 5.89,
-          "jmlhrumpun": 81,
-          "relpath": "S1/CIBALONG_SAGARA_13080027_KARTIM__foto_petak__4eb3dbca-1c13-4932-9617-a70f7cfd2164__foto_petak__g.jpg",
-          "image_url": "/api/local-image?path=S1/CIBALONG_SAGARA_13080027_KARTIM__foto_petak__4eb3dbca-1c13-4932-9617-a70f7cfd2164__foto_petak__g.jpg"
-        },
-        {
-          "subround": "SR1",
           "assignmentId": "1e8e3069-cbe0-45e5-9513-c6a4e1e382e6",
           "jenis_foto": "foto_petak",
           "pcl": "ROHIMAT",
@@ -6115,6 +6101,20 @@
           "jmlhrumpun": 82,
           "relpath": "S1/CIBALONG_SAGARA_13080028_KARTIM__foto_petak__1e8e3069-cbe0-45e5-9513-c6a4e1e382e6__foto_petak__g.jpg",
           "image_url": "/api/local-image?path=S1/CIBALONG_SAGARA_13080028_KARTIM__foto_petak__1e8e3069-cbe0-45e5-9513-c6a4e1e382e6__foto_petak__g.jpg"
+        },
+        {
+          "subround": "SR1",
+          "assignmentId": "4eb3dbca-1c13-4932-9617-a70f7cfd2164",
+          "jenis_foto": "foto_petak",
+          "pcl": "ROHIMAT",
+          "kecamatan": "CIBALONG",
+          "desa": "SAGARA",
+          "nks": "13080027",
+          "namakk": "KARTIM",
+          "beratbersih": 5.89,
+          "jmlhrumpun": 81,
+          "relpath": "S1/CIBALONG_SAGARA_13080027_KARTIM__foto_petak__4eb3dbca-1c13-4932-9617-a70f7cfd2164__foto_petak__g.jpg",
+          "image_url": "/api/local-image?path=S1/CIBALONG_SAGARA_13080027_KARTIM__foto_petak__4eb3dbca-1c13-4932-9617-a70f7cfd2164__foto_petak__g.jpg"
         },
         {
           "subround": "SR2",
