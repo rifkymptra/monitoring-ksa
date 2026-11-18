@@ -105,12 +105,18 @@ export default function DashboardPage() {
   });
   const [clusters, setClusters] = useState<any[]>([]);
   const [pairs, setPairs] = useState<any[]>([]);
+  const [officerPopulation, setOfficerPopulation] = useState<any[]>([]);
 
   // Executive Officer Table States
   const [pclSearch, setPclSearch] = useState("");
-  const [pclFilterType, setPclFilterType] = useState<"all" | "cross_pcl" | "multi_sample">("all");
+  const [pclFilterType, setPclFilterType] = useState<
+    "all" | "flagged" | "cross_pcl" | "clean"
+  >("all");
+  const [pclSortBy, setPclSortBy] = useState<
+    "pct_desc" | "count_desc" | "clean_first" | "name_asc"
+  >("pct_desc");
   const [pclPage, setPclPage] = useState(1);
-  const pclPageSize = 10;
+  const pclPageSize = 12;
 
   // Filter States - Clusters
   const [cScen, setCScen] = useState("");
@@ -205,6 +211,9 @@ export default function DashboardPage() {
         if (res.summary) setSummary(res.summary);
         if (Array.isArray(res.clusters)) setClusters(res.clusters);
         if (Array.isArray(res.pairs)) setPairs(res.pairs);
+        if (Array.isArray(res.officer_population)) {
+          setOfficerPopulation(res.officer_population);
+        }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -325,7 +334,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     setPclPage(1);
-  }, [pclSearch, pclFilterType]);
+  }, [pclSearch, pclFilterType, pclSortBy]);
 
   // Matrix Ringkasan Skenario
   const scenarioSummary = useMemo(() => {
@@ -354,7 +363,7 @@ export default function DashboardPage() {
     return Object.values(map).sort((a, b) => a.code.localeCompare(b.code));
   }, [pairs]);
 
-  // Rekapitulasi Per Petugas (PCL)
+  // Rekapitulasi Per Petugas (PCL) - Mencakup Seluruh Petugas Termasuk yang 0% (Bersih)
   const officerSummary = useMemo(() => {
     const map: Record<
       string,
@@ -362,24 +371,48 @@ export default function DashboardPage() {
         pcl: string;
         kecamatans: Set<string>;
         subrounds: Set<string>;
+        totalAssignments: number;
+        totalPhotos: number;
         clustersCount: number;
-        photosCount: number;
         crossPclClusters: number;
         diffSampleClusters: number;
         sameSampleClusters: number;
         samplesInvolved: Set<string>;
+        uniquePhotosInvolved: Set<string>;
       }
     > = {};
 
+    // 1. Inisialisasi seluruh populasi petugas dari photo_catalog (agar petugas 0% ikut tampil)
+    for (const pop of officerPopulation) {
+      const name = String(pop.pcl || "Tanpa Nama").trim().toUpperCase();
+      if (!name) continue;
+      map[name] = {
+        pcl: name,
+        kecamatans: new Set(Array.isArray(pop.kecamatans) ? pop.kecamatans : []),
+        subrounds: new Set(Array.isArray(pop.subrounds) ? pop.subrounds : []),
+        totalAssignments: Number(pop.total_assignments || 0),
+        totalPhotos: Number(pop.total_photos || 0),
+        clustersCount: 0,
+        crossPclClusters: 0,
+        diffSampleClusters: 0,
+        sameSampleClusters: 0,
+        samplesInvolved: new Set(),
+        uniquePhotosInvolved: new Set(),
+      };
+    }
+
+    // 2. Akumulasikan temuan dari duplicate_clusters
     for (const c of clusters) {
       const members = Array.isArray(c.members) ? c.members : [];
       const pclsInCluster = new Set<string>();
       const assignmentsInCluster = new Set<string>();
 
       for (const m of members) {
-        const name = (m.pcl || "Tanpa Nama").trim();
+        const name = String(m.pcl || "Tanpa Nama").trim().toUpperCase();
         pclsInCluster.add(name);
-        if (m.assignmentId) assignmentsInCluster.add(String(m.assignmentId));
+        if (m.assignmentId) {
+          assignmentsInCluster.add(`${m.subround || ""}:${m.assignmentId}`);
+        }
       }
 
       const isCrossPcl = pclsInCluster.size > 1;
@@ -387,24 +420,31 @@ export default function DashboardPage() {
 
       const countedForCluster = new Set<string>();
       for (const m of members) {
-        const name = (m.pcl || "Tanpa Nama").trim();
+        const name = String(m.pcl || "Tanpa Nama").trim().toUpperCase();
         if (!map[name]) {
           map[name] = {
             pcl: name,
             kecamatans: new Set(),
             subrounds: new Set(),
+            totalAssignments: 0,
+            totalPhotos: 0,
             clustersCount: 0,
-            photosCount: 0,
             crossPclClusters: 0,
             diffSampleClusters: 0,
             sameSampleClusters: 0,
             samplesInvolved: new Set(),
+            uniquePhotosInvolved: new Set(),
           };
         }
-        map[name].photosCount++;
-        if (m.kecamatan) map[name].kecamatans.add(m.kecamatan);
-        if (m.subround) map[name].subrounds.add(m.subround);
-        if (m.assignmentId) map[name].samplesInvolved.add(String(m.assignmentId));
+        if (m.kecamatan) map[name].kecamatans.add(String(m.kecamatan).trim().toUpperCase());
+        if (m.subround) map[name].subrounds.add(String(m.subround).trim().toUpperCase());
+        if (m.assignmentId) {
+          map[name].samplesInvolved.add(`${m.subround || ""}:${m.assignmentId}`);
+        }
+        const photoUniqueKey = `${m.subround || ""}:${m.assignmentId || ""}:${
+          m.jenis_foto || m.relpath || ""
+        }`;
+        map[name].uniquePhotosInvolved.add(photoUniqueKey);
 
         if (!countedForCluster.has(name)) {
           countedForCluster.add(name);
@@ -420,38 +460,82 @@ export default function DashboardPage() {
       }
     }
 
-    return Object.values(map)
-      .map((item) => ({
+    return Object.values(map).map((item) => {
+      const sampleCount = item.samplesInvolved.size;
+      const photosCount = item.uniquePhotosInvolved.size;
+      const totalAssignments = Math.max(item.totalAssignments, sampleCount);
+      const totalPhotos = Math.max(item.totalPhotos, photosCount);
+      const samplePct =
+        totalAssignments > 0
+          ? Number(((sampleCount / totalAssignments) * 100).toFixed(1))
+          : 0;
+      const photoPct =
+        totalPhotos > 0
+          ? Number(((photosCount / totalPhotos) * 100).toFixed(1))
+          : 0;
+
+      return {
         ...item,
         kecamatanList: Array.from(item.kecamatans).sort().join(", "),
         subroundList: Array.from(item.subrounds).sort().join(", "),
-        sampleCount: item.samplesInvolved.size,
-      }))
-      .sort((a, b) => {
-        if (b.clustersCount !== a.clustersCount) return b.clustersCount - a.clustersCount;
-        if (b.crossPclClusters !== a.crossPclClusters)
-          return b.crossPclClusters - a.crossPclClusters;
-        return b.photosCount - a.photosCount;
-      });
-  }, [clusters]);
+        sampleCount,
+        photosCount,
+        totalAssignments,
+        totalPhotos,
+        samplePct,
+        photoPct,
+        isClean: item.clustersCount === 0,
+      };
+    });
+  }, [clusters, officerPopulation]);
+
+  const officerCounts = useMemo(() => {
+    let flagged = 0;
+    let crossPcl = 0;
+    let clean = 0;
+    for (const o of officerSummary) {
+      if (o.isClean) clean++;
+      else flagged++;
+      if (o.crossPclClusters > 0) crossPcl++;
+    }
+    return { total: officerSummary.length, flagged, crossPcl, clean };
+  }, [officerSummary]);
 
   const filteredOfficers = useMemo(() => {
     const q = pclSearch.trim().toLowerCase();
-    return officerSummary.filter((o) => {
+    const filtered = officerSummary.filter((o) => {
+      if (pclFilterType === "flagged" && o.isClean) return false;
       if (pclFilterType === "cross_pcl" && o.crossPclClusters === 0) return false;
-      if (
-        pclFilterType === "multi_sample" &&
-        o.diffSampleClusters === 0 &&
-        o.crossPclClusters === 0
-      )
-        return false;
+      if (pclFilterType === "clean" && !o.isClean) return false;
       if (q) {
         const hay = `${o.pcl} ${o.kecamatanList}`.toLowerCase();
         if (!hay.includes(q)) return false;
       }
       return true;
     });
-  }, [officerSummary, pclSearch, pclFilterType]);
+
+    return [...filtered].sort((a, b) => {
+      if (pclSortBy === "pct_desc") {
+        if (b.samplePct !== a.samplePct) return b.samplePct - a.samplePct;
+        if (b.photoPct !== a.photoPct) return b.photoPct - a.photoPct;
+        if (b.clustersCount !== a.clustersCount) return b.clustersCount - a.clustersCount;
+        return a.pcl.localeCompare(b.pcl);
+      }
+      if (pclSortBy === "count_desc") {
+        if (b.sampleCount !== a.sampleCount) return b.sampleCount - a.sampleCount;
+        if (b.clustersCount !== a.clustersCount) return b.clustersCount - a.clustersCount;
+        if (b.photosCount !== a.photosCount) return b.photosCount - a.photosCount;
+        return a.pcl.localeCompare(b.pcl);
+      }
+      if (pclSortBy === "clean_first") {
+        if (a.samplePct !== b.samplePct) return a.samplePct - b.samplePct;
+        if (b.totalAssignments !== a.totalAssignments)
+          return b.totalAssignments - a.totalAssignments;
+        return a.pcl.localeCompare(b.pcl);
+      }
+      return a.pcl.localeCompare(b.pcl);
+    });
+  }, [officerSummary, pclSearch, pclFilterType, pclSortBy]);
 
   const totalPclPages = Math.max(1, Math.ceil(filteredOfficers.length / pclPageSize));
   const paginatedOfficers = useMemo(() => {
@@ -561,21 +645,31 @@ export default function DashboardPage() {
       "Nama Petugas",
       "Kecamatan",
       "Subround",
+      "Status Pemeriksaan",
+      "Sampel Terindikasi",
+      "Total Sampel Petugas",
+      "Persentase Sampel Bermasalah (%)",
+      "Foto Terindikasi",
+      "Total Foto Petugas",
+      "Persentase Foto Duplikat (%)",
       "Total Grup Duplikat",
-      "Total Foto Terlibat",
-      "Total Sampel Terlibat",
       "Grup Lintas Petugas",
       "Grup Antar Sampel Sendiri",
-      "Grup Lintas Jenis (1 Sampel)",
+      "Grup Internal 1 Sampel",
     ];
     const rows = filteredOfficers.map((o, i) => [
       i + 1,
       `"${o.pcl.replace(/"/g, '""')}"`,
       `"${o.kecamatanList.replace(/"/g, '""')}"`,
       `"${o.subroundList}"`,
-      o.clustersCount,
-      o.photosCount,
+      o.isClean ? "BERSIH (0%)" : "TERINDIKASI DUPLIKAT",
       o.sampleCount,
+      o.totalAssignments,
+      o.samplePct,
+      o.photosCount,
+      o.totalPhotos,
+      o.photoPct,
+      o.clustersCount,
       o.crossPclClusters,
       o.diffSampleClusters,
       o.sameSampleClusters,
@@ -586,7 +680,7 @@ export default function DashboardPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `rekap_duplikasi_per_petugas_garut.csv`;
+    a.download = `rekap_evaluasi_petugas_ubinan_garut.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -1290,74 +1384,108 @@ export default function DashboardPage() {
             <div className="space-y-6">
               {/* REKAPITULASI PER PETUGAS */}
               <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl shadow-2xs overflow-hidden">
-                <div className="p-5 sm:p-6 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                      <h2 className="text-base font-bold text-slate-900 dark:text-white">
-                        Rekapitulasi Indikasi Duplikasi per Petugas
-                      </h2>
-                      <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                        {officerSummary.length} Petugas Terlibat
-                      </span>
+                <div className="p-5 sm:p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col gap-4">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Users className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                        <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                          Evaluasi & Persentase Indikasi Duplikasi per Petugas (PCL)
+                        </h2>
+                        <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                          Total {officerCounts.total} Petugas
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800">
+                          {officerCounts.clean} Petugas Bersih (0%)
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border border-rose-200/70 dark:border-rose-800">
+                          {officerCounts.flagged} Petugas Terindikasi
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                        Menampilkan perbandingan beban tugas (total sampel & total foto) terhadap jumlah sampel maupun foto yang terindikasi duplikat untuk seluruh petugas, termasuk petugas dengan temuan 0% (bersih).
+                      </p>
                     </div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                      Rincian keterlibatan petugas berdasarkan jenis temuan: lintas petugas, antar sampel berbeda milik sendiri, maupun lintas jenis dalam 1 sampel.
-                    </p>
+
+                    <button
+                      onClick={handleDownloadOfficerCsv}
+                      className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 px-3.5 py-2 rounded-xl transition cursor-pointer shrink-0"
+                    >
+                      <Download className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
+                      Unduh CSV Lengkap ({filteredOfficers.length})
+                    </button>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2.5">
-                    <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-medium">
+                  <div className="flex flex-wrap items-center justify-between gap-2.5 pt-1">
+                    {/* Filter Chips */}
+                    <div className="flex flex-wrap items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-medium gap-0.5">
                       <button
                         onClick={() => setPclFilterType("all")}
-                        className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                        className={`px-2.5 py-1.5 rounded-lg transition cursor-pointer ${
                           pclFilterType === "all"
                             ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-semibold"
                             : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                         }`}
                       >
-                        Semua ({officerSummary.length})
+                        Semua ({officerCounts.total})
+                      </button>
+                      <button
+                        onClick={() => setPclFilterType("flagged")}
+                        className={`px-2.5 py-1.5 rounded-lg transition cursor-pointer ${
+                          pclFilterType === "flagged"
+                            ? "bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400 shadow-2xs font-semibold"
+                            : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                        }`}
+                      >
+                        Ada Indikasi ({officerCounts.flagged})
                       </button>
                       <button
                         onClick={() => setPclFilterType("cross_pcl")}
-                        className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                        className={`px-2.5 py-1.5 rounded-lg transition cursor-pointer ${
                           pclFilterType === "cross_pcl"
                             ? "bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400 shadow-2xs font-semibold"
                             : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                         }`}
                       >
-                        Lintas Petugas
+                        Lintas Petugas ({officerCounts.crossPcl})
                       </button>
                       <button
-                        onClick={() => setPclFilterType("multi_sample")}
-                        className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
-                          pclFilterType === "multi_sample"
-                            ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs font-semibold"
+                        onClick={() => setPclFilterType("clean")}
+                        className={`px-2.5 py-1.5 rounded-lg transition cursor-pointer ${
+                          pclFilterType === "clean"
+                            ? "bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-2xs font-semibold"
                             : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                         }`}
                       >
-                        Antar Sampel Berbeda
+                        ✅ Bersih 0% ({officerCounts.clean})
                       </button>
                     </div>
 
-                    <div className="relative min-w-[210px]">
-                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
-                      <input
-                        type="text"
-                        value={pclSearch}
-                        onChange={(e) => setPclSearch(e.target.value)}
-                        placeholder="Cari nama petugas / kecamatan..."
-                        className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl pl-8 pr-3 py-2 focus:outline-none focus:border-blue-500"
-                      />
-                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      {/* Sort Selector */}
+                      <select
+                        value={pclSortBy}
+                        onChange={(e) => setPclSortBy(e.target.value as any)}
+                        className="text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500 font-medium"
+                      >
+                        <option value="pct_desc">Urut: % Sampel Tertinggi</option>
+                        <option value="count_desc">Urut: Jumlah Temuan Terbanyak</option>
+                        <option value="clean_first">Urut: Petugas Bersih (0%) di Atas</option>
+                        <option value="name_asc">Urut: Nama Petugas (A–Z)</option>
+                      </select>
 
-                    <button
-                      onClick={handleDownloadOfficerCsv}
-                      className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 px-3 py-2 rounded-xl transition cursor-pointer"
-                    >
-                      <Download className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
-                      Unduh CSV
-                    </button>
+                      {/* Search Box */}
+                      <div className="relative min-w-[210px]">
+                        <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                        <input
+                          type="text"
+                          value={pclSearch}
+                          onChange={(e) => setPclSearch(e.target.value)}
+                          placeholder="Cari nama petugas / kecamatan..."
+                          className="w-full text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl pl-8 pr-3 py-2 focus:outline-none focus:border-blue-500"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -1365,13 +1493,19 @@ export default function DashboardPage() {
                   <table className="w-full text-xs text-left border-collapse">
                     <thead>
                       <tr className="border-b border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px] tracking-wider">
-                        <th className="py-3 px-4 w-10 text-center">#</th>
-                        <th className="py-3 px-4">Nama Petugas (PCL)</th>
-                        <th className="py-3 px-4">Wilayah Kecamatan</th>
+                        <th className="py-3 px-3.5 w-10 text-center">#</th>
+                        <th className="py-3 px-4">Nama Petugas & Wilayah</th>
                         <th className="py-3 px-3 text-center">Subround</th>
-                        <th className="py-3 px-3 text-center">Total Grup</th>
-                        <th className="py-3 px-3 text-center">Total Foto</th>
-                        <th className="py-3 px-4">Rincian Pola Duplikasi</th>
+                        <th className="py-3 px-3 text-center">
+                          Sampel (Terindikasi / Total)
+                        </th>
+                        <th className="py-3 px-3 text-center">
+                          Foto (Terindikasi / Total)
+                        </th>
+                        <th className="py-3 px-4 min-w-[165px]">
+                          % Indikasi (Sampel & Foto)
+                        </th>
+                        <th className="py-3 px-4">Status & Pola Duplikasi</th>
                         <th className="py-3 px-4 text-right">Telusuri Bukti</th>
                       </tr>
                     </thead>
@@ -1381,104 +1515,183 @@ export default function DashboardPage() {
                           <td colSpan={8} className="py-8 text-center text-slate-400">
                             {loading
                               ? "Memuat data pemeriksaan..."
-                              : "Tidak ada data petugas yang cocok dengan pencarian."}
+                              : "Tidak ada data petugas yang cocok dengan filter pencarian."}
                           </td>
                         </tr>
                       ) : (
                         paginatedOfficers.map((o, idx) => {
                           const rank = (pclPage - 1) * pclPageSize + idx + 1;
+                          const isHighRisk =
+                            o.crossPclClusters > 0 || o.samplePct >= 25;
                           return (
                             <tr
                               key={o.pcl}
                               className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition group"
                             >
-                              <td className="py-3 px-4 text-center font-mono text-slate-400">
+                              <td className="py-3 px-3.5 text-center font-mono text-slate-400">
                                 {rank}
                               </td>
                               <td className="py-3 px-4">
                                 <div className="font-bold text-slate-900 dark:text-white">
                                   {o.pcl}
                                 </div>
-                                <div className="text-[11px] text-slate-400">
-                                  Melibatkan {o.sampleCount} sampel ubinan
+                                <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-[230px]">
+                                  📍 {o.kecamatanList || "-"}
                                 </div>
-                              </td>
-                              <td className="py-3 px-4 text-slate-600 dark:text-slate-300 font-medium max-w-[220px] truncate">
-                                {o.kecamatanList || "-"}
                               </td>
                               <td className="py-3 px-3 text-center">
                                 <span className="inline-block px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium text-[11px]">
                                   {o.subroundList || "-"}
                                 </span>
                               </td>
-                              <td className="py-3 px-3 text-center">
-                                <span className="text-sm font-extrabold text-slate-900 dark:text-white">
-                                  {o.clustersCount}
+                              <td className="py-3 px-3 text-center whitespace-nowrap">
+                                <span
+                                  className={`font-extrabold text-sm ${
+                                    o.sampleCount > 0
+                                      ? "text-slate-900 dark:text-white"
+                                      : "text-emerald-600 dark:text-emerald-400"
+                                  }`}
+                                >
+                                  {o.sampleCount}
+                                </span>
+                                <span className="text-slate-400">
+                                  {" "}
+                                  / {o.totalAssignments} sampel
                                 </span>
                               </td>
-                              <td className="py-3 px-3 text-center">
-                                <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
+                              <td className="py-3 px-3 text-center whitespace-nowrap">
+                                <span
+                                  className={`font-bold text-sm ${
+                                    o.photosCount > 0
+                                      ? "text-blue-600 dark:text-blue-400"
+                                      : "text-emerald-600 dark:text-emerald-400"
+                                  }`}
+                                >
                                   {o.photosCount}
+                                </span>
+                                <span className="text-slate-400">
+                                  {" "}
+                                  / {o.totalPhotos} foto
                                 </span>
                               </td>
                               <td className="py-3 px-4">
-                                <div className="flex flex-wrap items-center gap-1.5">
-                                  {o.crossPclClusters > 0 && (
-                                    <span
-                                      title="Foto yang sama dipakai bersama petugas lain"
-                                      className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/70 dark:border-rose-800"
-                                    >
-                                      {o.crossPclClusters} Lintas Petugas
-                                    </span>
-                                  )}
-                                  {o.diffSampleClusters > 0 && (
-                                    <span
-                                      title="Foto yang sama dipakai ulang di sampel lain oleh petugas ini"
-                                      className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/70 dark:border-amber-800"
-                                    >
-                                      {o.diffSampleClusters} Antar Sampel
-                                    </span>
-                                  )}
-                                  {o.sameSampleClusters > 0 && (
-                                    <span
-                                      title="Foto dipakai ganda pada isian berbeda di dalam 1 sampel yang sama"
-                                      className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
-                                    >
-                                      {o.sameSampleClusters} Internal Sampel
-                                    </span>
-                                  )}
-                                </div>
+                                {o.isClean ? (
+                                  <div className="space-y-1">
+                                    <div className="flex items-center justify-between">
+                                      <span className="font-extrabold text-emerald-600 dark:text-emerald-400">
+                                        0,0% Sampel
+                                      </span>
+                                      <span className="text-[10px] text-emerald-600/80 dark:text-emerald-400/80 font-medium">
+                                        0,0% Foto
+                                      </span>
+                                    </div>
+                                    <div className="w-full h-1.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 overflow-hidden">
+                                      <div className="h-full w-0 bg-emerald-500 rounded-full" />
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="space-y-1">
+                                    <div className="flex items-baseline justify-between gap-2">
+                                      <span
+                                        className={`font-extrabold text-sm ${
+                                          isHighRisk
+                                            ? "text-rose-600 dark:text-rose-400"
+                                            : "text-amber-600 dark:text-amber-400"
+                                        }`}
+                                      >
+                                        {o.samplePct.toLocaleString("id-ID")}%{" "}
+                                        <span className="text-[10px] font-semibold">
+                                          Sampel
+                                        </span>
+                                      </span>
+                                      <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                                        ({o.photoPct.toLocaleString("id-ID")}% Foto)
+                                      </span>
+                                    </div>
+                                    <div className="w-full h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                                      <div
+                                        className={`h-full rounded-full ${
+                                          isHighRisk ? "bg-rose-500" : "bg-amber-500"
+                                        }`}
+                                        style={{
+                                          width: `${Math.min(100, Math.max(4, o.samplePct))}%`,
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                )}
+                              </td>
+                              <td className="py-3 px-4">
+                                {o.isClean ? (
+                                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800">
+                                    <CheckCircle2 className="w-3 h-3" />
+                                    Bersih 100% (Semua Unik)
+                                  </span>
+                                ) : (
+                                  <div className="flex flex-wrap items-center gap-1.5">
+                                    {o.crossPclClusters > 0 && (
+                                      <span
+                                        title="Foto yang sama dipakai bersama petugas lain"
+                                        className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/70 dark:border-rose-800"
+                                      >
+                                        {o.crossPclClusters} Lintas Petugas
+                                      </span>
+                                    )}
+                                    {o.diffSampleClusters > 0 && (
+                                      <span
+                                        title="Foto yang sama dipakai ulang di sampel lain oleh petugas ini"
+                                        className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/70 dark:border-amber-800"
+                                      >
+                                        {o.diffSampleClusters} Antar Sampel
+                                      </span>
+                                    )}
+                                    {o.sameSampleClusters > 0 && (
+                                      <span
+                                        title="Foto dipakai ganda pada isian berbeda di dalam 1 sampel yang sama"
+                                        className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
+                                      >
+                                        {o.sameSampleClusters} Internal Sampel
+                                      </span>
+                                    )}
+                                  </div>
+                                )}
                               </td>
                               <td className="py-3 px-4 text-right whitespace-nowrap">
-                                <div className="inline-flex items-center gap-1.5">
-                                  <button
-                                    onClick={() => {
-                                      setCScen("");
-                                      setCSr("");
-                                      setCSize(0);
-                                      setCPcl(0);
-                                      setCJenis("");
-                                      setCSearch(o.pcl);
-                                      setActiveTab("clusters");
-                                    }}
-                                    className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition cursor-pointer"
-                                  >
-                                    Lihat Grup
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setPScen("");
-                                      setPSr("");
-                                      setPKat("");
-                                      setPJenis("");
-                                      setPSearch(o.pcl);
-                                      setActiveTab("pairs");
-                                    }}
-                                    className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer"
-                                  >
-                                    Pasangan
-                                  </button>
-                                </div>
+                                {o.isClean ? (
+                                  <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                                    Aman ✓
+                                  </span>
+                                ) : (
+                                  <div className="inline-flex items-center gap-1.5">
+                                    <button
+                                      onClick={() => {
+                                        setCScen("");
+                                        setCSr("");
+                                        setCSize(0);
+                                        setCPcl(0);
+                                        setCJenis("");
+                                        setCSearch(o.pcl);
+                                        setActiveTab("clusters");
+                                      }}
+                                      className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition cursor-pointer"
+                                    >
+                                      Lihat Grup ({o.clustersCount})
+                                    </button>
+                                    <button
+                                      onClick={() => {
+                                        setPScen("");
+                                        setPSr("");
+                                        setPKat("");
+                                        setPJenis("");
+                                        setPSearch(o.pcl);
+                                        setActiveTab("pairs");
+                                      }}
+                                      className="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer"
+                                    >
+                                      Pasangan
+                                    </button>
+                                  </div>
+                                )}
                               </td>
                             </tr>
                           );
