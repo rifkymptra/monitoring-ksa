@@ -44,6 +44,7 @@ import {
   generateFasihConsoleScript,
 } from "@/lib/scraperTemplate";
 import { supabase } from "@/lib/supabase";
+import baselineCatalog from "@/lib/baselineCatalog.json";
 
 type TabType = "exec" | "clusters" | "pairs" | "scraper";
 
@@ -105,7 +106,9 @@ export default function DashboardPage() {
   });
   const [clusters, setClusters] = useState<any[]>([]);
   const [pairs, setPairs] = useState<any[]>([]);
-  const [officerPopulation, setOfficerPopulation] = useState<any[]>([]);
+  const [officerPopulation, setOfficerPopulation] = useState<any[]>(
+    baselineCatalog.officer_population || []
+  );
 
   // Executive Officer Table States
   const [pclSearch, setPclSearch] = useState("");
@@ -142,7 +145,11 @@ export default function DashboardPage() {
   const [customPeriodId, setCustomPeriodId] = useState(
     SUBROUND_OPTIONS[0].surveyPeriodId
   );
-  const [catalogFilenames, setCatalogFilenames] = useState<string[]>([]);
+  const [catalogFilenames, setCatalogFilenames] = useState<string[]>(
+    (baselineCatalog.filenames as Record<string, string[]>)[
+      SUBROUND_OPTIONS[0].code
+    ] || []
+  );
   const [copied, setCopied] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<{
     type: "idle" | "loading" | "success" | "error";
@@ -233,12 +240,20 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
+    // Langsung pasang katalog baseline (SR1: 1872, SR2: 1447, SR3: 266) dalam 0ms agar tidak pernah 0
+    const baseList =
+      (baselineCatalog.filenames as Record<string, string[]>)[
+        selectedSr.code
+      ] || [];
+    setCatalogFilenames(baseList);
+
     if (!currentUser || currentUser.role !== "admin") return;
     fetch(`/api/catalog-filenames?subround=${encodeURIComponent(selectedSr.code)}`)
       .then((r) => r.json())
       .then((res) => {
-        if (Array.isArray(res.filenames)) {
-          setCatalogFilenames(res.filenames);
+        if (Array.isArray(res.filenames) && res.filenames.length > 0) {
+          const merged = Array.from(new Set([...baseList, ...res.filenames]));
+          setCatalogFilenames(merged);
         }
       })
       .catch(() => {});
@@ -2596,12 +2611,13 @@ export default function DashboardPage() {
                       {copied ? (
                         <>
                           <Check className="w-4 h-4" />
-                          Kode Berhasil Disalin!
+                          Kode Berhasil Disalin! ({catalogFilenames.length.toLocaleString("id-ID")} Foto Lama Di-skip)
                         </>
                       ) : (
                         <>
                           <Copy className="w-4 h-4" />
-                          Salin Kode Console ({selectedSr.code})
+                          Salin Kode Console ({selectedSr.code} · Skip{" "}
+                          {catalogFilenames.length.toLocaleString("id-ID")} Foto Lama)
                         </>
                       )}
                     </button>

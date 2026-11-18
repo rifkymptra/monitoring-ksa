@@ -233,36 +233,54 @@ export function generateFasihConsoleScript(
   }
 
   console.log(
-    \`%c📸 Ringkasan Foto: \${skippedOldCount} foto lama di-skip | \${newPhotoItems.length} foto BARU akan di-download & di-hash di browser...\`,
+    \`%c📸 Ringkasan Foto: \${skippedOldCount} foto lama di-skip | \${newPhotoItems.length} foto BARU terdeteksi.\`,
     "color: #059669; font-weight: bold;"
   );
 
+  let downloadInBrowser = true;
+  if (newPhotoItems.length > 80) {
+    downloadInBrowser = confirm(
+      \`Ditemukan \${newPhotoItems.length} foto BARU (sedangkan \${skippedOldCount} foto lama sudah otomatis di-skip).\\n\\n\` +
+      \`• Klik OK untuk mengunduh & mengompres \${newPhotoItems.length} foto baru ini di browser (agar langsung diproses GitHub Actions saat di-upload ke Web).\\n\` +
+      \`• Klik Cancel jika ingin langsung mengunduh file JSON sekarang (0 detik) dan memproses fotonya lewat file 'jalankan_update_lokal.bat' di laptop.\`
+    );
+  }
+
   // Download HANYA foto baru di browser (IP Indonesia -> Bebas blokir Geo-IP BPS!)
-  for (let i = 0; i < newPhotoItems.length; i++) {
-    if (window.__STOP_SCRAPE__) break;
-    const pObj = newPhotoItems[i];
-    try {
-      const imgResp = await fetch(pObj.presignedUrl);
-      if (!imgResp.ok) throw new Error(\`HTTP \${imgResp.status}\`);
-      const arrayBuf = await imgResp.arrayBuffer();
+  if (downloadInBrowser && newPhotoItems.length > 0) {
+    let completed = 0;
+    const batchSize = 3;
+    for (let i = 0; i < newPhotoItems.length; i += batchSize) {
+      if (window.__STOP_SCRAPE__) break;
+      const batch = newPhotoItems.slice(i, i + batchSize);
+      await Promise.all(
+        batch.map(async (pObj) => {
+          try {
+            const imgResp = await fetch(pObj.presignedUrl);
+            if (!imgResp.ok) throw new Error(\`HTTP \${imgResp.status}\`);
+            const arrayBuf = await imgResp.arrayBuffer();
 
-      // 1. Pengaman SHA-256 Asli dari file JPEG mentah FASIH
-      pObj.origSha256 = await computeSha256Hex(arrayBuf);
-      pObj.origSize = arrayBuf.byteLength;
+            // 1. Pengaman SHA-256 Asli dari file JPEG mentah FASIH
+            pObj.origSha256 = await computeSha256Hex(arrayBuf);
+            pObj.origSize = arrayBuf.byteLength;
 
-      // 2. Kompres ke WebP (~40KB) untuk di-relay ke Supabase Storage
-      const blob = new Blob([arrayBuf], { type: "image/jpeg" });
-      const { origWidth, origHeight, webpDataUrl } = await compressToWebpBase64(blob);
-      pObj.origWidth = origWidth;
-      pObj.origHeight = origHeight;
-      pObj.webpBase64 = webpDataUrl;
-
-      if ((i + 1) % 5 === 0 || i === newPhotoItems.length - 1) {
-        console.log(\`   -> Download & Hash Foto Baru: \${i + 1} / \${newPhotoItems.length}\`);
+            // 2. Kompres ke WebP (~40KB) untuk di-relay ke Supabase Storage
+            const blob = new Blob([arrayBuf], { type: "image/jpeg" });
+            const { origWidth, origHeight, webpDataUrl } = await compressToWebpBase64(blob);
+            pObj.origWidth = origWidth;
+            pObj.origHeight = origHeight;
+            pObj.webpBase64 = webpDataUrl;
+          } catch (e) {
+            console.warn(\`   ⚠️ Gagal mengambil foto baru \${pObj.fileName}:\`, e);
+          } finally {
+            completed++;
+          }
+        })
+      );
+      if (completed % 6 === 0 || completed === newPhotoItems.length) {
+        console.log(\`   -> Download & Hash Foto Baru: \${completed} / \${newPhotoItems.length}\`);
       }
-      await sleep(350);
-    } catch (e) {
-      console.warn(\`   ⚠️ Gagal mengambil foto baru \${pObj.fileName}:\`, e);
+      await sleep(250);
     }
   }
 
