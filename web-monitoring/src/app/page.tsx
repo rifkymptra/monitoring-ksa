@@ -117,7 +117,7 @@ export default function DashboardPage() {
   >("all");
   const [pclSortBy, setPclSortBy] = useState<
     "pct_desc" | "count_desc" | "clean_first" | "name_asc"
-  >("pct_desc");
+  >("count_desc");
   const [pclPage, setPclPage] = useState(1);
   const pclPageSize = 12;
 
@@ -1483,8 +1483,8 @@ export default function DashboardPage() {
                         onChange={(e) => setPclSortBy(e.target.value as any)}
                         className="text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500 font-medium"
                       >
-                        <option value="pct_desc">Urut: % Sampel Tertinggi</option>
                         <option value="count_desc">Urut: Jumlah Temuan Terbanyak</option>
+                        <option value="pct_desc">Urut: % Sampel Tertinggi</option>
                         <option value="clean_first">Urut: Petugas Bersih (0%) di Atas</option>
                         <option value="name_asc">Urut: Nama Petugas (A–Z)</option>
                       </select>
