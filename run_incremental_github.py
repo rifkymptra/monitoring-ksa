@@ -137,29 +137,69 @@ def load_full_catalog() -> dict[str, dict]:
 
 
 def download_and_hash_new_photo(item: dict) -> dict | None:
-    """Download 1 foto baru dari Presigned URL S3 FASIH lalu hitung hash-nya."""
-    url = item["presigned_url"]
+    """Download 1 foto baru (Prioritas 1: Relay Supabase Storage, Prioritas 2: Presigned URL S3 FASIH) lalu hitung hash-nya."""
     filepath = item["filepath"]
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    try:
-        req = urllib.request.Request(
-            url,
-            headers={
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-            },
-        )
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = resp.read()
-        with open(filepath, "wb") as f:
-            f.write(data)
 
-        processed = process_single_image(item)
-        if processed.get("valid"):
-            processed["is_new"] = True
-            return processed
-    except Exception as e:
-        print(f"   ⚠️ Gagal download foto baru {item['orig_filename']}: {e}")
+    urls_to_try = []
+    if item.get("temp_storage_url"):
+        urls_to_try.append(("Supabase Relay", item["temp_storage_url"]))
+    if item.get("presigned_url"):
+        urls_to_try.append(("S3 FASIH", item["presigned_url"]))
+
+    for source_name, url in urls_to_try:
+        try:
+            req = urllib.request.Request(
+                url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                },
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = resp.read()
+            with open(filepath, "wb") as f:
+                f.write(data)
+
+            processed = process_single_image(item)
+            if processed.get("valid"):
+                # Pengaman 1: Gunakan SHA-256 & dimensi asli dari file JPEG mentah jika tersedia dari browser
+                if item.get("orig_sha256"):
+                    processed["sha256"] = item["orig_sha256"]
+                if item.get("orig_width"):
+                    processed["width"] = int(item["orig_width"])
+                if item.get("orig_height"):
+                    processed["height"] = int(item["orig_height"])
+                if item.get("orig_size"):
+                    processed["file_size"] = int(item["orig_size"])
+                processed["is_new"] = True
+                return processed
+        except Exception as e:
+            print(f"   ⚠️ Gagal download foto baru ({source_name}) {item['orig_filename']}: {e}")
     return None
+
+
+def cleanup_temp_storage_files(temp_keys: list[str]):
+    """Pengaman 2: Hapus foto sementara di `temp_new/` dari Supabase Storage agar kuota tetap hemat."""
+    cleaned = 0
+    for tk in temp_keys:
+        if not tk:
+            continue
+        try:
+            del_url = f"{SUPABASE_URL}/storage/v1/object/{BUCKET_NAME}/{urllib.parse.quote(tk)}"
+            req = urllib.request.Request(
+                del_url,
+                method="DELETE",
+                headers={
+                    "Authorization": f"Bearer {SUPABASE_KEY}",
+                    "apikey": SUPABASE_KEY,
+                },
+            )
+            urllib.request.urlopen(req, timeout=20)
+            cleaned += 1
+        except Exception:
+            pass
+    if cleaned > 0:
+        print(f"🧹 [Cleanup] Berhasil menghapus {cleaned} file relay sementara dari `temp_new/` di Supabase Storage.")
 
 
 def main():
@@ -208,6 +248,8 @@ def main():
                     continue
                 orig_fn = p_info["fileName"]
                 presigned_url = p_info.get("presignedUrl")
+                temp_storage_url = p_info.get("tempStorageUrl")
+                temp_storage_key = p_info.get("tempStorageKey")
 
                 # JIKA SUDAH ADA DI KATALOG LAMA -> SKIP DOWNLOAD!
                 if orig_fn in catalog:
@@ -215,7 +257,7 @@ def main():
                     catalog[orig_fn]["status_assignment"] = status_assign or catalog[orig_fn]["status_assignment"]
                     continue
 
-                if not presigned_url:
+                if not presigned_url and not temp_storage_url:
                     continue
 
                 custom_fname = f"{safe_name(kec)}_{safe_name(desa)}_{safe_name(nks)}_{safe_name(namakk)}__{key}__{orig_fn}"
@@ -241,6 +283,12 @@ def main():
                         "relpath": relpath,
                         "filepath": relpath,
                         "presigned_url": presigned_url,
+                        "temp_storage_url": temp_storage_url,
+                        "temp_storage_key": temp_storage_key,
+                        "orig_sha256": p_info.get("origSha256"),
+                        "orig_width": p_info.get("origWidth"),
+                        "orig_height": p_info.get("origHeight"),
+                        "orig_size": p_info.get("origSize"),
                         "image_url": "",
                     }
                 )
@@ -542,6 +590,11 @@ def main():
     # Tandai antrean upload di raw_scrape_uploads menjadi DONE
     for uid in processed_upload_ids:
         supabase_patch(f"raw_scrape_uploads?id=eq.{uid}", {"status": "DONE"})
+
+    # Bersihkan file sementara di temp_new/ Supabase Storage
+    temp_keys_to_clean = [t.get("temp_storage_key") for t in new_tasks if t.get("temp_storage_key")]
+    if temp_keys_to_clean:
+        cleanup_temp_storage_files(temp_keys_to_clean)
 
     print(f"🎉 Incremental Job Selesai! Total Foto: {len(valid_photos)}, Cluster: {len(db_clusters)}, Pasangan: {len(verified_findings)}.")
 

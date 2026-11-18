@@ -43,6 +43,7 @@ import {
   SUBROUND_OPTIONS,
   generateFasihConsoleScript,
 } from "@/lib/scraperTemplate";
+import { supabase } from "@/lib/supabase";
 
 type TabType = "exec" | "clusters" | "pairs" | "scraper";
 
@@ -135,6 +136,7 @@ export default function DashboardPage() {
   const [customPeriodId, setCustomPeriodId] = useState(
     SUBROUND_OPTIONS[0].surveyPeriodId
   );
+  const [catalogFilenames, setCatalogFilenames] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<{
     type: "idle" | "loading" | "success" | "error";
@@ -220,6 +222,18 @@ export default function DashboardPage() {
       })
       .catch(() => {});
   };
+
+  useEffect(() => {
+    if (!currentUser || currentUser.role !== "admin") return;
+    fetch(`/api/catalog-filenames?subround=${encodeURIComponent(selectedSr.code)}`)
+      .then((r) => r.json())
+      .then((res) => {
+        if (Array.isArray(res.filenames)) {
+          setCatalogFilenames(res.filenames);
+        }
+      })
+      .catch(() => {});
+  }, [currentUser, selectedSr.code]);
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -466,9 +480,7 @@ export default function DashboardPage() {
         if (map[kc]) map[kc].clusters++;
       });
     }
-    return Object.values(map)
-      .sort((a, b) => b.photos - a.photos)
-      .slice(0, 12);
+    return Object.values(map).sort((a, b) => b.photos - a.photos);
   }, [clusters]);
 
   // Filtered Clusters
@@ -528,8 +540,13 @@ export default function DashboardPage() {
   }, [filteredPairs, pairPage, pairPageSize]);
 
   const consoleScript = useMemo(
-    () => generateFasihConsoleScript(customPeriodId, selectedSr.code),
-    [customPeriodId, selectedSr]
+    () =>
+      generateFasihConsoleScript(
+        customPeriodId,
+        selectedSr.code,
+        catalogFilenames
+      ),
+    [customPeriodId, selectedSr, catalogFilenames]
   );
 
   const handleCopyScript = async () => {
@@ -577,11 +594,78 @@ export default function DashboardPage() {
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploadStatus({ type: "loading", msg: "Membaca dan mengunggah file JSON..." });
+    setUploadStatus({ type: "loading", msg: "Membaca file JSON hasil scrape..." });
 
     try {
       const text = await file.text();
       const parsed = JSON.parse(text);
+      if (!Array.isArray(parsed)) {
+        throw new Error("Format JSON harus berupa array daftar assignment.");
+      }
+
+      // 1. Cek apakah ada foto baru dengan webpBase64 untuk di-upload langsung (Direct Browser -> Supabase Storage)
+      const newPhotosToRelay: Array<{ pObj: any; fileName: string }> = [];
+      for (const a of parsed) {
+        const photos = a?.photos || {};
+        for (const k of ["fotobidang", "foto_petak", "fotoplot", "fotoberat"]) {
+          const pObj = photos[k];
+          if (pObj && pObj.webpBase64 && pObj.fileName) {
+            newPhotosToRelay.push({ pObj, fileName: pObj.fileName });
+          }
+        }
+      }
+
+      if (newPhotosToRelay.length > 0 && supabase) {
+        for (let i = 0; i < newPhotosToRelay.length; i++) {
+          const { pObj, fileName } = newPhotosToRelay[i];
+          setUploadStatus({
+            type: "loading",
+            msg: `Mengunggah foto baru langsung ke Supabase Storage (${i + 1}/${newPhotosToRelay.length})...`,
+          });
+
+          try {
+            const base64Part = String(pObj.webpBase64).split(",")[1] || "";
+            const binaryStr = atob(base64Part);
+            const bytes = new Uint8Array(binaryStr.length);
+            for (let b = 0; b < binaryStr.length; b++) {
+              bytes[b] = binaryStr.charCodeAt(b);
+            }
+            const blob = new Blob([bytes], { type: "image/webp" });
+            const tempKey = `temp_new/${fileName}.webp`;
+
+            const { error: upErr } = await supabase.storage
+              .from("ubinan-photos")
+              .upload(tempKey, blob, {
+                contentType: "image/webp",
+                upsert: true,
+              });
+
+            if (!upErr) {
+              const { data: pubData } = supabase.storage
+                .from("ubinan-photos")
+                .getPublicUrl(tempKey);
+              pObj.tempStorageKey = tempKey;
+              pObj.tempStorageUrl = pubData.publicUrl;
+            }
+          } catch (relayErr) {
+            console.warn("Gagal relay foto ke temp_new:", relayErr);
+          }
+
+          // Hapus string base64 agar payload JSON ke Vercel tetap sangat ringan
+          delete pObj.webpBase64;
+        }
+      } else {
+        // Pastikan tidak ada base64 tersisa meskipun supabase client belum diinisialisasi
+        for (const { pObj } of newPhotosToRelay) {
+          delete pObj.webpBase64;
+        }
+      }
+
+      setUploadStatus({
+        type: "loading",
+        msg: "Menyimpan metadata & memicu analisis otomatis GitHub Actions...",
+      });
+
       const res = await fetch("/api/upload-scrape", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -593,7 +677,14 @@ export default function DashboardPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Gagal mengunggah JSON");
-      setUploadStatus({ type: "success", msg: data.message });
+      setUploadStatus({
+        type: "success",
+        msg: `${data.message}${
+          newPhotosToRelay.length > 0
+            ? ` (${newPhotosToRelay.length} foto baru berhasil di-relay ke Supabase Storage bebas blokir IP!)`
+            : ""
+        }`,
+      });
     } catch (err: any) {
       setUploadStatus({
         type: "error",
@@ -1517,19 +1608,20 @@ export default function DashboardPage() {
                   <div className="flex items-center justify-between mb-1">
                     <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                       <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                      Sebaran Kecamatan (Top 12)
+                      Sebaran Kecamatan ({topKecamatans.length} Wilayah)
                     </h2>
                     <span className="text-[11px] text-blue-600 dark:text-blue-400 font-medium">
                       Klik untuk filter
                     </span>
                   </div>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
-                    Kecamatan dengan frekuensi keterlibatan foto duplikat tertinggi.
+                    Seluruh kecamatan yang memiliki keterlibatan foto duplikat (diurutkan dari tertinggi).
                   </p>
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto max-h-[340px] overflow-y-auto rounded-lg border border-slate-100 dark:border-slate-800/80">
                     <table className="w-full text-xs text-left border-collapse">
-                      <thead>
-                        <tr className="border-b border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px] tracking-wider">
+                      <thead className="sticky top-0 z-10 bg-slate-50 dark:bg-slate-800">
+                        <tr className="border-b border-slate-200/80 dark:border-slate-700 text-slate-500 dark:text-slate-400 uppercase text-[10px] tracking-wider">
+                          <th className="py-2.5 px-3 w-8 text-center">#</th>
                           <th className="py-2.5 px-3">Kecamatan</th>
                           <th className="py-2.5 px-3 text-center">Grup</th>
                           <th className="py-2.5 px-3 text-center">Foto</th>
@@ -1537,7 +1629,7 @@ export default function DashboardPage() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100 dark:divide-slate-800/70">
-                        {topKecamatans.map((k) => {
+                        {topKecamatans.map((k, idx) => {
                           const maxPhotos = topKecamatans[0]?.photos || 1;
                           const pct = Math.round((k.photos / maxPhotos) * 100);
                           return (
@@ -1549,6 +1641,9 @@ export default function DashboardPage() {
                               }}
                               className="hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition"
                             >
+                              <td className="py-2.5 px-3 text-center font-mono text-[11px] text-slate-400">
+                                {idx + 1}
+                              </td>
                               <td className="py-2.5 px-3">
                                 <div className="font-semibold text-slate-800 dark:text-slate-200">
                                   {k.kec}

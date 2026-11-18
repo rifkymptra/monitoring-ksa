@@ -16,20 +16,27 @@ export const SUBROUND_OPTIONS = [
   },
 ];
 
-export function generateFasihConsoleScript(surveyPeriodId: string, subroundLabel: string): string {
+export function generateFasihConsoleScript(
+  surveyPeriodId: string,
+  subroundLabel: string,
+  knownFileNames: string[] = []
+): string {
+  const knownJson = JSON.stringify(knownFileNames);
   return `/**
  * ============================================================================
- * SCRIPT SCRAPING FOTO UBINAN FASIH-SM (RAMAH SERVER & ULTRA-SAFE)
+ * SCRIPT SCRAPING FOTO UBINAN FASIH-SM (INKREMENTAL + RELAY ANTI-BLOKIR GEO-IP)
  * Target: ${subroundLabel} (${surveyPeriodId})
+ * Foto lama di katalog (${knownFileNames.length} file) otomatis di-skip!
  * ============================================================================
  */
 (async () => {
   const SURVEY_PERIOD_ID = "${surveyPeriodId}";
   const PHOTO_KEYS = ["fotobidang", "foto_petak", "fotoplot", "fotoberat"];
-  const MIN_DELAY_MS = 800;
-  const MAX_DELAY_MS = 1500;
+  const KNOWN_FILES = new Set(${knownJson});
+  const MIN_DELAY_MS = 750;
+  const MAX_DELAY_MS = 1400;
   const COOLDOWN_EVERY = 35;
-  const COOLDOWN_MS = 4000;
+  const COOLDOWN_MS = 3500;
 
   const getHeaders = () => {
     const xsrf = document.cookie.split("; ").find((r) => r.startsWith("XSRF-TOKEN="))?.split("=")[1];
@@ -43,21 +50,48 @@ export function generateFasihConsoleScript(surveyPeriodId: string, subroundLabel
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const randomSleep = () => sleep(Math.floor(Math.random() * (MAX_DELAY_MS - MIN_DELAY_MS + 1)) + MIN_DELAY_MS);
 
+  // Fungsi Hitung SHA-256 Asli (100% identik dengan hashlib.sha256 Python)
+  const computeSha256Hex = async (arrayBuffer) => {
+    const hashBuffer = await crypto.subtle.digest("SHA-256", arrayBuffer);
+    return Array.from(new Uint8Array(hashBuffer))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  };
+
+  // Fungsi Kompresi Gambar ke WebP (~40KB) untuk Relay ke Supabase Storage
+  const compressToWebpBase64 = async (blob) => {
+    const bitmap = await createImageBitmap(blob);
+    const origWidth = bitmap.width;
+    const origHeight = bitmap.height;
+    const maxDim = 1000;
+    let targetW = origWidth;
+    let targetH = origHeight;
+    if (origWidth > maxDim || origHeight > maxDim) {
+      if (origWidth >= origHeight) {
+        targetW = maxDim;
+        targetH = Math.round((origHeight * maxDim) / origWidth);
+      } else {
+        targetH = maxDim;
+        targetW = Math.round((origWidth * maxDim) / origHeight);
+      }
+    }
+    const canvas = document.createElement("canvas");
+    canvas.width = targetW;
+    canvas.height = targetH;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(bitmap, 0, 0, targetW, targetH);
+    const webpDataUrl = canvas.toDataURL("image/webp", 0.82);
+    bitmap.close();
+    return { origWidth, origHeight, webpDataUrl };
+  };
+
   window.__CACHE_UBINAN__ = window.__CACHE_UBINAN__ || {};
   window.__STOP_SCRAPE__ = false;
-  console.log("%c🚀 Memulai Penarikan Data & Foto Ubinan (${subroundLabel})...", "color: #2563eb; font-weight: bold; font-size: 14px;");
-
-  let dirHandle = null;
-  if ("showDirectoryPicker" in window) {
-    try {
-      const pick = confirm(
-        "Pilih folder di komputer untuk menyimpan foto secara langsung?\\n\\n" +
-        "- Klik OK untuk memilih folder tujuan\\n" +
-        "- Klik Cancel jika hanya ingin mengunduh file JSON untuk di-upload ke Web Monitoring"
-      );
-      if (pick) dirHandle = await window.showDirectoryPicker({ mode: "readwrite" });
-    } catch (e) {}
-  }
+  console.log(
+    "%c🚀 Memulai Penarikan Data & Foto Ubinan (${subroundLabel}) — Mode Inkremental Pintar...",
+    "color: #2563eb; font-weight: bold; font-size: 14px;"
+  );
+  console.log(\`ℹ️ Katalog Supabase saat ini sudah menyimpan \${KNOWN_FILES.size} foto di ${subroundLabel} (tidak akan di-download ulang).\`);
 
   let allAssignments = [];
   let start = 0;
@@ -86,10 +120,10 @@ export function generateFasihConsoleScript(surveyPeriodId: string, subroundLabel
     if (!rows.length) break;
 
     allAssignments.push(...rows);
-    console.log(\`   -> Mengambil daftar: \${allAssignments.length} / \${totalRecords}\`);
+    console.log(\`   -> Mengambil daftar assignment: \${allAssignments.length} / \${totalRecords}\`);
     if (rows.length < pageSize || (typeof totalRecords === "number" && allAssignments.length >= totalRecords)) break;
     start += pageSize;
-    await sleep(900);
+    await sleep(800);
   }
 
   const targetAssignments = allAssignments.filter((r) => {
@@ -130,8 +164,12 @@ export function generateFasihConsoleScript(surveyPeriodId: string, subroundLabel
       for (const key of PHOTO_KEYS) {
         const ans = getAns(key);
         if (Array.isArray(ans) && ans.length > 0 && ans[0]?.filename) {
-          photos[key] = { fileName: ans[0].filename, presignedUrl: null };
-          fileNamesToSign.push(ans[0].filename);
+          const fn = ans[0].filename;
+          photos[key] = { fileName: fn, presignedUrl: null };
+          // Hanya minta presignedUrl untuk foto BARU yang belum ada di katalog
+          if (!KNOWN_FILES.has(fn)) {
+            fileNamesToSign.push(fn);
+          }
         }
       }
 
@@ -154,13 +192,16 @@ export function generateFasihConsoleScript(surveyPeriodId: string, subroundLabel
         photos,
       });
 
-      if (fileNamesToSign.length > 0) batchPresignPayload.push({ assignmentId, fileNames: fileNamesToSign });
-      if ((i + 1) % 5 === 0 || i === listToProcess.length - 1) {
-        console.log(\`   -> Progress Detail: \${i + 1}/\${listToProcess.length}\`);
+      if (fileNamesToSign.length > 0) {
+        batchPresignPayload.push({ assignmentId, fileNames: fileNamesToSign });
+      }
+      if ((i + 1) % 10 === 0 || i === listToProcess.length - 1) {
+        console.log(\`   -> Progress Metadata: \${i + 1}/\${listToProcess.length}\`);
       }
     } catch (err) { await sleep(2000); }
   }
 
+  // Ambil Presigned URL hanya untuk foto baru
   const urlMap = {};
   for (let i = 0; i < batchPresignPayload.length; i += 20) {
     const chunk = batchPresignPayload.slice(i, i + 20);
@@ -172,12 +213,56 @@ export function generateFasihConsoleScript(surveyPeriodId: string, subroundLabel
         for (const p of item.presignedUrls || []) urlMap[p.fileName] = p.presignedUrl;
       }
     } catch (err) {}
-    await sleep(1000);
+    await sleep(800);
   }
 
+  // Hitung berapa foto baru vs foto lama
+  const newPhotoItems = [];
+  let skippedOldCount = 0;
   for (const item of assignmentDetails) {
     for (const key of PHOTO_KEYS) {
-      if (item.photos[key]) item.photos[key].presignedUrl = urlMap[item.photos[key].fileName] || null;
+      const pObj = item.photos[key];
+      if (!pObj) continue;
+      if (KNOWN_FILES.has(pObj.fileName)) {
+        skippedOldCount++;
+      } else if (urlMap[pObj.fileName]) {
+        pObj.presignedUrl = urlMap[pObj.fileName];
+        newPhotoItems.push(pObj);
+      }
+    }
+  }
+
+  console.log(
+    \`%c📸 Ringkasan Foto: \${skippedOldCount} foto lama di-skip | \${newPhotoItems.length} foto BARU akan di-download & di-hash di browser...\`,
+    "color: #059669; font-weight: bold;"
+  );
+
+  // Download HANYA foto baru di browser (IP Indonesia -> Bebas blokir Geo-IP BPS!)
+  for (let i = 0; i < newPhotoItems.length; i++) {
+    if (window.__STOP_SCRAPE__) break;
+    const pObj = newPhotoItems[i];
+    try {
+      const imgResp = await fetch(pObj.presignedUrl);
+      if (!imgResp.ok) throw new Error(\`HTTP \${imgResp.status}\`);
+      const arrayBuf = await imgResp.arrayBuffer();
+
+      // 1. Pengaman SHA-256 Asli dari file JPEG mentah FASIH
+      pObj.origSha256 = await computeSha256Hex(arrayBuf);
+      pObj.origSize = arrayBuf.byteLength;
+
+      // 2. Kompres ke WebP (~40KB) untuk di-relay ke Supabase Storage
+      const blob = new Blob([arrayBuf], { type: "image/jpeg" });
+      const { origWidth, origHeight, webpDataUrl } = await compressToWebpBase64(blob);
+      pObj.origWidth = origWidth;
+      pObj.origHeight = origHeight;
+      pObj.webpBase64 = webpDataUrl;
+
+      if ((i + 1) % 5 === 0 || i === newPhotoItems.length - 1) {
+        console.log(\`   -> Download & Hash Foto Baru: \${i + 1} / \${newPhotoItems.length}\`);
+      }
+      await sleep(350);
+    } catch (e) {
+      console.warn(\`   ⚠️ Gagal mengambil foto baru \${pObj.fileName}:\`, e);
     }
   }
 
@@ -190,7 +275,6 @@ export function generateFasihConsoleScript(surveyPeriodId: string, subroundLabel
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  console.log("💾 File JSON berhasil diunduh! Silakan upload file tersebut di tab 'Tarik Data FASIH' pada Web Monitoring.");
+  console.log("%c💾 Selesai! File JSON (beserta paket foto baru terkompresi) berhasil diunduh. Silakan unggah di tab 'Tarik Data FASIH' pada Web Monitoring!", "color: #2563eb; font-weight: bold;");
 })();`;
 }
-
