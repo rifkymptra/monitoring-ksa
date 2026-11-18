@@ -4,6 +4,10 @@ import path from "path";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { getSessionFromRequest } from "@/lib/auth";
 import baselineCatalog from "@/lib/baselineCatalog.json";
+import {
+  normalizeClustersAndPairs,
+  normalizePclName,
+} from "@/lib/pclNormalizer";
 
 interface OfficerPopItem {
   pcl: string;
@@ -20,7 +24,7 @@ async function fetchMergedOfficerPopulation(): Promise<OfficerPopItem[]> {
     return cachedOfficerPop.data;
   }
 
-  // Mulai dari populasi baseline (79 petugas dari SR1, SR2, SR3)
+  // Mulai dari populasi baseline (55 petugas unik dari SR1, SR2, SR3)
   const map: Record<
     string,
     {
@@ -33,13 +37,22 @@ async function fetchMergedOfficerPopulation(): Promise<OfficerPopItem[]> {
   > = {};
 
   for (const b of baselineCatalog.officer_population || []) {
-    map[b.pcl] = {
-      pcl: b.pcl,
-      kecs: new Set(b.kecamatans || []),
-      srs: new Set(b.subrounds || []),
-      total_assignments: b.total_assignments || 0,
-      total_photos: b.total_photos || 0,
-    };
+    const normName = normalizePclName(b.pcl);
+    if (!normName) continue;
+    if (!map[normName]) {
+      map[normName] = {
+        pcl: normName,
+        kecs: new Set(b.kecamatans || []),
+        srs: new Set(b.subrounds || []),
+        total_assignments: b.total_assignments || 0,
+        total_photos: b.total_photos || 0,
+      };
+    } else {
+      (b.kecamatans || []).forEach((k) => map[normName].kecs.add(k));
+      (b.subrounds || []).forEach((s) => map[normName].srs.add(s));
+      map[normName].total_assignments += b.total_assignments || 0;
+      map[normName].total_photos += b.total_photos || 0;
+    }
   }
 
   if (isSupabaseConfigured && supabase) {
@@ -79,7 +92,7 @@ async function fetchMergedOfficerPopulation(): Promise<OfficerPopItem[]> {
         if (!res.data) continue;
         for (const row of res.data) {
           totalDbRows++;
-          const name = String(row.pcl || "Tanpa Nama").trim().toUpperCase();
+          const name = normalizePclName(row.pcl || "Tanpa Nama");
           if (!name) continue;
           if (!dbMap[name]) {
             dbMap[name] = {
@@ -91,8 +104,10 @@ async function fetchMergedOfficerPopulation(): Promise<OfficerPopItem[]> {
             };
           }
           dbMap[name].photos += 1;
-          if (row.kecamatan) dbMap[name].kecs.add(String(row.kecamatan).trim().toUpperCase());
-          if (row.subround) dbMap[name].srs.add(String(row.subround).trim().toUpperCase());
+          if (row.kecamatan)
+            dbMap[name].kecs.add(String(row.kecamatan).trim().toUpperCase());
+          if (row.subround)
+            dbMap[name].srs.add(String(row.subround).trim().toUpperCase());
           if (row.assignment_id) {
             dbMap[name].assigns.add(`${row.subround || ""}:${row.assignment_id}`);
           }
@@ -149,30 +164,37 @@ export async function GET(req: NextRequest) {
   // 1. Jika Supabase sudah dikonfigurasi, ambil langsung dari Supabase Database
   if (isSupabaseConfigured && supabase) {
     try {
-      const [{ data: summary }, { data: clusters }, { data: pairs }] = await Promise.all([
-        supabase.from("audit_summary").select("*").eq("id", "latest").single(),
-        supabase
-          .from("duplicate_clusters")
-          .select("*")
-          .order("jumlah_foto", { ascending: false }),
-        supabase.from("duplicate_pairs").select("*").order("id", { ascending: true }),
-      ]);
+      const [{ data: summary }, { data: rawClusters }, { data: rawPairs }] =
+        await Promise.all([
+          supabase.from("audit_summary").select("*").eq("id", "latest").single(),
+          supabase
+            .from("duplicate_clusters")
+            .select("*")
+            .order("jumlah_foto", { ascending: false }),
+          supabase.from("duplicate_pairs").select("*").order("id", { ascending: true }),
+        ]);
 
-      if (clusters && clusters.length > 0) {
+      if (rawClusters && rawClusters.length > 0) {
+        const { clusters, pairs, crossPclClustersCount } =
+          normalizeClustersAndPairs(rawClusters, rawPairs || []);
+
         return NextResponse.json({
           source: "supabase",
-          summary: summary || {
-            total_photos: 3585,
-            total_assignments: 975,
-            total_pairs: pairs?.length || 0,
+          summary: {
+            total_photos: summary?.total_photos || 3585,
+            total_assignments: summary?.total_assignments || 975,
+            total_pairs: pairs.length,
             total_clusters: clusters.length,
-            multi_photo_clusters: clusters.filter((c: any) => c.jumlah_foto >= 3).length,
-            cross_pcl_clusters: clusters.filter((c: any) => c.jumlah_petugas >= 2).length,
+            multi_photo_clusters: clusters.filter((c: any) => c.jumlah_foto >= 3)
+              .length,
+            cross_pcl_clusters: crossPclClustersCount,
             exact_pairs:
-              pairs?.filter((p: any) => String(p.kategori_temuan).startsWith("1.")).length || 0,
+              pairs.filter((p: any) =>
+                String(p.kategori_temuan).startsWith("1.")
+              ).length || 0,
           },
           clusters,
-          pairs: pairs || [],
+          pairs,
           officer_population: officerPopulation,
         });
       }
@@ -182,13 +204,27 @@ export async function GET(req: NextRequest) {
   }
 
   // 2. Fallback: Baca dari hasil_analisis/web_data.json lokal
-  const localJsonPath = path.resolve(process.cwd(), "..", "hasil_analisis", "web_data.json");
+  const localJsonPath = path.resolve(
+    process.cwd(),
+    "..",
+    "hasil_analisis",
+    "web_data.json"
+  );
   if (fs.existsSync(localJsonPath)) {
     const raw = fs.readFileSync(localJsonPath, "utf-8");
     const parsed = JSON.parse(raw);
+    const { clusters, pairs, crossPclClustersCount } = normalizeClustersAndPairs(
+      parsed.clusters || [],
+      parsed.pairs || []
+    );
     return NextResponse.json({
       source: "local_json",
-      ...parsed,
+      summary: {
+        ...parsed.summary,
+        cross_pcl_clusters: crossPclClustersCount,
+      },
+      clusters,
+      pairs,
       officer_population: officerPopulation,
     });
   }

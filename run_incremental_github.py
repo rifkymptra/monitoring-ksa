@@ -31,6 +31,7 @@ from analyze_photos import (
     build_clusters,
     classify_scenario,
     hamming_distance,
+    normalize_pcl_name,
     process_single_image,
     verify_content_orb_and_pixel,
 )
@@ -101,7 +102,7 @@ def load_full_catalog() -> dict[str, dict]:
                 "subround": r["subround"],
                 "assignmentId": r["assignment_id"],
                 "jenis_foto": r["jenis_foto"],
-                "pcl": r.get("pcl") or "",
+                "pcl": normalize_pcl_name(r.get("pcl") or "", r.get("kecamatan") or ""),
                 "kecamatan": r.get("kecamatan") or "",
                 "desa": r.get("desa") or "",
                 "nks": r.get("nks") or "",
@@ -228,8 +229,8 @@ def main():
 
         for a in assignments:
             aid = a.get("assignmentId", "")
-            pcl = (a.get("pcl") or "").strip().upper()
             kec = (a.get("kecamatan") or "").strip().upper()
+            pcl = normalize_pcl_name(a.get("pcl") or "", kec)
             desa = (a.get("desa") or "").strip().upper()
             nks = str(a.get("nks") or "").strip()
             sls = str(a.get("sls") or "").strip()

@@ -48,6 +48,74 @@ SUBROUND_MAP = {
 
 PHOTO_KEYS = ["fotobidang", "foto_petak", "fotoplot", "fotoberat"]
 
+# Pemetaan Standar Nama Petugas (Menyatukan Variasi Singkatan / Typo Ketikan di Kecamatan yang Sama)
+PCL_CANONICAL_MAP = {
+    # TAROGONG KALER
+    "RIFQIE NOOR": "RIFQIE NOOR IQBALULLOH",
+    "RIFQIE NOOR I": "RIFQIE NOOR IQBALULLOH",
+    "RIFQIE NOOR I.": "RIFQIE NOOR IQBALULLOH",
+    "RIFQIE NOOR IQBQLULLOH": "RIFQIE NOOR IQBALULLOH",
+    "RIFQIE NOOR IQBALULLOH": "RIFQIE NOOR IQBALULLOH",
+    # BANYURESMI
+    "FITRIA FEBIAN": "FITRIA FEBRIAN AGUSTI",
+    "FITRIA FEBRIAN": "FITRIA FEBRIAN AGUSTI",
+    "FITRIA FREBIAN": "FITRIA FEBRIAN AGUSTI",
+    "FITRIA FREBRIAN": "FITRIA FEBRIAN AGUSTI",
+    "FITRIA FEBRIAN AGUSTI": "FITRIA FEBRIAN AGUSTI",
+    "MASHAADI PUDJIANTO": "MASHADI PUDJIANTO",
+    "MASHAI PUDJIANTO": "MASHADI PUDJIANTO",
+    "MASHADI PUDJIANTO": "MASHADI PUDJIANTO",
+    # SINGAJAYA
+    "DUDUNG WAHYIDIN": "DUDUNG WAHYUDIN",
+    "DUDUNG WAYUDIN": "DUDUNG WAHYUDIN",
+    "DUDUNG WAHYUDIN": "DUDUNG WAHYUDIN",
+    # WANARAJA
+    "AGNAN": "AGNAN AHMAD KURNIAWAN",
+    "AGNAN AHMAD": "AGNAN AHMAD KURNIAWAN",
+    "AGNAN AHMAD K": "AGNAN AHMAD KURNIAWAN",
+    "AGNAN AHMAD KURNIAWAN": "AGNAN AHMAD KURNIAWAN",
+    # TAROGONG KIDUL
+    "AJRUL MUMININ": "AJRUL MU'MININ",
+    "AJRUL MU'MININ": "AJRUL MU'MININ",
+    # KARANGTENGAH
+    "DADI HARYADI": "DADI HERYADI",
+    "DADI HERYADI": "DADI HERYADI",
+    # CIBATU
+    "INTAN RACHMANIA S": "INTAN RACHMANIA SUPRIATIN",
+    "INTAN RACHMANIA SUPRIATIN": "INTAN RACHMANIA SUPRIATIN",
+    # PANGATIKAN
+    "YUSAN YUSABTI": "YUSAN YUSANTI",
+    "YUSAN YUSANTI": "YUSAN YUSANTI",
+    # MEKARMUKTI
+    "DEDING JOHAN BASARAH, SP": "DEDING JOHAN BASARAH",
+    "DEDNG JOHAN BASARAH": "DEDING JOHAN BASARAH",
+    "DEDING JOHAN BASARAH": "DEDING JOHAN BASARAH",
+    # CIHURIP
+    "INDRA BJ": "INDRA BUDI JAYA",
+    "INDRA BUDI JAYA": "INDRA BUDI JAYA",
+    # CISURUPAN
+    "CUCUSURAHMAN": "CUCU SURAHMAN",
+    "CUCU SURAHMAN": "CUCU SURAHMAN",
+    # TALEGONG
+    "ALDI": "ALDI FIRMAN",
+    "ALDI FIRMAN": "ALDI FIRMAN",
+}
+
+
+def normalize_pcl_name(raw_pcl: str, kecamatan: str = "") -> str:
+    """Normalisasi nama petugas dari typo ketikan manual, gelar, atau singkatan."""
+    name = re.sub(r"\s+", " ", str(raw_pcl or "").strip().upper())
+    if not name:
+        return ""
+    if name in PCL_CANONICAL_MAP:
+        return PCL_CANONICAL_MAP[name]
+    # Bersihkan gelar di belakang koma (mis. ', SP', ', S.P', dll.) dan titik di ujung
+    cleaned = re.sub(r",\s*[A-Z.\s]+$", "", name).rstrip(".")
+    if cleaned in PCL_CANONICAL_MAP:
+        return PCL_CANONICAL_MAP[cleaned]
+    return cleaned
+
+
 
 def crop_content_area_pil(img: Image.Image) -> Image.Image:
     w, h = img.size
@@ -241,8 +309,8 @@ def build_dataset() -> tuple[list[dict], list[dict]]:
 
         for a in assignments:
             aid = a.get("assignmentId", "")
-            pcl = (a.get("pcl") or "").strip().upper()
             kec = (a.get("kecamatan") or "").strip().upper()
+            pcl = normalize_pcl_name(a.get("pcl") or "", kec)
             desa = (a.get("desa") or "").strip().upper()
             nks = str(a.get("nks") or "").strip()
             sls = str(a.get("sls") or "").strip()
